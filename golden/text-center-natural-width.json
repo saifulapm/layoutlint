@@ -1,20 +1,20 @@
 {
-  "name": "emoji-text",
+  "name": "text-center-natural-width",
   "viewport": 375,
   "chromium": "148.0.7778.96",
-  "generatedAt": "2026-06-11T09:25:30.988Z",
+  "generatedAt": "2026-06-11T09:25:39.052Z",
   "rects": {
     "r": {
       "x": 0,
       "y": 0,
       "width": 375,
-      "height": 80
+      "height": 56
     },
     "r.0": {
-      "x": 16,
+      "x": 132.44,
       "y": 16,
-      "width": 343,
-      "height": 48
+      "width": 110.13,
+      "height": 24
     }
   }
 }

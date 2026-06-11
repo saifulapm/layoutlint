@@ -1,0 +1,38 @@
+{
+  "name": "wrap-align-content-stretch",
+  "viewport": 375,
+  "chromium": "148.0.7778.96",
+  "generatedAt": "2026-06-11T09:25:33.643Z",
+  "rects": {
+    "r": {
+      "x": 0,
+      "y": 0,
+      "width": 375,
+      "height": 200
+    },
+    "r.0": {
+      "x": 10,
+      "y": 10,
+      "width": 150,
+      "height": 85
+    },
+    "r.1": {
+      "x": 170,
+      "y": 10,
+      "width": 150,
+      "height": 85
+    },
+    "r.2": {
+      "x": 10,
+      "y": 105,
+      "width": 150,
+      "height": 85
+    },
+    "r.3": {
+      "x": 170,
+      "y": 105,
+      "width": 150,
+      "height": 85
+    }
+  }
+}

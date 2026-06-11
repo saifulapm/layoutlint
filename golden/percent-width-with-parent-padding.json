@@ -1,8 +1,8 @@
 {
-  "name": "emoji-text",
+  "name": "percent-width-with-parent-padding",
   "viewport": 375,
   "chromium": "148.0.7778.96",
-  "generatedAt": "2026-06-11T09:25:30.988Z",
+  "generatedAt": "2026-06-11T09:25:34.662Z",
   "rects": {
     "r": {
       "x": 0,
@@ -11,10 +11,10 @@
       "height": 80
     },
     "r.0": {
-      "x": 16,
-      "y": 16,
-      "width": 343,
-      "height": 48
+      "x": 20,
+      "y": 20,
+      "width": 167.5,
+      "height": 40
     }
   }
 }

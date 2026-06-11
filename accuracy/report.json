@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-06-11T09:08:32.268Z",
-  "passCount": 9,
-  "total": 10,
+  "generatedAt": "2026-06-11T09:25:41.720Z",
+  "passCount": 47,
+  "total": 50,
   "results": [
     {
       "name": "row-fixed-gap",
@@ -522,6 +522,1776 @@
       "pass": true,
       "maxPosDelta": 0,
       "maxSizeDelta": 0
+    },
+    {
+      "name": "row-reverse-fixed",
+      "viewport": 375,
+      "nodes": [
+        {
+          "path": "r",
+          "name": "root",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0",
+          "name": "first",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.1",
+          "name": "second",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.2",
+          "name": "third",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "maxPosDelta": 0,
+      "maxSizeDelta": 0
+    },
+    {
+      "name": "justify-center-row",
+      "viewport": 375,
+      "nodes": [
+        {
+          "path": "r",
+          "name": "root",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0",
+          "name": "box-a",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.1",
+          "name": "box-b",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "maxPosDelta": 0,
+      "maxSizeDelta": 0
+    },
+    {
+      "name": "justify-space-around",
+      "viewport": 768,
+      "nodes": [
+        {
+          "path": "r",
+          "name": "root",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0",
+          "name": "box-a",
+          "isText": false,
+          "dx": 0.01,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.1",
+          "name": "box-b",
+          "isText": false,
+          "dx": 0.02,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.2",
+          "name": "box-c",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "maxPosDelta": 0.02,
+      "maxSizeDelta": 0,
+      "worst": {
+        "path": "r.1",
+        "name": "box-b",
+        "isText": false,
+        "dx": 0.02,
+        "dy": 0,
+        "dw": 0,
+        "dh": 0,
+        "pass": true
+      }
+    },
+    {
+      "name": "justify-space-evenly",
+      "viewport": 768,
+      "nodes": [
+        {
+          "path": "r",
+          "name": "root",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0",
+          "name": "box-a",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.1",
+          "name": "box-b",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.2",
+          "name": "box-c",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "maxPosDelta": 0,
+      "maxSizeDelta": 0
+    },
+    {
+      "name": "align-items-flex-end",
+      "viewport": 375,
+      "nodes": [
+        {
+          "path": "r",
+          "name": "root",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0",
+          "name": "short",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.1",
+          "name": "tall",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.2",
+          "name": "medium",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "maxPosDelta": 0,
+      "maxSizeDelta": 0
+    },
+    {
+      "name": "align-self-mixed",
+      "viewport": 375,
+      "nodes": [
+        {
+          "path": "r",
+          "name": "root",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0",
+          "name": "stretched",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.1",
+          "name": "centered",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.2",
+          "name": "pinned-end",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.3",
+          "name": "pinned-start",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "maxPosDelta": 0,
+      "maxSizeDelta": 0
+    },
+    {
+      "name": "column-justify-center",
+      "viewport": 375,
+      "nodes": [
+        {
+          "path": "r",
+          "name": "root",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0",
+          "name": "item-a",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.1",
+          "name": "item-b",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "maxPosDelta": 0,
+      "maxSizeDelta": 0
+    },
+    {
+      "name": "column-reverse",
+      "viewport": 320,
+      "nodes": [
+        {
+          "path": "r",
+          "name": "root",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0",
+          "name": "logically-first",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.1",
+          "name": "logically-second",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.2",
+          "name": "logically-third",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "maxPosDelta": 0,
+      "maxSizeDelta": 0
+    },
+    {
+      "name": "wrap-align-content-stretch",
+      "viewport": 375,
+      "nodes": [
+        {
+          "path": "r",
+          "name": "root",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0",
+          "name": "tile-1",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.1",
+          "name": "tile-2",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.2",
+          "name": "tile-3",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.3",
+          "name": "tile-4",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "maxPosDelta": 0,
+      "maxSizeDelta": 0
+    },
+    {
+      "name": "wrap-reverse-chips",
+      "viewport": 320,
+      "nodes": [
+        {
+          "path": "r",
+          "name": "root",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0",
+          "name": "chip-1",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.1",
+          "name": "chip-2",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.2",
+          "name": "chip-3",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.3",
+          "name": "chip-4",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "maxPosDelta": 0,
+      "maxSizeDelta": 0
+    },
+    {
+      "name": "wrap-mixed-gaps",
+      "viewport": 375,
+      "nodes": [
+        {
+          "path": "r",
+          "name": "root",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0",
+          "name": "cell-1",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.1",
+          "name": "cell-2",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.2",
+          "name": "cell-3",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.3",
+          "name": "cell-4",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.4",
+          "name": "cell-5",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "maxPosDelta": 0,
+      "maxSizeDelta": 0
+    },
+    {
+      "name": "wrap-single-overflowing-line",
+      "viewport": 320,
+      "nodes": [
+        {
+          "path": "r",
+          "name": "root",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0",
+          "name": "wide-1",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.1",
+          "name": "wide-2",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "maxPosDelta": 0,
+      "maxSizeDelta": 0
+    },
+    {
+      "name": "percent-width-children",
+      "viewport": 375,
+      "nodes": [
+        {
+          "path": "r",
+          "name": "root",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0",
+          "name": "half",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.1",
+          "name": "quarter",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.2",
+          "name": "three-quarter",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "maxPosDelta": 0,
+      "maxSizeDelta": 0
+    },
+    {
+      "name": "percent-width-with-parent-padding",
+      "viewport": 375,
+      "nodes": [
+        {
+          "path": "r",
+          "name": "root",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0",
+          "name": "half-of-content-box",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "maxPosDelta": 0,
+      "maxSizeDelta": 0
+    },
+    {
+      "name": "flex-basis-fixed",
+      "viewport": 768,
+      "nodes": [
+        {
+          "path": "r",
+          "name": "root",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0",
+          "name": "basis-only",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.1",
+          "name": "basis-grow",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.2",
+          "name": "basis-grow-2x",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "maxPosDelta": 0,
+      "maxSizeDelta": 0
+    },
+    {
+      "name": "flex-basis-percent",
+      "viewport": 768,
+      "nodes": [
+        {
+          "path": "r",
+          "name": "root",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0",
+          "name": "basis-30",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.1",
+          "name": "basis-50",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "maxPosDelta": 0,
+      "maxSizeDelta": 0
+    },
+    {
+      "name": "shrink-proportional",
+      "viewport": 320,
+      "nodes": [
+        {
+          "path": "r",
+          "name": "root",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0",
+          "name": "squeezed-a",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.1",
+          "name": "squeezed-b",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "maxPosDelta": 0,
+      "maxSizeDelta": 0
+    },
+    {
+      "name": "shrink-uneven",
+      "viewport": 320,
+      "nodes": [
+        {
+          "path": "r",
+          "name": "root",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0",
+          "name": "rigid",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.1",
+          "name": "squishy",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "maxPosDelta": 0,
+      "maxSizeDelta": 0
+    },
+    {
+      "name": "min-width-freeze-redistribute",
+      "viewport": 768,
+      "nodes": [
+        {
+          "path": "r",
+          "name": "root",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0",
+          "name": "wants-400",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 160,
+          "dh": 0,
+          "pass": false
+        },
+        {
+          "path": "r.1",
+          "name": "takes-rest",
+          "isText": false,
+          "dx": 160,
+          "dy": 0,
+          "dw": 160,
+          "dh": 0,
+          "pass": false
+        }
+      ],
+      "pass": false,
+      "maxPosDelta": 160,
+      "maxSizeDelta": 160,
+      "worst": {
+        "path": "r.0",
+        "name": "wants-400",
+        "isText": false,
+        "dx": 0,
+        "dy": 0,
+        "dw": 160,
+        "dh": 0,
+        "pass": false
+      }
+    },
+    {
+      "name": "max-width-cap-single",
+      "viewport": 768,
+      "nodes": [
+        {
+          "path": "r",
+          "name": "root",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0",
+          "name": "capped",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "maxPosDelta": 0,
+      "maxSizeDelta": 0
+    },
+    {
+      "name": "max-height-shrink-children",
+      "viewport": 375,
+      "nodes": [
+        {
+          "path": "r",
+          "name": "root",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0",
+          "name": "wants-80-a",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.1",
+          "name": "wants-80-b",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "maxPosDelta": 0,
+      "maxSizeDelta": 0
+    },
+    {
+      "name": "asymmetric-padding",
+      "viewport": 320,
+      "nodes": [
+        {
+          "path": "r",
+          "name": "root",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0",
+          "name": "content",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "maxPosDelta": 0,
+      "maxSizeDelta": 0
+    },
+    {
+      "name": "margin-auto-push",
+      "viewport": 375,
+      "nodes": [
+        {
+          "path": "r",
+          "name": "root",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0",
+          "name": "brand",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.1",
+          "name": "pushed-right",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "maxPosDelta": 0,
+      "maxSizeDelta": 0
+    },
+    {
+      "name": "margin-auto-center",
+      "viewport": 768,
+      "nodes": [
+        {
+          "path": "r",
+          "name": "root",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0",
+          "name": "centered-block",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "maxPosDelta": 0,
+      "maxSizeDelta": 0
+    },
+    {
+      "name": "negative-margin-overlap",
+      "viewport": 375,
+      "nodes": [
+        {
+          "path": "r",
+          "name": "root",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0",
+          "name": "banner",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.1",
+          "name": "pulled-up-card",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "maxPosDelta": 0,
+      "maxSizeDelta": 0
+    },
+    {
+      "name": "nested-padding-stack",
+      "viewport": 320,
+      "nodes": [
+        {
+          "path": "r",
+          "name": "outer",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0",
+          "name": "middle",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0.0",
+          "name": "inner",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0.0.0",
+          "name": "leaf",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "maxPosDelta": 0,
+      "maxSizeDelta": 0
+    },
+    {
+      "name": "absolute-top-left",
+      "viewport": 375,
+      "nodes": [
+        {
+          "path": "r",
+          "name": "root",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0",
+          "name": "in-flow",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.1",
+          "name": "badge",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "maxPosDelta": 0,
+      "maxSizeDelta": 0
+    },
+    {
+      "name": "absolute-right-bottom",
+      "viewport": 375,
+      "nodes": [
+        {
+          "path": "r",
+          "name": "root",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0",
+          "name": "in-flow",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.1",
+          "name": "fab",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "maxPosDelta": 0,
+      "maxSizeDelta": 0
+    },
+    {
+      "name": "absolute-inset-overlay",
+      "viewport": 375,
+      "nodes": [
+        {
+          "path": "r",
+          "name": "root",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0",
+          "name": "content",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.1",
+          "name": "overlay",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "maxPosDelta": 0,
+      "maxSizeDelta": 0
+    },
+    {
+      "name": "relative-offset",
+      "viewport": 320,
+      "nodes": [
+        {
+          "path": "r",
+          "name": "root",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0",
+          "name": "anchor",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.1",
+          "name": "nudged",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.2",
+          "name": "after-nudged",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "maxPosDelta": 0,
+      "maxSizeDelta": 0
+    },
+    {
+      "name": "text-in-row-shrink",
+      "viewport": 375,
+      "nodes": [
+        {
+          "path": "r",
+          "name": "root",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0",
+          "name": "icon",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 25.7,
+          "dh": 0,
+          "pass": false
+        },
+        {
+          "path": "r.1",
+          "name": "label",
+          "isText": true,
+          "dx": 25.7,
+          "dy": 0,
+          "dw": 25.71,
+          "dh": 0,
+          "pass": false
+        }
+      ],
+      "pass": false,
+      "maxPosDelta": 25.7,
+      "maxSizeDelta": 25.71,
+      "worst": {
+        "path": "r.1",
+        "name": "label",
+        "isText": true,
+        "dx": 25.7,
+        "dy": 0,
+        "dw": 25.71,
+        "dh": 0,
+        "pass": false
+      }
+    },
+    {
+      "name": "text-min-content-floor",
+      "viewport": 320,
+      "nodes": [
+        {
+          "path": "r",
+          "name": "root",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0",
+          "name": "wide-fixed",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.1",
+          "name": "cramped-text",
+          "isText": true,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "maxPosDelta": 0,
+      "maxSizeDelta": 0
+    },
+    {
+      "name": "text-center-natural-width",
+      "viewport": 375,
+      "nodes": [
+        {
+          "path": "r",
+          "name": "root",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0",
+          "name": "short-label",
+          "isText": true,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0.01,
+          "dh": 0,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "maxPosDelta": 0,
+      "maxSizeDelta": 0.01,
+      "worst": {
+        "path": "r.0",
+        "name": "short-label",
+        "isText": true,
+        "dx": 0,
+        "dy": 0,
+        "dw": 0.01,
+        "dh": 0,
+        "pass": true
+      }
+    },
+    {
+      "name": "text-letter-spacing",
+      "viewport": 375,
+      "nodes": [
+        {
+          "path": "r",
+          "name": "root",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0",
+          "name": "spaced-heading",
+          "isText": true,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "maxPosDelta": 0,
+      "maxSizeDelta": 0
+    },
+    {
+      "name": "text-small-caption",
+      "viewport": 320,
+      "nodes": [
+        {
+          "path": "r",
+          "name": "root",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0",
+          "name": "caption",
+          "isText": true,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "maxPosDelta": 0,
+      "maxSizeDelta": 0
+    },
+    {
+      "name": "wide-single-line-1440",
+      "viewport": 1440,
+      "nodes": [
+        {
+          "path": "r",
+          "name": "root",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0",
+          "name": "one-liner",
+          "isText": true,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "maxPosDelta": 0,
+      "maxSizeDelta": 0
+    },
+    {
+      "name": "mixed-bangla-latin",
+      "viewport": 320,
+      "nodes": [
+        {
+          "path": "r",
+          "name": "root",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0",
+          "name": "mixed-paragraph",
+          "isText": true,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "maxPosDelta": 0,
+      "maxSizeDelta": 0
+    },
+    {
+      "name": "emoji-only-row",
+      "viewport": 375,
+      "nodes": [
+        {
+          "path": "r",
+          "name": "root",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0",
+          "name": "reactions",
+          "isText": true,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "maxPosDelta": 0,
+      "maxSizeDelta": 0
+    },
+    {
+      "name": "text-with-padding",
+      "viewport": 320,
+      "nodes": [
+        {
+          "path": "r",
+          "name": "root",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0",
+          "name": "padded-note",
+          "isText": true,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "maxPosDelta": 0,
+      "maxSizeDelta": 0
+    },
+    {
+      "name": "card-kitchen-sink",
+      "viewport": 320,
+      "nodes": [
+        {
+          "path": "r",
+          "name": "root",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0",
+          "name": "card",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0.0",
+          "name": "card-header",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0.0.0",
+          "name": "avatar",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0.0.1",
+          "name": "author",
+          "isText": true,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0.1",
+          "name": "card-title",
+          "isText": true,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0.2",
+          "name": "card-body",
+          "isText": true,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0.3",
+          "name": "card-actions",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0.3.0",
+          "name": "primary-btn",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0.01,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0.3.0.0",
+          "name": "primary-btn-label",
+          "isText": true,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0.01,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0.3.1",
+          "name": "ghost-btn",
+          "isText": false,
+          "dx": 0.01,
+          "dy": 0,
+          "dw": 0.01,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0.3.1.0",
+          "name": "ghost-btn-label",
+          "isText": true,
+          "dx": 0.01,
+          "dy": 0,
+          "dw": 0.01,
+          "dh": 0,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "maxPosDelta": 0.01,
+      "maxSizeDelta": 0.01,
+      "worst": {
+        "path": "r.0.3.0",
+        "name": "primary-btn",
+        "isText": false,
+        "dx": 0,
+        "dy": 0,
+        "dw": 0.01,
+        "dh": 0,
+        "pass": true
+      }
     }
   ]
 }

@@ -1,0 +1,32 @@
+{
+  "name": "justify-space-around",
+  "viewport": 768,
+  "chromium": "148.0.7778.96",
+  "generatedAt": "2026-06-11T09:25:32.311Z",
+  "rects": {
+    "r": {
+      "x": 0,
+      "y": 0,
+      "width": 768,
+      "height": 80
+    },
+    "r.0": {
+      "x": 78.66,
+      "y": 16,
+      "width": 120,
+      "height": 48
+    },
+    "r.1": {
+      "x": 323.98,
+      "y": 16,
+      "width": 120,
+      "height": 48
+    },
+    "r.2": {
+      "x": 569.33,
+      "y": 16,
+      "width": 120,
+      "height": 48
+    }
+  }
+}

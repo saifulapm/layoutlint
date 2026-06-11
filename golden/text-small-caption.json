@@ -1,0 +1,20 @@
+{
+  "name": "text-small-caption",
+  "viewport": 320,
+  "chromium": "148.0.7778.96",
+  "generatedAt": "2026-06-11T09:25:39.573Z",
+  "rects": {
+    "r": {
+      "x": 0,
+      "y": 0,
+      "width": 320,
+      "height": 72
+    },
+    "r.0": {
+      "x": 12,
+      "y": 12,
+      "width": 296,
+      "height": 48
+    }
+  }
+}

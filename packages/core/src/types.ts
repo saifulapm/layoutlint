@@ -49,10 +49,10 @@ export interface Style {
   paddingBottom?: number;
   paddingLeft?: number;
   margin?: number;
-  marginTop?: number;
-  marginRight?: number;
-  marginBottom?: number;
-  marginLeft?: number;
+  marginTop?: number | 'auto';
+  marginRight?: number | 'auto';
+  marginBottom?: number | 'auto';
+  marginLeft?: number | 'auto';
 
   // positioning
   position?: 'relative' | 'absolute';

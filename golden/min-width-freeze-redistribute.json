@@ -1,8 +1,8 @@
 {
-  "name": "min-max-constraints",
+  "name": "min-width-freeze-redistribute",
   "viewport": 768,
   "chromium": "148.0.7778.96",
-  "generatedAt": "2026-06-11T09:25:30.400Z",
+  "generatedAt": "2026-06-11T09:25:35.841Z",
   "rects": {
     "r": {
       "x": 0,
@@ -13,19 +13,13 @@
     "r.0": {
       "x": 16,
       "y": 16,
-      "width": 262,
+      "width": 400,
       "height": 60
     },
     "r.1": {
-      "x": 294,
+      "x": 432,
       "y": 16,
-      "width": 180,
-      "height": 60
-    },
-    "r.2": {
-      "x": 490,
-      "y": 16,
-      "width": 262,
+      "width": 320,
       "height": 60
     }
   }

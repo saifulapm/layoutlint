@@ -1,0 +1,26 @@
+{
+  "name": "margin-auto-push",
+  "viewport": 375,
+  "chromium": "148.0.7778.96",
+  "generatedAt": "2026-06-11T09:25:36.727Z",
+  "rects": {
+    "r": {
+      "x": 0,
+      "y": 0,
+      "width": 375,
+      "height": 56
+    },
+    "r.0": {
+      "x": 12,
+      "y": 12,
+      "width": 96,
+      "height": 32
+    },
+    "r.1": {
+      "x": 299,
+      "y": 12,
+      "width": 64,
+      "height": 32
+    }
+  }
+}

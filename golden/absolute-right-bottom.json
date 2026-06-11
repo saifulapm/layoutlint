@@ -1,0 +1,26 @@
+{
+  "name": "absolute-right-bottom",
+  "viewport": 375,
+  "chromium": "148.0.7778.96",
+  "generatedAt": "2026-06-11T09:25:37.846Z",
+  "rects": {
+    "r": {
+      "x": 0,
+      "y": 0,
+      "width": 375,
+      "height": 240
+    },
+    "r.0": {
+      "x": 0,
+      "y": 0,
+      "width": 375,
+      "height": 60
+    },
+    "r.1": {
+      "x": 303,
+      "y": 168,
+      "width": 56,
+      "height": 56
+    }
+  }
+}

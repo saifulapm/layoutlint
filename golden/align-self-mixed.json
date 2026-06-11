@@ -1,0 +1,38 @@
+{
+  "name": "align-self-mixed",
+  "viewport": 375,
+  "chromium": "148.0.7778.96",
+  "generatedAt": "2026-06-11T09:25:33.038Z",
+  "rects": {
+    "r": {
+      "x": 0,
+      "y": 0,
+      "width": 375,
+      "height": 140
+    },
+    "r.0": {
+      "x": 8,
+      "y": 8,
+      "width": 70,
+      "height": 124
+    },
+    "r.1": {
+      "x": 86,
+      "y": 46,
+      "width": 70,
+      "height": 48
+    },
+    "r.2": {
+      "x": 164,
+      "y": 84,
+      "width": 70,
+      "height": 48
+    },
+    "r.3": {
+      "x": 242,
+      "y": 8,
+      "width": 70,
+      "height": 48
+    }
+  }
+}

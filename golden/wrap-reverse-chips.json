@@ -1,0 +1,38 @@
+{
+  "name": "wrap-reverse-chips",
+  "viewport": 320,
+  "chromium": "148.0.7778.96",
+  "generatedAt": "2026-06-11T09:25:33.843Z",
+  "rects": {
+    "r": {
+      "x": 0,
+      "y": 0,
+      "width": 320,
+      "height": 88
+    },
+    "r.0": {
+      "x": 12,
+      "y": 48,
+      "width": 110,
+      "height": 28
+    },
+    "r.1": {
+      "x": 130,
+      "y": 48,
+      "width": 110,
+      "height": 28
+    },
+    "r.2": {
+      "x": 12,
+      "y": 12,
+      "width": 110,
+      "height": 28
+    },
+    "r.3": {
+      "x": 130,
+      "y": 12,
+      "width": 110,
+      "height": 28
+    }
+  }
+}

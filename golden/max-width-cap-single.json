@@ -1,0 +1,20 @@
+{
+  "name": "max-width-cap-single",
+  "viewport": 768,
+  "chromium": "148.0.7778.96",
+  "generatedAt": "2026-06-11T09:25:36.059Z",
+  "rects": {
+    "r": {
+      "x": 0,
+      "y": 0,
+      "width": 768,
+      "height": 92
+    },
+    "r.0": {
+      "x": 16,
+      "y": 16,
+      "width": 200,
+      "height": 60
+    }
+  }
+}

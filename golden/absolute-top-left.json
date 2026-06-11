@@ -1,20 +1,26 @@
 {
-  "name": "emoji-text",
+  "name": "absolute-top-left",
   "viewport": 375,
   "chromium": "148.0.7778.96",
-  "generatedAt": "2026-06-11T09:25:30.988Z",
+  "generatedAt": "2026-06-11T09:25:37.625Z",
   "rects": {
     "r": {
       "x": 0,
       "y": 0,
       "width": 375,
-      "height": 80
+      "height": 200
     },
     "r.0": {
       "x": 16,
       "y": 16,
       "width": 343,
       "height": 48
+    },
+    "r.1": {
+      "x": 10,
+      "y": 10,
+      "width": 40,
+      "height": 40
     }
   }
 }

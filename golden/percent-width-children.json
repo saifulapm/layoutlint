@@ -1,0 +1,32 @@
+{
+  "name": "percent-width-children",
+  "viewport": 375,
+  "chromium": "148.0.7778.96",
+  "generatedAt": "2026-06-11T09:25:34.467Z",
+  "rects": {
+    "r": {
+      "x": 0,
+      "y": 0,
+      "width": 375,
+      "height": 120
+    },
+    "r.0": {
+      "x": 0,
+      "y": 0,
+      "width": 187.5,
+      "height": 40
+    },
+    "r.1": {
+      "x": 0,
+      "y": 40,
+      "width": 93.75,
+      "height": 40
+    },
+    "r.2": {
+      "x": 0,
+      "y": 80,
+      "width": 281.25,
+      "height": 40
+    }
+  }
+}

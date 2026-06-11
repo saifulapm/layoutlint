@@ -1,0 +1,20 @@
+{
+  "name": "wide-single-line-1440",
+  "viewport": 1440,
+  "chromium": "148.0.7778.96",
+  "generatedAt": "2026-06-11T09:25:39.852Z",
+  "rects": {
+    "r": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 76
+    },
+    "r.0": {
+      "x": 24,
+      "y": 24,
+      "width": 1392,
+      "height": 28
+    }
+  }
+}

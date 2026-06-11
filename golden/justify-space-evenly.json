@@ -1,0 +1,32 @@
+{
+  "name": "justify-space-evenly",
+  "viewport": 768,
+  "chromium": "148.0.7778.96",
+  "generatedAt": "2026-06-11T09:25:32.506Z",
+  "rects": {
+    "r": {
+      "x": 0,
+      "y": 0,
+      "width": 768,
+      "height": 80
+    },
+    "r.0": {
+      "x": 125,
+      "y": 16,
+      "width": 100,
+      "height": 48
+    },
+    "r.1": {
+      "x": 334,
+      "y": 16,
+      "width": 100,
+      "height": 48
+    },
+    "r.2": {
+      "x": 543,
+      "y": 16,
+      "width": 100,
+      "height": 48
+    }
+  }
+}

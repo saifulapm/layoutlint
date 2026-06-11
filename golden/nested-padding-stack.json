@@ -1,0 +1,32 @@
+{
+  "name": "nested-padding-stack",
+  "viewport": 320,
+  "chromium": "148.0.7778.96",
+  "generatedAt": "2026-06-11T09:25:37.399Z",
+  "rects": {
+    "r": {
+      "x": 0,
+      "y": 0,
+      "width": 320,
+      "height": 96
+    },
+    "r.0": {
+      "x": 16,
+      "y": 16,
+      "width": 288,
+      "height": 64
+    },
+    "r.0.0": {
+      "x": 28,
+      "y": 28,
+      "width": 264,
+      "height": 40
+    },
+    "r.0.0.0": {
+      "x": 36,
+      "y": 36,
+      "width": 248,
+      "height": 24
+    }
+  }
+}

@@ -13,7 +13,10 @@ import { GOLDEN_DIR, type GoldenFile, type GoldenRect } from './golden';
 
 const round = (n: number) => Math.round(n * 100) / 100;
 
-const browser = await chromium.launch();
+// Without this flag, headless Linux Chromium grid-fits glyph advances to
+// whole pixels (FreeType full hinting), diverging from both fontkit's linear
+// metrics and from Chrome on macOS/Windows, which use subpixel positioning.
+const browser = await chromium.launch({ args: ['--font-render-hinting=none'] });
 const version = browser.version();
 mkdirSync(GOLDEN_DIR, { recursive: true });
 

@@ -1,0 +1,26 @@
+{
+  "name": "shrink-proportional",
+  "viewport": 320,
+  "chromium": "148.0.7778.96",
+  "generatedAt": "2026-06-11T09:25:35.396Z",
+  "rects": {
+    "r": {
+      "x": 0,
+      "y": 0,
+      "width": 320,
+      "height": 40
+    },
+    "r.0": {
+      "x": 0,
+      "y": 0,
+      "width": 160,
+      "height": 40
+    },
+    "r.1": {
+      "x": 160,
+      "y": 0,
+      "width": 160,
+      "height": 40
+    }
+  }
+}

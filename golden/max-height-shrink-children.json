@@ -1,0 +1,26 @@
+{
+  "name": "max-height-shrink-children",
+  "viewport": 375,
+  "chromium": "148.0.7778.96",
+  "generatedAt": "2026-06-11T09:25:36.283Z",
+  "rects": {
+    "r": {
+      "x": 0,
+      "y": 0,
+      "width": 375,
+      "height": 100
+    },
+    "r.0": {
+      "x": 8,
+      "y": 8,
+      "width": 359,
+      "height": 42
+    },
+    "r.1": {
+      "x": 8,
+      "y": 50,
+      "width": 359,
+      "height": 42
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "name": "text-in-row-shrink",
+  "viewport": 375,
+  "chromium": "148.0.7778.96",
+  "generatedAt": "2026-06-11T09:25:38.560Z",
+  "rects": {
+    "r": {
+      "x": 0,
+      "y": 0,
+      "width": 375,
+      "height": 104
+    },
+    "r.0": {
+      "x": 12,
+      "y": 12,
+      "width": 38.63,
+      "height": 80
+    },
+    "r.1": {
+      "x": 58.63,
+      "y": 12,
+      "width": 304.38,
+      "height": 80
+    }
+  }
+}
