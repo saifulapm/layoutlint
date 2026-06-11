@@ -73,6 +73,60 @@ export const reactCases: ReactCase[] = [
     component: 'Footer',
   },
   {
+    name: 'react-settings-form',
+    viewport: 375,
+    file: 'corpora/react/settings-form.tsx',
+  },
+  {
+    name: 'react-stat-dashboard',
+    viewport: 375,
+    file: 'corpora/react/stat-dashboard.tsx',
+  },
+  {
+    name: 'react-navbar-signed-in',
+    viewport: 768,
+    file: 'corpora/react/navbar-auth.tsx',
+    props: { signedIn: true, userName: 'Saiful Islam Khan' },
+  },
+  {
+    name: 'react-navbar-signed-out',
+    viewport: 375,
+    file: 'corpora/react/navbar-auth.tsx',
+  },
+  {
+    name: 'react-chat-list',
+    viewport: 375,
+    file: 'corpora/react/chat-list.tsx',
+  },
+  {
+    name: 'react-data-table',
+    viewport: 768,
+    file: 'corpora/react/data-table.tsx',
+    props: {
+      rows: [
+        { name: 'golden-generator', status: 'Healthy', region: 'us-east-1' },
+        { name: 'paint-comparator-with-a-very-long-service-name', status: 'Degraded', region: 'eu-central-1' },
+        { name: 'mcp-server', status: 'Healthy', region: 'ap-southeast-1' },
+      ],
+    },
+  },
+  {
+    name: 'react-context-theme',
+    viewport: 375,
+    file: 'corpora/react/context-theme.tsx',
+    props: { density: 'comfortable' },
+  },
+  {
+    name: 'react-banner',
+    viewport: 320,
+    file: 'corpora/react/banner-dismissible.tsx',
+  },
+  {
+    name: 'react-footer-columns',
+    viewport: 320,
+    file: 'corpora/react/footer-columns.tsx',
+  },
+  {
     name: 'react-pricing-props',
     viewport: 375,
     file: 'corpora/react/pricing-props.tsx',
