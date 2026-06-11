@@ -1,5 +1,5 @@
 export { FontStore, type FontFace } from './fonts';
-export { measureText, type TextMeasurement } from './text';
+export { breakLines, measureText, type LineBox, type TextMeasurement } from './text';
 export { computeLayout } from './layout';
 export { parseSource } from './parser';
 export {
