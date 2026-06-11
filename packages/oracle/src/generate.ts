@@ -18,15 +18,11 @@ const round = (n: number) => Math.round(n * 100) / 100;
 // Without this flag, headless Linux Chromium grid-fits glyph advances to
 // whole pixels (FreeType full hinting), diverging from both fontkit's linear
 // metrics and from Chrome on macOS/Windows, which use subpixel positioning.
-const LAUNCH_ARGS = ['--font-render-hinting=none'];
-
-// Chromium's memory grows across hundreds of setContent pages and has
-// OOM-killed CI runners mid-run — relaunch every N cases to bound it.
-const RELAUNCH_EVERY = 50;
-
-let browser = await chromium.launch({ args: LAUNCH_ARGS });
+// (Relaunching the browser every N cases was tried as an OOM mitigation and
+// caused nondeterministic setContent hangs under bun+playwright — the real
+// fix for CI memory pressure is conditional font embedding in html.ts.)
+const browser = await chromium.launch({ args: ['--font-render-hinting=none'] });
 const version = browser.version();
-let pagesServed = 0;
 mkdirSync(GOLDEN_DIR, { recursive: true });
 
 const allCases = [
@@ -36,16 +32,11 @@ const allCases = [
 ];
 
 for (const c of allCases) {
-  if (pagesServed > 0 && pagesServed % RELAUNCH_EVERY === 0) {
-    await browser.close();
-    browser = await chromium.launch({ args: LAUNCH_ARGS });
-  }
-  pagesServed++;
   const page = await browser.newPage({
     viewport: { width: c.viewport, height: ORACLE_VIEWPORT_HEIGHT },
     deviceScaleFactor: 1,
   });
-  await page.setContent(c.html, { waitUntil: 'load' });
+  await page.setContent(c.html, { waitUntil: 'load', timeout: 60_000 });
   await page.evaluate(() => document.fonts.ready);
   // Tailwind browser-build compilation has applied once the probe is display:none
   await page.waitForFunction(() => {

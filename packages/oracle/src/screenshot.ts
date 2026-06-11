@@ -31,7 +31,7 @@ if (import.meta.main) {
       viewport: { width: c.viewport, height: 2000 },
       deviceScaleFactor: 1,
     });
-    await page.setContent(renderTailwindCaseHtml(c.html), { waitUntil: 'load' });
+    await page.setContent(renderTailwindCaseHtml(c.html), { waitUntil: 'load', timeout: 60_000 });
     await page.evaluate(() => document.fonts.ready);
     await page.waitForFunction(() => {
       const probe = document.getElementById('tw-probe');

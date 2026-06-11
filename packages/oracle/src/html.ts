@@ -56,7 +56,7 @@ export function renderCaseHtml(c: CorpusCase): string {
   return `<!DOCTYPE html>
 <html><head><meta charset="utf-8">
 <style>
-${ALL_FONT_FACES()}
+${FONT_FACES_FOR(JSON.stringify(c.tree))}
 html,body{margin:0;padding:0;overflow:hidden;}
 body{font-family:'AE Sans','AE Bengali','AE Emoji';font-size:16px;}
 </style>
@@ -84,14 +84,34 @@ function renderRawNode(n: TreeNode, path: string): string {
   return `${open}>${inner}</${tag}>`;
 }
 
-const ALL_FONT_FACES = () =>
+// Embedding fonts as data URIs makes pages heavy — the emoji font alone is
+// ~14MB base64, which slowed/OOM-killed CI Chromium when attached to all
+// 297 pages. Cache each encoded face once, and include the Bengali/emoji
+// faces only when the case content can actually use them (an unused
+// @font-face can never affect layout, so goldens are unchanged).
+const faceCache = new Map<string, string>();
+const cachedFace = (family: string, path: string, weight: number): string => {
+  const key = `${family}|${path}|${weight}`;
+  let css = faceCache.get(key);
+  if (css === undefined) {
+    css = fontFace(family, path, weight);
+    faceCache.set(key, css);
+  }
+  return css;
+};
+
+const FONT_FACES_FOR = (content: string) =>
   [
-    fontFace('AE Sans', join(FONTS_DIR, 'Inter-Regular.ttf'), 400),
-    fontFace('AE Sans', join(FONTS_DIR, 'Inter-Medium.ttf'), 500),
-    fontFace('AE Sans', join(FONTS_DIR, 'Inter-SemiBold.ttf'), 600),
-    fontFace('AE Sans', join(FONTS_DIR, 'Inter-Bold.ttf'), 700),
-    fontFace('AE Bengali', join(FONTS_DIR, 'NotoSansBengali-Regular.ttf'), 400),
-    fontFace('AE Emoji', VENDOR_EMOJI, 400),
+    cachedFace('AE Sans', join(FONTS_DIR, 'Inter-Regular.ttf'), 400),
+    cachedFace('AE Sans', join(FONTS_DIR, 'Inter-Medium.ttf'), 500),
+    cachedFace('AE Sans', join(FONTS_DIR, 'Inter-SemiBold.ttf'), 600),
+    cachedFace('AE Sans', join(FONTS_DIR, 'Inter-Bold.ttf'), 700),
+    ...(/\p{Script=Bengali}/u.test(content)
+      ? [cachedFace('AE Bengali', join(FONTS_DIR, 'NotoSansBengali-Regular.ttf'), 400)]
+      : []),
+    ...(/[\p{Extended_Pictographic}\u{1F1E6}-\u{1F1FF}\u{2600}-\u{27BF}\u{FE0F}\u{20E3}]/u.test(content)
+      ? [cachedFace('AE Emoji', VENDOR_EMOJI, 400)]
+      : []),
   ].join('\n');
 
 /**
@@ -105,7 +125,7 @@ export function renderTailwindCaseHtml(html: string): string {
   return `<!DOCTYPE html>
 <html><head><meta charset="utf-8">
 <style>
-${ALL_FONT_FACES()}
+${FONT_FACES_FOR(html)}
 html, body { margin: 0; padding: 0; overflow: hidden; }
 html, body { font-family: 'AE Sans', 'AE Bengali', 'AE Emoji' !important; font-size: 16px; }
 </style>
