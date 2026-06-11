@@ -8,6 +8,7 @@ import { mkdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { chromium } from 'playwright';
 import { cases } from '../../../corpora/cases';
+import { generatedCases } from '../../../corpora/generated';
 import { tailwindCases } from '../../../corpora/tailwind-cases';
 import { renderCaseHtml, renderTailwindCaseHtml } from './html';
 import { GOLDEN_DIR, ORACLE_VIEWPORT_HEIGHT, type GoldenFile, type GoldenRect } from './golden';
@@ -23,6 +24,7 @@ mkdirSync(GOLDEN_DIR, { recursive: true });
 
 const allCases = [
   ...cases.map((c) => ({ name: c.name, viewport: c.viewport, html: renderCaseHtml(c) })),
+  ...generatedCases.map((c) => ({ name: c.name, viewport: c.viewport, html: renderCaseHtml(c) })),
   ...tailwindCases.map((c) => ({ name: c.name, viewport: c.viewport, html: renderTailwindCaseHtml(c.html) })),
 ];
 

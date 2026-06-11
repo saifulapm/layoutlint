@@ -33,6 +33,7 @@
       "dependencies": {
         "domhandler": "^6.0.1",
         "fontkit": "^2.0.4",
+        "harfbuzzjs": "^1.2.1",
         "htmlparser2": "^12.0.0",
         "yoga-layout": "^3.2.1",
       },
@@ -182,6 +183,8 @@
     "get-proto": ["get-proto@1.0.1", "", { "dependencies": { "dunder-proto": "^1.0.1", "es-object-atoms": "^1.0.0" } }, "sha512-sTSfBjoXBp89JvIKIefqw7U2CCebsc74kiY6awiGogKtoSGbgjYE/G/+l9sF3MWFPNc9IcoOC4ODfKHfxFmp0g=="],
 
     "gopd": ["gopd@1.2.0", "", {}, "sha512-ZUKRh6/kUFoAiTAtTYPZJ3hw9wNxx+BIBOijnlG9PnrJsCcSjs1wyyD6vJpaYtgnzDrKYRSqf3OO6Rfa93xsRg=="],
+
+    "harfbuzzjs": ["harfbuzzjs@1.2.1", "", {}, "sha512-XOtbpWwQ8pHceShD5LNIU8Tz0G/r0TLQf4K/ut9Z8SkBcKwaW4Hn1zYJDJe8GUosDlrKSzkCMHHBjpf/bQbz/g=="],
 
     "has-symbols": ["has-symbols@1.1.0", "", {}, "sha512-1cDNdwJ2Jaohmb3sg4OmKaMBwuC48sYni5HUw2DvsC8LjGTLK9h+eb1X6RyuOHe4hT0ULCW68iomhjUoKUqlPQ=="],
 

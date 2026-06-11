@@ -1,5 +1,13 @@
 import * as fontkit from 'fontkit';
 import type { Font } from 'fontkit';
+import { readFileSync } from 'node:fs';
+import {
+  Blob as HbBlob,
+  Buffer as HbBuffer,
+  Face as HbFace,
+  Font as HbFont,
+  shape as hbShape,
+} from 'harfbuzzjs';
 
 export interface FontFace {
   family: string;
@@ -10,7 +18,11 @@ export interface FontFace {
 interface LoadedFace {
   family: string;
   weight: number;
+  /** fontkit — font parsing, cmap coverage, table access */
   font: Font;
+  /** HarfBuzz — shaping (what Chrome uses), so advances match the browser */
+  hbFont: HbFont;
+  upem: number;
 }
 
 /** Default-ignorable codepoints that should stay attached to the current run. */
@@ -18,31 +30,20 @@ function isJoinerOrSelector(cp: number): boolean {
   return cp === 0x200d || (cp >= 0xfe00 && cp <= 0xfe0f) || cp === 0x20e3;
 }
 
-/**
- * Advance width of a run in font units. Prefers full OpenType shaping
- * (kerning, ligatures, complex scripts); falls back to raw cmap+hmtx sums
- * for fonts fontkit cannot shape (e.g. CBDT color-emoji fonts, which have
- * no glyf/CFF table). Known gap: the fallback measures ZWJ emoji sequences
- * as the sum of their parts.
- */
-function runAdvance(font: Font, text: string): number {
-  try {
-    return font.layout(text).advanceWidth;
-  } catch {
-    const f = font as Font & {
-      _cmapProcessor: { lookup(cp: number): number };
-      hmtx: { metrics: { length: number; get(i: number): { advance: number } } };
-    };
-    let advance = 0;
-    for (const ch of text) {
-      const cp = ch.codePointAt(0)!;
-      if (isJoinerOrSelector(cp)) continue;
-      const id = f._cmapProcessor.lookup(cp);
-      const metric = f.hmtx.metrics.get(Math.min(id, f.hmtx.metrics.length - 1));
-      if (metric) advance += metric.advance;
-    }
-    return advance;
-  }
+const graphemeSegmenter = new Intl.Segmenter(undefined, { granularity: 'grapheme' });
+
+// single reusable shaping buffer — FontStore usage is synchronous
+const hbBuffer = new HbBuffer();
+
+/** Advance width of a run in font units, shaped with HarfBuzz. */
+function runAdvance(face: LoadedFace, text: string): number {
+  hbBuffer.reset();
+  hbBuffer.addText(text);
+  hbBuffer.guessSegmentProperties();
+  hbShape(face.hbFont, hbBuffer);
+  let advance = 0;
+  for (const p of hbBuffer.getGlyphPositions()) advance += p.xAdvance;
+  return advance;
 }
 
 /**
@@ -54,7 +55,15 @@ export class FontStore {
 
   constructor(faces: FontFace[]) {
     for (const f of faces) {
-      this.faces.push({ family: f.family, weight: f.weight, font: fontkit.openSync(f.path) as Font });
+      const data = readFileSync(f.path);
+      const hbFace = new HbFace(new HbBlob(new Uint8Array(data).buffer as ArrayBuffer), 0);
+      this.faces.push({
+        family: f.family,
+        weight: f.weight,
+        font: fontkit.create(data) as Font,
+        hbFont: new HbFont(hbFace),
+        upem: hbFace.upem,
+      });
     }
     if (this.faces.length === 0) throw new Error('FontStore requires at least one font');
   }
@@ -79,8 +88,8 @@ export class FontStore {
 
   /**
    * Advance width of a string in px. Splits the string into same-font runs
-   * by codepoint coverage, then shapes each run with fontkit (kerning,
-   * ligatures, complex-script shaping) like a browser would with HarfBuzz.
+   * by codepoint coverage (CSS per-character family matching), then shapes
+   * each run with HarfBuzz — the same shaper Chrome uses.
    */
   measureWidth(text: string, fontSize: number, weight: number, letterSpacing = 0): number {
     if (text.length === 0) return 0;
@@ -101,12 +110,14 @@ export class FontStore {
       }
     }
     let width = 0;
-    let chars = 0;
     for (const run of runs) {
-      width += (runAdvance(run.face.font, run.text) / run.face.font.unitsPerEm) * fontSize;
-      chars += [...run.text].length;
+      width += (runAdvance(run.face, run.text) / run.face.upem) * fontSize;
     }
-    if (letterSpacing !== 0) width += letterSpacing * chars;
+    if (letterSpacing !== 0) {
+      // letter-spacing applies per typographic character unit (grapheme
+      // cluster), not per codepoint — combining marks add no spacing
+      width += letterSpacing * [...graphemeSegmenter.segment(text)].length;
+    }
     return width;
   }
 }

@@ -25,6 +25,9 @@ jobs:
       - name: Typecheck
         run: npx tsc --noEmit
 
+      - name: Unit tests (rules, resolver, check API)
+        run: bun test
+
       - name: Regenerate golden files against pinned Chromium
         run: bun run oracle
 

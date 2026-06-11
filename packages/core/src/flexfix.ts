@@ -69,9 +69,12 @@ function intrinsicWidth(
     return clamp(measureText(fonts, n.text, s, maxWidth).width + pb);
   }
   const children = flowChildren(n);
-  const isRow = s.flexDirection === 'row' || s.flexDirection === 'row-reverse';
+  // undefined = web default = row (the engine runs Yoga with web defaults)
+  const isRow = s.flexDirection !== 'column' && s.flexDirection !== 'column-reverse';
+  // a wrap row can break between items: its min-content is its largest item
+  const sums = isRow && !(mode === 'min' && (s.flexWrap === 'wrap' || s.flexWrap === 'wrap-reverse'));
   let content = 0;
-  if (isRow) {
+  if (sums) {
     content = children.reduce((acc, c) => acc + intrinsicWidth(c, fonts, mode) + hMargins(c.style ?? {}), 0);
     content += gapOf(s) * Math.max(0, children.length - 1);
   } else {
@@ -93,6 +96,8 @@ export const minContentWidth = (n: TreeNode, fonts: FontStore): number =>
 export interface FlexItemInput {
   /** flex base size (border-box main size before flexing) */
   base: number;
+  /** horizontal padding+border — the spec weights shrink by the *inner* base */
+  padBorder: number;
   min: number;
   max: number;
   grow: number;
@@ -141,9 +146,10 @@ export function resolveFlexibleLengths(items: FlexItemInput[], available: number
           size[i] = items[i].base + (free * items[i].grow) / factorSum;
         }
       } else {
-        const scaledSum = unfrozenIdx.reduce((a, i) => a + items[i].shrink * items[i].base, 0);
+        const inner = (i: number) => Math.max(0, items[i].base - items[i].padBorder);
+        const scaledSum = unfrozenIdx.reduce((a, i) => a + items[i].shrink * inner(i), 0);
         for (const i of unfrozenIdx) {
-          const ratio = scaledSum > 0 ? (items[i].shrink * items[i].base) / scaledSum : 0;
+          const ratio = scaledSum > 0 ? (items[i].shrink * inner(i)) / scaledSum : 0;
           size[i] = items[i].base - Math.abs(free) * ratio;
         }
       }
@@ -172,6 +178,37 @@ export function resolveFlexibleLengths(items: FlexItemInput[], available: number
   return size;
 }
 
+/**
+ * CSS fit-content width for a non-stretched auto-width child in column flow:
+ * clamp(min-content, available, max-content). Yoga neither clamps an
+ * overflowing fit-content child to the available width (wrappable content)
+ * nor lets unbreakable content keep its min-content width past it. Returns
+ * the target width, or null when fit-content sizing doesn't apply.
+ */
+export function fitContentWidth(
+  parent: TreeNode,
+  child: TreeNode,
+  parentContentWidth: number,
+  fonts: FontStore,
+): number | null {
+  const ps = parent.style ?? {};
+  const cs = child.style ?? {};
+  const isColumn = ps.flexDirection === 'column' || ps.flexDirection === 'column-reverse';
+  if (!isColumn) return null;
+  if (cs.display === 'none' || cs.position === 'absolute') return null;
+  if (cs.width !== undefined) return null;
+  const align = cs.alignSelf && cs.alignSelf !== 'auto' ? cs.alignSelf : (ps.alignItems ?? 'stretch');
+  if (align === 'stretch') return null;
+  if (cs.marginLeft === 'auto' || cs.marginRight === 'auto') return null;
+
+  const available = parentContentWidth - hMargins(cs);
+  const target = Math.max(
+    intrinsicWidth(child, fonts, 'min'),
+    Math.min(available, intrinsicWidth(child, fonts, 'max')),
+  );
+  return clampWidth(cs, target);
+}
+
 export interface RowCorrection {
   /** §9.7-resolved border-box widths, parallel to in-flow children. */
   children: { child: TreeNode; index: number; width: number }[];
@@ -185,9 +222,10 @@ export interface RowCorrection {
 }
 
 /**
- * Compute §9.7-correct child widths for a single-line row container, given
- * its border-box width. Returns null when the container is out of scope
- * (column, wrap, auto margins on the axis) — Yoga's answer stands.
+ * Compute §9.7-correct child widths for a row container, given its
+ * border-box width. Wrap containers get §9.3 line collection (greedy over
+ * hypothetical outer sizes) and per-line resolution. Returns null when the
+ * container is out of scope (column, auto margins) — Yoga's answer stands.
  */
 export function correctRowContainer(
   container: TreeNode,
@@ -195,8 +233,9 @@ export function correctRowContainer(
   fonts: FontStore,
 ): RowCorrection | null {
   const s = container.style ?? {};
-  const isRow = s.flexDirection === 'row' || s.flexDirection === 'row-reverse';
-  if (!isRow || (s.flexWrap ?? 'nowrap') !== 'nowrap') return null;
+  const isRow = s.flexDirection !== 'column' && s.flexDirection !== 'column-reverse';
+  if (!isRow) return null;
+  const wrap = (s.flexWrap ?? 'nowrap') !== 'nowrap';
 
   const all = container.children ?? [];
   const childIndices: number[] = [];
@@ -206,30 +245,36 @@ export function correctRowContainer(
   });
   if (childIndices.length === 0) return null;
 
-  let available = containerWidth - hPadBorder(s) - gapOf(s) * (childIndices.length - 1);
-  const items: FlexItemInput[] = [];
-  let hasExplicitMinMax = false;
-  let hasContentBase = false;
+  const contentWidth = Math.max(0, containerWidth - hPadBorder(s));
+  const gap = gapOf(s);
+
+  interface Entry extends FlexItemInput {
+    index: number;
+    margins: number;
+    explicitMinMax: boolean;
+    contentBase: boolean;
+  }
+  const entries: Entry[] = [];
 
   for (const i of childIndices) {
     const c = all[i];
     const cs = c.style ?? {};
     // auto margins interact with free space before justification — out of scope
     if (cs.marginLeft === 'auto' || cs.marginRight === 'auto') return null;
-    available -= hMargins(cs);
 
     // flex base size: unclamped — min/max apply at the hypothetical step
     let base: number;
+    let contentBase = false;
     const basis = cs.flexBasis;
     if (typeof basis === 'number') base = basis;
     else if (typeof basis === 'string' && basis !== 'auto') {
-      base = (parseFloat(basis) / 100) * Math.max(0, containerWidth - hPadBorder(s));
+      base = (parseFloat(basis) / 100) * contentWidth;
     } else if (typeof cs.width === 'number') base = cs.width;
     else if (typeof cs.width === 'string') {
-      base = (parseFloat(cs.width) / 100) * Math.max(0, containerWidth - hPadBorder(s));
+      base = (parseFloat(cs.width) / 100) * contentWidth;
     } else {
       base = intrinsicWidth(c, fonts, 'max', true);
-      hasContentBase = true;
+      contentBase = true;
     }
 
     // automatic minimum size (§4.5): min(content size suggestion, specified
@@ -240,24 +285,57 @@ export function correctRowContainer(
     const autoMin = scrollable ? 0 : Math.min(contentSuggestion, specifiedSuggestion);
     const min = typeof cs.minWidth === 'number' ? cs.minWidth : autoMin;
     const max = typeof cs.maxWidth === 'number' ? cs.maxWidth : Infinity;
-    if (typeof cs.minWidth === 'number' || typeof cs.maxWidth === 'number') hasExplicitMinMax = true;
 
-    items.push({
+    entries.push({
+      index: i,
       base,
+      padBorder: hPadBorder(cs),
       min,
       max,
       grow: cs.flexGrow ?? 0,
       shrink: cs.flexShrink ?? 1,
+      margins: hMargins(cs),
+      explicitMinMax: typeof cs.minWidth === 'number' || typeof cs.maxWidth === 'number',
+      contentBase,
     });
   }
 
-  const sumHyp = items.reduce((a, it) => a + Math.min(Math.max(it.base, it.min), it.max), 0);
-  const shrinking = sumHyp > available;
-  const conflict = hasExplicitMinMax || (shrinking && hasContentBase);
+  // collect flex lines (§9.3): greedy over hypothetical outer sizes
+  const lines: Entry[][] = [];
+  if (!wrap) {
+    lines.push(entries);
+  } else {
+    let line: Entry[] = [];
+    let lineWidth = 0;
+    for (const e of entries) {
+      const outer = Math.min(Math.max(e.base, e.min), e.max) + e.margins;
+      const withGap = lineWidth + (line.length > 0 ? gap : 0) + outer;
+      if (line.length > 0 && withGap > contentWidth + 0.01) {
+        lines.push(line);
+        line = [e];
+        lineWidth = outer;
+      } else {
+        line.push(e);
+        lineWidth = withGap;
+      }
+    }
+    if (line.length > 0) lines.push(line);
+  }
 
-  const sizes = resolveFlexibleLengths(items, available);
-  return {
-    children: childIndices.map((index, k) => ({ child: all[index], index, width: sizes[k] })),
-    conflict,
-  };
+  const children: RowCorrection['children'] = [];
+  let conflict = false;
+  for (const line of lines) {
+    const available =
+      contentWidth - gap * (line.length - 1) - line.reduce((a, e) => a + e.margins, 0);
+    const sumHyp = line.reduce((a, e) => a + Math.min(Math.max(e.base, e.min), e.max), 0);
+    const shrinking = sumHyp > available;
+    const lineConflict =
+      line.some((e) => e.explicitMinMax) || (shrinking && line.some((e) => e.contentBase));
+    if (!lineConflict) continue;
+    conflict = true;
+    const sizes = resolveFlexibleLengths(line, available);
+    line.forEach((e, k) => children.push({ child: all[e.index], index: e.index, width: sizes[k] }));
+  }
+
+  return { children, conflict };
 }

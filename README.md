@@ -3,8 +3,9 @@
 Deterministic UI layout verification for AI coding agents: catch overflow,
 overlap, and truncation in milliseconds — **no browser, no screenshots**.
 
-Pure TypeScript: Yoga (flexbox) + fontkit (font metrics) + Intl.Segmenter
-(line breaking), validated against headless Chromium golden files, the same
+Pure TypeScript: Yoga (flexbox) + HarfBuzz-WASM (text shaping — the same
+shaper Chrome uses) + fontkit (font parsing) + Intl.Segmenter (line
+breaking), validated against headless Chromium golden files, the same
 oracle method [Pretext](https://github.com/chenglou/pretext) proved for text
 layout. Not a pixel-perfect browser — a deterministic bug-catcher for agent
 workflows.
@@ -44,12 +45,12 @@ A failing check answers *what, where, by how much, and a plausible fix*:
 ```
 
 Rules: `no-overflow`, `no-overlap`, `fits-viewport`, `no-text-truncation`.
-A 4-viewport check on a typical component runs in ~30ms, no browser involved.
+A 4-viewport check on a typical component runs in ~8ms, no browser involved.
 
 ## Accuracy scoreboard
 
 Engine vs Chromium `getBoundingClientRect`, thresholds: positions ≤1px,
-sizes ≤1px (text sizes ≤2px). **97/97 corpus cases within threshold** —
+sizes ≤1px (text sizes ≤2px). **217/217 corpus cases within threshold** —
 the overwhelming majority at a flat **0.00px delta** (full per-case table
 in [accuracy/README.md](./accuracy/README.md), regenerated in CI on every
 push).
@@ -66,6 +67,11 @@ push).
   tabs, toasts, login and error pages, Bangla content, …) run the **full
   pipeline** — parser → resolver → Yoga — against headless Chromium
   executing the real, vendored Tailwind v4 browser build.
+- 120 **seeded fuzz cases** ([corpora/generated.ts](./corpora/generated.ts)):
+  deterministic pseudo-random trees mixing every supported feature, with
+  Latin/Bangla/nowrap text at random sizes and weights. The fuzzer found
+  six divergence classes the curated corpus missed; all are fixed. Widening
+  the generator is the cheapest way to hunt the next one.
 
 ### Engine notes (hard-won parity lessons)
 
@@ -73,19 +79,31 @@ push).
   pass.** CSS iteratively freezes min/max violators and *redistributes*
   recovered space
   ([spec](https://www.w3.org/TR/css-flexbox-1/#resolve-flexible-lengths));
-  Yoga clamps each item's base once and distributes in a single pass
-  (Chrome 262/180/262 vs Yoga 401/151/151 on three competing-grow items).
-  `packages/core/src/flexfix.ts` implements the spec algorithm — including
-  unclamped flex bases, max-content bases for text items, and §4.5
-  automatic minimums (`min(content suggestion, specified width)`, zero for
-  scrollable boxes — the `min-w-0`/`truncate` semantics) — and pins the
-  corrected widths on conflicted single-line row containers. Column
-  main-axis conflicts, wrap lines, and auto-margin rows still fall through
-  to Yoga's answer.
-- **Lines must be shaped whole, not as summed words.** Kerning and
-  contextual alternates cross word boundaries — Inter shapes "2.1"
-  differently standalone than mid-string — so the line breaker measures
-  each candidate line cumulatively, like a browser.
+  Yoga clamps each item's base once and distributes in a single pass.
+  `packages/core/src/flexfix.ts` implements the spec algorithm — unclamped
+  flex bases, max-content bases for text items, §4.5 automatic minimums
+  (`min(content suggestion, specified width)`, zero for scrollable boxes —
+  the `min-w-0`/`truncate` semantics), inner-base shrink weighting, and
+  §9.3 line collection so wrap rows resolve per line with min-content
+  floors. Corrections are applied as width pins over Yoga's tree and
+  iterated to a fixpoint (with unpinning when a settled container no longer
+  conflicts).
+- **Yoga has no fit-content cross sizing.** A non-stretched auto-width child
+  of a column must size to `clamp(min-content, available, max-content)`:
+  Yoga neither clamps wrappable content to the available width nor lets
+  nowrap text keep its min-content width past it. Same corrective pass.
+- **Text must be shaped like the browser shapes it.** Shaping runs through
+  HarfBuzz-WASM (Chrome's shaper) — fontkit's own shaper is ~4px/word off
+  on some Bengali conjuncts (e.g. প্রযুক্তি). Lines are shaped whole, not as
+  summed words (kerning and contextual alternates cross word boundaries:
+  Inter shapes "2.1" differently standalone than mid-string), and
+  letter-spacing applies per grapheme cluster, not per codepoint (combining
+  marks add no spacing). Font fallback walks the family list per codepoint —
+  including for spaces, which take the first font, not the surrounding run's.
+- **Known envelope edge:** fit-content sizing *of a wrap container itself*
+  (a wrap row inside a row, or in a non-stretch column) is not modeled —
+  the fuzzer avoids generating it, and real Tailwind UI almost always
+  stretches wrap rows full-width.
 - **The oracle must run Chromium with `--font-render-hinting=none`.**
   Headless Linux Chromium otherwise grid-fits every glyph advance to whole
   pixels (FreeType full hinting) — "Dismiss" at 14px measures 49px hinted vs
@@ -134,7 +152,7 @@ packages/
   cli/       # `agent-eyes check <file>` (pretty + --json)
   mcp/       # stdio MCP server exposing check_layout
   skill/     # Claude Code skill (SKILL.md)
-corpora/     # style-object cases + Tailwind-input cases
+corpora/     # style-object cases + Tailwind-input cases + seeded fuzz corpus
 golden/      # Chromium golden files (committed, regenerated in CI)
 accuracy/    # scoreboard output (report.json + README.md)
 fonts/       # Inter (4 weights) + Noto Sans Bengali
@@ -146,8 +164,10 @@ vendor/      # pinned @tailwindcss/browser build (oracle only)
 ```sh
 bun install
 npx playwright install chromium   # oracle only — never a runtime dep
+bun test            # unit tests for the rules + resolver + check API
 bun run oracle      # regenerate golden files from headless Chromium
 bun run accuracy    # engine vs golden, prints the scoreboard
+bun run packages/oracle/src/debug-case.ts <name>   # tree + per-node deltas
 ```
 
 The harness is the dev loop: a failing case prints per-node px deltas;

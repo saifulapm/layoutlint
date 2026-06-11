@@ -53,9 +53,7 @@ export function renderCaseHtml(c: CorpusCase): string {
   return `<!DOCTYPE html>
 <html><head><meta charset="utf-8">
 <style>
-${fontFace('AE Sans', 'Inter-Regular.ttf', 400)}
-${fontFace('AE Sans', 'Inter-Bold.ttf', 700)}
-${fontFace('AE Bengali', 'NotoSansBengali-Regular.ttf', 400)}
+${ALL_FONT_FACES()}
 html,body{margin:0;padding:0;overflow:hidden;}
 body{font-family:'AE Sans','AE Bengali';font-size:16px;}
 </style>

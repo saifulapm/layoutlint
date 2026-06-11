@@ -1,8 +1,17 @@
 import Yoga from 'yoga-layout';
 import type { FontStore } from './fonts';
-import { correctRowContainer } from './flexfix';
+import { correctRowContainer, fitContentWidth } from './flexfix';
 import { measureText } from './text';
 import type { Box, Style, TreeNode } from './types';
+
+const num = (v: number | `${number}%` | 'auto' | undefined): number =>
+  typeof v === 'number' ? v : 0;
+
+const hPadBorder = (s: Style): number =>
+  num(s.paddingLeft ?? s.padding) +
+  num(s.paddingRight ?? s.padding) +
+  num(s.borderLeftWidth ?? s.borderWidth) +
+  num(s.borderRightWidth ?? s.borderWidth);
 
 const FLEX_DIRECTION = {
   row: Yoga.FLEX_DIRECTION_ROW,
@@ -140,26 +149,57 @@ export function computeLayout(tree: TreeNode, viewportWidth: number, fonts: Font
   // CSS iteratively freezes min/max violators and redistributes. Pin the
   // spec-correct widths on conflicted row containers and relayout, repeating
   // so nested containers see their parents' corrected widths.
-  const corrected = new Set<string>();
-  for (let pass = 0; pass < 4; pass++) {
+  // AE_NO_FLEXFIX=1 disables the pass (debugging raw Yoga output).
+  // Both corrections are pure functions of (styles, current container width),
+  // so re-applying is idempotent — iterate to a fixpoint, letting widths
+  // settle top-down across passes. Pins must be reconciled every pass: a
+  // child pinned while its container was narrow must be released once the
+  // settled container no longer conflicts.
+  const flexPinned = new Set<string>();
+  for (let pass = 0; pass < 8 && !process.env.AE_NO_FLEXFIX; pass++) {
     let changed = false;
-    const visit = (n: TreeNode, path: string) => {
+    const pin = (path: string, width: number, alsoFlex: boolean): void => {
+      const yn = yogaNodes.get(path);
+      if (alsoFlex) flexPinned.add(path);
+      if (!yn || Math.abs(yn.getComputedWidth() - width) <= 0.5) return;
+      yn.setWidth(width);
+      if (alsoFlex) {
+        yn.setFlexGrow(0);
+        yn.setFlexShrink(0);
+      }
+      changed = true;
+    };
+    const unpin = (path: string, child: TreeNode): void => {
+      if (!flexPinned.delete(path)) return;
       const yn = yogaNodes.get(path);
       if (!yn) return;
-      if (n.text === undefined && !corrected.has(path)) {
-        const corr = correctRowContainer(n, yn.getComputedWidth(), fonts);
-        if (corr?.conflict) {
-          corrected.add(path);
-          for (const { index, width } of corr.children) {
-            const childYoga = yogaNodes.get(`${path}.${index}`);
-            if (!childYoga || Math.abs(childYoga.getComputedWidth() - width) <= 0.5) continue;
-            childYoga.setWidth(width);
-            childYoga.setFlexGrow(0);
-            childYoga.setFlexShrink(0);
-            changed = true;
-          }
-        }
+      const cs = child.style ?? {};
+      if (cs.width !== undefined) yn.setWidth(cs.width);
+      else yn.setWidthAuto();
+      // web defaults: grow 0, shrink 1
+      yn.setFlexGrow(cs.flexGrow ?? 0);
+      yn.setFlexShrink(cs.flexShrink ?? 1);
+      changed = true;
+    };
+    const visit = (n: TreeNode, path: string) => {
+      const yn = yogaNodes.get(path);
+      if (!yn || n.text !== undefined) return;
+      const corr = correctRowContainer(n, yn.getComputedWidth(), fonts);
+      if (corr) {
+        const targets = new Map(corr.children.map((c) => [c.index, c.width]));
+        (n.children ?? []).forEach((c, i) => {
+          const childPath = `${path}.${i}`;
+          const target = corr.conflict ? targets.get(i) : undefined;
+          if (target !== undefined) pin(childPath, target, true);
+          else unpin(childPath, c);
+        });
       }
+      // fit-content cross sizing for non-stretched children of columns
+      const contentWidth = yn.getComputedWidth() - hPadBorder(n.style ?? {});
+      (n.children ?? []).forEach((c, i) => {
+        const target = fitContentWidth(n, c, contentWidth, fonts);
+        if (target !== null) pin(`${path}.${i}`, target, false);
+      });
       (n.children ?? []).forEach((c, i) => visit(c, `${path}.${i}`));
     };
     visit(tree, 'r');

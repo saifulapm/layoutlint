@@ -11,6 +11,7 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { computeLayout, FontStore, parseSource, resolveTree, type Box, type TreeNode } from '@agent-eyes/core';
 import { cases } from '../../../corpora/cases';
+import { generatedCases } from '../../../corpora/generated';
 import { tailwindCases } from '../../../corpora/tailwind-cases';
 import { ACCURACY_DIR, GOLDEN_DIR, ORACLE_VIEWPORT_HEIGHT, type GoldenFile } from './golden';
 import { FONTS_DIR } from './html';
@@ -58,6 +59,7 @@ const results: CaseResult[] = [];
 
 const allCases: { name: string; viewport: number; tree: TreeNode }[] = [
   ...cases,
+  ...generatedCases,
   ...tailwindCases.map((c) => ({
     name: c.name,
     viewport: c.viewport,
