@@ -116,9 +116,9 @@ push).
   explicit px line-height. (The Tailwind path is unaffected: preflight's
   `html { line-height: 1.5 }` and the `text-*`/`leading-*` scales give
   every text node a deterministic line-height.)
-- ZWJ emoji sequences (👨‍👩‍👧) measure as the sum of their parts — the CBDT
-  color-emoji font defeats fontkit's shaper, so we fall back to raw
-  cmap+hmtx advances.
+- Emoji (including ZWJ sequences like 👨‍👩‍👧, which ligate to a single glyph)
+  shape correctly through HarfBuzz against the system CBDT color-emoji
+  font — a font fontkit's own shaper cannot process at all.
 
 ### Phase 1 scope notes (parser + resolver)
 
