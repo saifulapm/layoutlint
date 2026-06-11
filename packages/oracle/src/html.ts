@@ -4,6 +4,9 @@ import { parseSource, type CorpusCase, type Style, type TreeNode } from '@layout
 
 export const FONTS_DIR = join(import.meta.dir, '../../rules/fonts');
 const VENDOR_DIR = join(import.meta.dir, '../../../vendor');
+/** Vendored emoji font — embedded in oracle pages AND loaded by the engine
+ *  during golden comparison, so goldens are platform-independent. */
+export const VENDOR_EMOJI = join(VENDOR_DIR, 'fonts/NotoColorEmoji.ttf');
 
 /** Props whose numeric values are unitless in CSS. */
 const UNITLESS = new Set(['flexGrow', 'flexShrink', 'fontWeight']);
@@ -38,16 +41,16 @@ function renderNode(n: TreeNode, path: string): string {
   return `<div data-aeid="${path}" style="${styleToCss(n.style ?? {}, isText)}">${inner}</div>`;
 }
 
-function fontFace(family: string, file: string, weight: number): string {
-  const b64 = readFileSync(join(FONTS_DIR, file)).toString('base64');
+function fontFace(family: string, path: string, weight: number): string {
+  const b64 = readFileSync(path).toString('base64');
   return `@font-face{font-family:'${family}';src:url(data:font/ttf;base64,${b64});font-weight:${weight};}`;
 }
 
 /**
  * Render a corpus case as a standalone HTML document that mirrors what the
  * engine computes: border-box flex divs, explicit fonts, no UA margins.
- * Emoji intentionally fall through to the system Noto Color Emoji — the
- * engine has the same file in its fallback chain.
+ * Every family — including emoji — is an embedded @font-face, so goldens
+ * are identical regardless of the host platform's system fonts.
  */
 export function renderCaseHtml(c: CorpusCase): string {
   return `<!DOCTYPE html>
@@ -55,7 +58,7 @@ export function renderCaseHtml(c: CorpusCase): string {
 <style>
 ${ALL_FONT_FACES()}
 html,body{margin:0;padding:0;overflow:hidden;}
-body{font-family:'AE Sans','AE Bengali';font-size:16px;}
+body{font-family:'AE Sans','AE Bengali','AE Emoji';font-size:16px;}
 </style>
 </head><body>${renderNode(c.tree, 'r')}</body></html>`;
 }
@@ -83,11 +86,12 @@ function renderRawNode(n: TreeNode, path: string): string {
 
 const ALL_FONT_FACES = () =>
   [
-    fontFace('AE Sans', 'Inter-Regular.ttf', 400),
-    fontFace('AE Sans', 'Inter-Medium.ttf', 500),
-    fontFace('AE Sans', 'Inter-SemiBold.ttf', 600),
-    fontFace('AE Sans', 'Inter-Bold.ttf', 700),
-    fontFace('AE Bengali', 'NotoSansBengali-Regular.ttf', 400),
+    fontFace('AE Sans', join(FONTS_DIR, 'Inter-Regular.ttf'), 400),
+    fontFace('AE Sans', join(FONTS_DIR, 'Inter-Medium.ttf'), 500),
+    fontFace('AE Sans', join(FONTS_DIR, 'Inter-SemiBold.ttf'), 600),
+    fontFace('AE Sans', join(FONTS_DIR, 'Inter-Bold.ttf'), 700),
+    fontFace('AE Bengali', join(FONTS_DIR, 'NotoSansBengali-Regular.ttf'), 400),
+    fontFace('AE Emoji', VENDOR_EMOJI, 400),
   ].join('\n');
 
 /**
@@ -103,7 +107,7 @@ export function renderTailwindCaseHtml(html: string): string {
 <style>
 ${ALL_FONT_FACES()}
 html, body { margin: 0; padding: 0; overflow: hidden; }
-html, body { font-family: 'AE Sans', 'AE Bengali' !important; font-size: 16px; }
+html, body { font-family: 'AE Sans', 'AE Bengali', 'AE Emoji' !important; font-size: 16px; }
 </style>
 <script>${tailwind}</script>
 </head><body>${renderRawNode(tree, 'r')}<div class="hidden" id="tw-probe"></div></body></html>`;

@@ -66,23 +66,21 @@ LL_NO_FLEXFIX=1 bun run packages/oracle/src/compare.ts  # raw Yoga (debugging)
 The loop that built this: add/widen corpus → `oracle` → `accuracy` → pick a
 FAIL → `debug-case.ts` → fix engine or document envelope → green → commit.
 
-## ⚠️ macOS notes (you're continuing from a MacBook)
+## Platform notes
 
-- **Don't regenerate goldens on macOS and commit them.** Goldens are pinned
-  to headless **Linux** Chromium (`--font-render-hinting=none`, see README
-  engine notes). CI regenerates and verifies them on Linux; treat CI as the
-  oracle of record. Local macOS `bun run oracle` is fine for experiments but
-  will differ subtly (emoji especially).
-- **Emoji corpus cases depend on the Linux system font**
-  `/usr/share/fonts/truetype/noto/NotoColorEmoji.ttf` (engine + oracle
-  both guard with `existsSync` / system fallback). On macOS that path
-  doesn't exist: the engine skips the emoji face (emoji measure as .notdef
-  via the chain) and Chrome falls back to Apple Color Emoji — so
-  `emoji-*` cases and some `gen-*` cases will mismatch locally. Expected;
-  CI is green. Fix later by vendoring NotoColorEmoji.ttf into fonts/
-  (~10MB) if local-mac parity matters.
-- `bun test` and the CLI/MCP/check() all work fine on macOS — no browser,
-  no Linux dependency.
+- **Goldens are platform-independent as of 2026-06-11.** The oracle embeds
+  every font — including the vendored `vendor/fonts/NotoColorEmoji.ttf`
+  (v2.051) — as `@font-face` data URIs, and compare/debug load the same
+  files into the engine chain. Verified: regenerating all 217 goldens on
+  macOS vs the Linux-generated committed set differed by ≤0.03px in 3
+  emoji-bearing gen-* cases, byte-identical rects everywhere else. `bun run
+  oracle` + `bun run accuracy` are now trustworthy on any platform with the
+  same pinned Playwright Chromium (148.0.7778.96 / playwright 1.60).
+- The *product* (`check()` / CLI / MCP) still uses the system emoji font
+  when present (`/usr/share/fonts/...`) and skips it otherwise — the 10MB
+  font is dev-only vendored and does NOT ship in the npm package.
+- `bun test` and the CLI/MCP/check() work on macOS — no browser, no Linux
+  dependency.
 
 ## What was learned/decided this session (beyond HANDOFF.md)
 

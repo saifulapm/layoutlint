@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-11T10:57:40.728Z",
+  "generatedAt": "2026-06-11T12:26:17.898Z",
   "passCount": 217,
   "total": 217,
   "results": [
@@ -5426,7 +5426,7 @@
           "isText": false,
           "dx": 0,
           "dy": 0,
-          "dw": 0.17,
+          "dw": 0.19,
           "dh": 0,
           "pass": true
         },
@@ -5489,16 +5489,16 @@
           "isText": true,
           "dx": 0.16,
           "dy": 0,
-          "dw": 0.02,
+          "dw": 0.04,
           "dh": 0,
           "pass": true
         },
         {
           "path": "r.1.1",
           "isText": false,
-          "dx": 0.17,
+          "dx": 0.19,
           "dy": 0,
-          "dw": 0.17,
+          "dw": 0.19,
           "dh": 0,
           "pass": true
         },
@@ -5513,14 +5513,14 @@
         }
       ],
       "pass": true,
-      "maxPosDelta": 0.17,
-      "maxSizeDelta": 0.17,
+      "maxPosDelta": 0.19,
+      "maxSizeDelta": 0.19,
       "worst": {
         "path": "r.1.0",
         "isText": false,
         "dx": 0,
         "dy": 0,
-        "dw": 0.17,
+        "dw": 0.19,
         "dh": 0,
         "pass": true
       }
@@ -10907,16 +10907,16 @@
           "isText": true,
           "dx": 0,
           "dy": 0,
-          "dw": 0,
+          "dw": 0.01,
           "dh": 0,
           "pass": true
         },
         {
           "path": "r.0.3",
           "isText": false,
-          "dx": 0.01,
+          "dx": 0.03,
           "dy": 0,
-          "dw": 0.01,
+          "dw": 0.03,
           "dh": 0,
           "pass": true
         },
@@ -10940,14 +10940,14 @@
         }
       ],
       "pass": true,
-      "maxPosDelta": 0.01,
-      "maxSizeDelta": 0.01,
+      "maxPosDelta": 0.03,
+      "maxSizeDelta": 0.03,
       "worst": {
-        "path": "r.0.1",
-        "isText": true,
-        "dx": 0,
+        "path": "r.0.3",
+        "isText": false,
+        "dx": 0.03,
         "dy": 0,
-        "dw": 0.01,
+        "dw": 0.03,
         "dh": 0,
         "pass": true
       }

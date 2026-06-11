@@ -1,21 +1,20 @@
 /** Print one case's tree and engine-vs-golden boxes. Usage: bun run debug-case.ts <name> */
-import { existsSync, readFileSync } from 'node:fs';
+import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { computeLayout, FontStore, parseSource, resolveTree, type TreeNode } from '@layoutlint/core';
 import { cases } from '../../../corpora/cases';
 import { generatedCases } from '../../../corpora/generated';
 import { tailwindCases } from '../../../corpora/tailwind-cases';
 import { GOLDEN_DIR, ORACLE_VIEWPORT_HEIGHT, type GoldenFile } from './golden';
-import { FONTS_DIR } from './html';
+import { FONTS_DIR, VENDOR_EMOJI } from './html';
 
-const SYSTEM_EMOJI = '/usr/share/fonts/truetype/noto/NotoColorEmoji.ttf';
 const fonts = new FontStore([
   { family: 'AE Sans', path: join(FONTS_DIR, 'Inter-Regular.ttf'), weight: 400 },
   { family: 'AE Sans', path: join(FONTS_DIR, 'Inter-Medium.ttf'), weight: 500 },
   { family: 'AE Sans', path: join(FONTS_DIR, 'Inter-SemiBold.ttf'), weight: 600 },
   { family: 'AE Sans', path: join(FONTS_DIR, 'Inter-Bold.ttf'), weight: 700 },
   { family: 'AE Bengali', path: join(FONTS_DIR, 'NotoSansBengali-Regular.ttf'), weight: 400 },
-  ...(existsSync(SYSTEM_EMOJI) ? [{ family: 'Noto Color Emoji', path: SYSTEM_EMOJI, weight: 400 }] : []),
+  { family: 'AE Emoji', path: VENDOR_EMOJI, weight: 400 },
 ]);
 
 const name = process.argv[2];
