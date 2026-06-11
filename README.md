@@ -17,7 +17,7 @@ Chromium screenshot**, gated in CI on every push.
 ## Check
 
 ```sh
-npx layoutlint check Card.tsx --viewports 320,375,768,1440
+npx @saifulapm/layoutlint check Card.tsx --viewports 320,375,768,1440
 ```
 
 ```
@@ -38,7 +38,7 @@ violations. Rules: `no-overflow`, `no-overlap`, `fits-viewport`,
 ## Render
 
 ```sh
-npx layoutlint render Card.tsx --viewport 375 -o card.png   # or .svg
+npx @saifulapm/layoutlint render Card.tsx --viewport 375 -o card.png   # or .svg
 ```
 
 ![demo card rendered by layoutlint, not a browser](demo/card-375.png)
@@ -52,7 +52,7 @@ renders identically anywhere, no fonts needed.
 
 ```jsonc
 // MCP (e.g. Claude Code .mcp.json) — check_layout + render_layout tools
-{ "mcpServers": { "layoutlint": { "command": "npx", "args": ["layoutlint-mcp"] } } }
+{ "mcpServers": { "layoutlint": { "command": "npx", "args": ["-y", "-p", "@saifulapm/layoutlint", "layoutlint-mcp"] } } }
 ```
 
 ```yaml
@@ -62,7 +62,7 @@ renders identically anywhere, no fonts needed.
 
 ```ts
 // Library
-import { check, render } from 'layoutlint';
+import { check, render } from '@saifulapm/layoutlint';
 const report = await check(source, { viewports: [320, 768] });
 const { png } = await render(source, { viewport: 375, format: 'png' });
 ```

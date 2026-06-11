@@ -34,7 +34,7 @@ runs:
   steps:
     - name: Install layoutlint
       shell: bash
-      run: npm install --global "layoutlint@${{ inputs.version }}"
+      run: npm install --global "@saifulapm/layoutlint@${{ inputs.version }}"
 
     - name: Check changed components
       shell: bash

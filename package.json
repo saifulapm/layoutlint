@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@layoutlint/core": "workspace:*",
-    "layoutlint": "workspace:*"
+    "@saifulapm/layoutlint": "workspace:*"
   },
   "devDependencies": {
     "@types/bun": "^1.2.0",

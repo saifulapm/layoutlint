@@ -13,8 +13,8 @@ check runs in ~8ms.
 ## CLI
 
 ```sh
-npx layoutlint check src/components/Card.tsx
-npx layoutlint check Card.tsx --viewports 320,1440 --json   # agent-shaped report
+npx @saifulapm/layoutlint check src/components/Card.tsx
+npx @saifulapm/layoutlint check Card.tsx --viewports 320,1440 --json   # agent-shaped report
 ```
 
 Exit code `0` = all rules pass at all viewports, `1` = violations, `2` = usage error.
@@ -35,7 +35,7 @@ shaped for an agent (or you) to act on directly.
 ## Library
 
 ```ts
-import { check } from 'layoutlint';
+import { check } from '@saifulapm/layoutlint';
 
 const report = await check(componentSource, { viewports: [320, 375, 768, 1440] });
 // report.pass, report.viewports[n].violations[…], report.warnings
@@ -44,11 +44,11 @@ const report = await check(componentSource, { viewports: [320, 375, 768, 1440] }
 ## Render — see the component without a browser
 
 ```sh
-npx layoutlint render Card.tsx --viewport 375 -o card.png   # or .svg / stdout
+npx @saifulapm/layoutlint render Card.tsx --viewport 375 -o card.png   # or .svg / stdout
 ```
 
 ```ts
-import { render } from 'layoutlint';
+import { render } from '@saifulapm/layoutlint';
 const { svg, png } = await render(source, { viewport: 375, format: 'png' });
 ```
 
@@ -65,7 +65,7 @@ agents can verify layout after every UI edit:
 
 ```jsonc
 // e.g. Claude Code: .mcp.json
-{ "mcpServers": { "layoutlint": { "command": "npx", "args": ["layoutlint-mcp"] } } }
+{ "mcpServers": { "layoutlint": { "command": "npx", "args": ["-y", "-p", "@saifulapm/layoutlint", "layoutlint-mcp"] } } }
 ```
 
 Tools: `check_layout` (violations report) and `render_layout` (PNG image of

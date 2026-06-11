@@ -24,7 +24,7 @@ After **every** edit to a component's structure, classes, or copy:
 bun run packages/rules/src/cli.ts check <file> --json
 ```
 
-(or `npx layoutlint check <file> --json` once installed). Default viewports
+(or `npx @saifulapm/layoutlint check <file> --json` once installed). Default viewports
 are 320, 375, 768, 1440 — override with `--viewports 320,1440`.
 
 ## Reading the report
@@ -44,7 +44,7 @@ After `check` passes (or to inspect a reported violation visually):
 bun run packages/rules/src/cli.ts render <file> --viewport 375 -o /tmp/c.png
 ```
 
-(or `npx layoutlint render …` once installed; via MCP use the
+(or `npx @saifulapm/layoutlint render …` once installed; via MCP use the
 `render_layout` tool, which returns the PNG directly.) The PNG is the
 engine's own deterministic paint — pixel-validated against Chromium in CI —
 so use it to judge visual structure (spacing, alignment, colors), not
