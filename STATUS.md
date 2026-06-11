@@ -111,10 +111,10 @@ fit-content sizing of wrap containers is the documented envelope edge.
    codename `agent-eyes` is squatted on npm by an active adjacent product).
    Packaging is DONE: single package `layoutlint` (CLI + MCP bins folded in,
    core bundled, fonts shipped, runs under plain Node — CI smoke-tests this).
-   Remaining, all manual: rename the GitHub repo (remote is still
-   `saifulapm/OpenEye-`; package.json points at `saifulapm/layoutlint`),
-   grab the domain, then `cd packages/rules && npm publish` (prepublishOnly
-   builds). License set to MIT (LICENSE at root + in package).
+   GitHub repo renamed to `saifulapm/layoutlint` (2026-06-12) and `main` is
+   the default branch with green CI (geometry + paint gates). Remaining,
+   manual: grab the domain, then `cd packages/rules && npm publish`
+   (prepublishOnly builds). License set to MIT.
 2. ~~Demo GIF~~ DONE 2026-06-11 — demo/demo.gif (151KB, vhs; tape +
    intentionally-buggy demo/Card.tsx committed; re-record with
    `vhs demo/demo.tape` from repo root after building packages/rules/dist,
