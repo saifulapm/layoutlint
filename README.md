@@ -76,7 +76,7 @@ A 4-viewport check on a typical component runs in ~8ms, no browser involved.
 ## Accuracy scoreboard
 
 Engine vs Chromium `getBoundingClientRect`, thresholds: positions ≤1px,
-sizes ≤1px (text sizes ≤2px). **217/217 corpus cases within threshold** —
+sizes ≤1px (text sizes ≤2px). **297/297 corpus cases within threshold** —
 the overwhelming majority at a flat **0.00px delta** (full per-case table
 in [accuracy/README.md](./accuracy/README.md), regenerated in CI on every
 push).
@@ -93,7 +93,7 @@ push).
   tabs, toasts, login and error pages, Bangla content, …) run the **full
   pipeline** — parser → resolver → Yoga — against headless Chromium
   executing the real, vendored Tailwind v4 browser build.
-- 120 **seeded fuzz cases** ([corpora/generated.ts](./corpora/generated.ts)):
+- 200 **seeded fuzz cases** ([corpora/generated.ts](./corpora/generated.ts)):
   deterministic pseudo-random trees mixing every supported feature, with
   Latin/Bangla/nowrap text at random sizes and weights. The fuzzer found
   six divergence classes the curated corpus missed; all are fixed. Widening

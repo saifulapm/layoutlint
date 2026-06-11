@@ -6,11 +6,12 @@
 ## TL;DR
 
 Phases 0 **and** 1 are done and exceeded. The engine matches headless Chromium
-on **217/217 corpus cases** (≤1px positions/sizes, ≤2px text sizes), most at
+on **297/297 corpus cases** (≤1px positions/sizes, ≤2px text sizes), most at
 0.00px. The product surface works end-to-end: `check()` library, CLI, MCP
-server, Claude Code skill, CI. A 4-viewport check runs in ~8ms with no
-browser. What remains is launch work (naming, npm, demo GIF) and Phase 2
-(grid via Taffy, React component support, GitHub Action).
+server, Claude Code skill, GitHub Action, demo GIF, CI. Named `layoutlint`,
+packaged for npm (single package, Node-ready), goldens platform-independent.
+What remains before launch is manual publish steps (GitHub repo rename, npm
+publish, domain); after that, Phase 2 (grid via Taffy, React components).
 
 ## What exists (repo tour)
 
@@ -43,7 +44,7 @@ packages/oracle/      DEV-ONLY: Playwright golden generator + comparator
 corpora/cases.ts      56 style-object cases (engine in isolation)
 corpora/tailwind-cases.ts  41 real-markup cases (full pipeline vs real
                         vendored Tailwind v4 browser build in the oracle)
-corpora/generated.ts  120 seeded fuzz cases (deterministic from seed)
+corpora/generated.ts  200 seeded fuzz cases (deterministic from seed)
 golden/               committed Chromium golden files (regenerated in CI)
 accuracy/             scoreboard output (README.md + report.json)
 vendor/               pinned @tailwindcss/browser 4.1.16 (oracle only)
@@ -100,22 +101,27 @@ fit-content sizing of wrap containers is the documented envelope edge.
    `saifulapm/OpenEye-`; package.json points at `saifulapm/layoutlint`),
    grab the domain, then `cd packages/rules && npm publish` (prepublishOnly
    builds). License set to MIT (LICENSE at root + in package).
-2. **Demo GIF** for the README (HANDOFF §8: agent edits component → check
-   catches overflow at 320 → fixes → green; no browser window).
-3. **Corpus to 300+**: bump `GENERATED_COUNT` in corpora/generated.ts
-   (e.g. 200) and/or widen the generator (new features = new divergence
-   hunting); grind any new failures with debug-case.ts. Also worth adding:
+2. ~~Demo GIF~~ DONE 2026-06-11 — demo/demo.gif (151KB, vhs; tape +
+   intentionally-buggy demo/Card.tsx committed; re-record with
+   `vhs demo/demo.tape` from repo root after building packages/rules/dist,
+   then restore Card.tsx's `w-96`).
+3. **Corpus**: 200 fuzz cases as of 2026-06-11 (all 80 new ones passed with
+   zero engine changes — the generator's feature mix is exhausted). Next
+   divergence hunting requires *widening the generator* (new features:
+   aspect-ratio, order, inset combos, nested wrap…) and/or adding
    scraped/adapted shadcn-style real components to tailwind-cases.ts.
-4. **GitHub Action** ("layout lint" — run CLI on changed component files).
+4. ~~GitHub Action~~ DONE 2026-06-11 — action.yml (composite; installs from
+   npm, so it works only after publish). Usage example in README.
 5. **Phase 2 engine**: CSS Grid via Taffy WASM (resolver already warns on
    grid classes); React component support via react-test-renderer;
-   `line-clamp`; vendored emoji font; `assertTapTargets`/`assertContrast`.
+   `line-clamp`; `assertTapTargets`/`assertContrast`.
 6. Nice-to-haves: `lineHeight: normal` parity; mixed-weight inline span
-   measurement (currently parent-style, documented ≤2px error).
+   measurement (currently parent-style, documented ≤2px error); ship emoji
+   metrics in the product (vendored font is dev-only today).
 
 ## Numbers to brag about (verified, reproducible)
 
-- 217/217 corpus cases within threshold; most 0.00px.
+- 297/297 corpus cases within threshold; most 0.00px.
 - 41 Tailwind cases verified against the *real* Tailwind v4 build in Chrome.
 - ~8ms per 4-viewport `check()` (Bun, warm).
 - Bangla + emoji (incl. ZWJ ligation) text measurement matches Chrome.

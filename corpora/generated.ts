@@ -146,7 +146,7 @@ export function generateCase(seed: number): CorpusCase {
   return { name: `gen-${String(seed).padStart(3, '0')}`, viewport, tree: root };
 }
 
-export const GENERATED_COUNT = 120;
+export const GENERATED_COUNT = 200;
 
 export const generatedCases: CorpusCase[] = Array.from({ length: GENERATED_COUNT }, (_, i) =>
   generateCase(i + 1),
