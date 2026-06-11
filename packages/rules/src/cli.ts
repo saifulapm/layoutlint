@@ -7,20 +7,28 @@
  *
  * Exit code 0 = all rules pass at all viewports; 1 = violations; 2 = usage error.
  */
-import { readFileSync } from 'node:fs';
+import { readFileSync, writeFileSync } from 'node:fs';
 import { parseArgs } from 'node:util';
-import { check, ALL_RULES, DEFAULT_VIEWPORTS, type RuleName } from './index';
+import { check, render, ALL_RULES, DEFAULT_VIEWPORTS, type RuleName } from './index';
 
-const HELP = `layoutlint — deterministic UI layout checks, no browser
+const HELP = `layoutlint — deterministic UI layout checks and screenshots, no browser
 
 Usage:
   layoutlint check <file...> [options]
+  layoutlint render <file> [--viewport 375] [-o out.svg|out.png]
 
-Options:
+Check options:
   --viewports <list>        comma-separated widths (default ${DEFAULT_VIEWPORTS.join(',')})
-  --viewport-height <px>    height for h-screen/vh units (default 800)
   --rules <list>            subset of: ${ALL_RULES.join(', ')}
   --json                    machine-readable report (for agents)
+
+Render options:
+  --viewport <px>           viewport width (default 375)
+  -o, --out <path>          output file; format from extension (.svg/.png);
+                            no -o writes SVG to stdout
+
+Common:
+  --viewport-height <px>    height for h-screen/vh units (default 800)
   --help                    show this help
 `;
 
@@ -29,16 +37,53 @@ const { values, positionals } = parseArgs({
   allowPositionals: true,
   options: {
     viewports: { type: 'string' },
+    viewport: { type: 'string' },
     'viewport-height': { type: 'string' },
     rules: { type: 'string' },
     json: { type: 'boolean', default: false },
+    out: { type: 'string', short: 'o' },
     help: { type: 'boolean', default: false },
   },
 });
 
-if (values.help || positionals[0] !== 'check' || positionals.length < 2) {
+const command = positionals[0];
+if (values.help || (command !== 'check' && command !== 'render') || positionals.length < 2) {
   console.log(HELP);
   process.exit(values.help ? 0 : 2);
+}
+
+const viewportHeight = values['viewport-height'] ? parseInt(values['viewport-height'], 10) : undefined;
+
+if (command === 'render') {
+  const file = positionals[1];
+  let source: string;
+  try {
+    source = readFileSync(file, 'utf8');
+  } catch {
+    console.error(`cannot read ${file}`);
+    process.exit(2);
+  }
+  const viewport = values.viewport ? parseInt(values.viewport, 10) : undefined;
+  if (values.viewport && (!Number.isFinite(viewport) || viewport! <= 0)) {
+    console.error(`invalid viewport: ${values.viewport}`);
+    process.exit(2);
+  }
+  const wantPng = values.out?.endsWith('.png') ?? false;
+  const result = await render(source, {
+    viewport,
+    viewportHeight,
+    format: wantPng ? 'png' : 'svg',
+  });
+  if (values.out === undefined) {
+    console.log(result.svg);
+  } else if (wantPng) {
+    writeFileSync(values.out, result.png!);
+    console.error(`${values.out} (${result.width}×${result.height})`);
+  } else {
+    writeFileSync(values.out, result.svg);
+    console.error(`${values.out} (${result.width}×${result.height})`);
+  }
+  process.exit(0);
 }
 
 const viewports = values.viewports?.split(',').map((v) => {
@@ -80,11 +125,7 @@ for (const file of positionals.slice(1)) {
     process.exit(2);
   }
 
-  const report = await check(source, {
-    viewports,
-    rules,
-    viewportHeight: values['viewport-height'] ? parseInt(values['viewport-height'], 10) : undefined,
-  });
+  const report = await check(source, { viewports, rules, viewportHeight });
   if (!report.pass) anyFail = true;
 
   if (values.json) {

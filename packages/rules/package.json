@@ -1,7 +1,7 @@
 {
   "name": "layoutlint",
   "version": "0.1.0",
-  "description": "Deterministic UI layout checks for JSX/HTML + Tailwind — overflow, overlap, viewport fit, text truncation — in milliseconds, no browser. Validated against headless-Chromium golden files.",
+  "description": "Deterministic UI layout checks for JSX/HTML + Tailwind \u2014 overflow, overlap, viewport fit, text truncation \u2014 in milliseconds, no browser. Validated against headless-Chromium golden files.",
   "keywords": [
     "layout",
     "lint",
@@ -38,11 +38,12 @@
     "node": ">=20"
   },
   "scripts": {
-    "build": "bun build src/index.ts src/cli.ts src/mcp.ts --outdir dist --target node --splitting --external fontkit --external harfbuzzjs --external htmlparser2 --external domhandler --external yoga-layout --external zod --external '@modelcontextprotocol/sdk/*' && bunx dts-bundle-generator --project ../../tsconfig.json --external-inlines @layoutlint/core -o dist/index.d.ts src/index.ts",
+    "build": "rm -rf dist && bun build src/index.ts src/cli.ts src/mcp.ts --outdir dist --target node --splitting --external fontkit --external harfbuzzjs --external htmlparser2 --external domhandler --external yoga-layout --external zod --external '@resvg/resvg-js' --external '@modelcontextprotocol/sdk/*' && bunx dts-bundle-generator --project ../../tsconfig.json --external-inlines @layoutlint/core -o dist/index.d.ts src/index.ts",
     "prepublishOnly": "bun run build"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.21.0",
+    "@resvg/resvg-js": "^2",
     "domhandler": "^6.0.1",
     "fontkit": "^2.0.4",
     "harfbuzzjs": "^1.2.1",

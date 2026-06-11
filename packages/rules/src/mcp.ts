@@ -7,7 +7,7 @@ import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 import { z } from 'zod';
 import { readFileSync } from 'node:fs';
-import { check, ALL_RULES, DEFAULT_VIEWPORTS, type RuleName } from './index';
+import { check, render, ALL_RULES, DEFAULT_VIEWPORTS, type RuleName } from './index';
 
 const server = new McpServer({ name: 'layoutlint', version: '0.0.0' });
 
@@ -32,7 +32,10 @@ const inputSchema: z.ZodRawShape = {
  * zod+SDK versions; this loose signature skips inference. The SDK still
  * validates calls against the zod shape at runtime.
  */
-type ToolResult = { content: { type: 'text'; text: string }[]; isError?: boolean };
+type ToolContent =
+  | { type: 'text'; text: string }
+  | { type: 'image'; mimeType: string; data: string };
+type ToolResult = { content: ToolContent[]; isError?: boolean };
 const registerTool = server.registerTool.bind(server) as (
   name: string,
   config: { title?: string; description?: string; inputSchema?: z.ZodRawShape },
@@ -81,6 +84,49 @@ registerTool(
       rules: args.rules as RuleName[] | undefined,
     });
     return { content: [{ type: 'text' as const, text: JSON.stringify(report, null, 2) }] };
+  },
+);
+
+registerTool(
+  'render_layout',
+  {
+    title: 'Render UI layout to an image',
+    description:
+      'Deterministically render a JSX/HTML + Tailwind component to a PNG ' +
+      'screenshot without a browser — real flexbox layout, real text shaping, ' +
+      'real Tailwind colors. Use it to SEE what a component looks like at a ' +
+      'viewport after check_layout passes (or to inspect a reported violation).',
+    inputSchema: {
+      source: inputSchema.source,
+      file: inputSchema.file,
+      viewport: z.number().int().positive().optional()
+        .describe('Viewport width in px (default 375).'),
+      viewportHeight: inputSchema.viewportHeight,
+    },
+  },
+  async (rawArgs) => {
+    const args = rawArgs as { source?: string; file?: string; viewport?: number; viewportHeight?: number };
+    const source = args.source ?? (args.file ? readFileSync(args.file, 'utf8') : undefined);
+    if (!source) {
+      return {
+        content: [{ type: 'text' as const, text: 'error: provide either `source` or `file`' }],
+        isError: true,
+      };
+    }
+    const result = await render(source, {
+      viewport: args.viewport,
+      viewportHeight: args.viewportHeight,
+      format: 'png',
+    });
+    return {
+      content: [
+        {
+          type: 'image' as const,
+          mimeType: 'image/png',
+          data: Buffer.from(result.png!).toString('base64'),
+        },
+      ],
+    };
   },
 );
 
