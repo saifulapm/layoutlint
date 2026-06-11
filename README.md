@@ -10,9 +10,11 @@ oracle method [Pretext](https://github.com/chenglou/pretext) proved for text
 layout. Not a pixel-perfect browser — a deterministic bug-catcher for agent
 workflows.
 
-See [HANDOFF.md](./HANDOFF.md) for the full plan. **Current status: Phase 1
-MVP** — parser, Tailwind resolver, assertion rules, CLI, MCP server, and
-Claude Code skill are functional; corpus and polish are ongoing.
+See [HANDOFF.md](./HANDOFF.md) for the original plan and
+[STATUS.md](./STATUS.md) for current state, dev loop, platform notes, and
+next steps. **Current status: Phases 0–1 complete** — engine, parser,
+resolver, rules, CLI, MCP server, skill, fuzz corpus, and CI are all
+functional and green.
 
 ## Quickstart
 
