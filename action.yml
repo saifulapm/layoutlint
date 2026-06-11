@@ -1,0 +1,66 @@
+name: layoutlint
+description: >-
+  Deterministic UI layout checks for changed JSX/HTML + Tailwind components —
+  overflow, overlap, viewport fit, text truncation — in milliseconds, no
+  browser. Fails the job when a changed component violates a layout rule.
+branding:
+  icon: layout
+  color: purple
+
+inputs:
+  files:
+    description: >-
+      Extended-regex filter for changed files to check
+      (matched against paths from git diff).
+    default: '\.(tsx|jsx)$'
+  viewports:
+    description: Comma-separated viewport widths in px.
+    default: '320,375,768,1440'
+  rules:
+    description: >-
+      Comma-separated subset of no-overflow, no-overlap, fits-viewport,
+      no-text-truncation. Empty = all.
+    default: ''
+  base:
+    description: >-
+      Base ref to diff against. Defaults to the PR base, or HEAD~1 on push.
+    default: ''
+  version:
+    description: layoutlint version to install from npm.
+    default: 'latest'
+
+runs:
+  using: composite
+  steps:
+    - name: Install layoutlint
+      shell: bash
+      run: npm install --global "layoutlint@${{ inputs.version }}"
+
+    - name: Check changed components
+      shell: bash
+      env:
+        FILES_RE: ${{ inputs.files }}
+        VIEWPORTS: ${{ inputs.viewports }}
+        RULES: ${{ inputs.rules }}
+        BASE: ${{ inputs.base != '' && inputs.base || github.event.pull_request.base.sha || '' }}
+      run: |
+        set -euo pipefail
+        base="${BASE:-$(git rev-parse HEAD~1 2>/dev/null || echo '')}"
+        if [ -n "$base" ]; then
+          # not every base sha is fetched on shallow checkouts — fall back gracefully
+          git fetch --quiet --depth=1 origin "$base" 2>/dev/null || true
+          changed=$(git diff --name-only --diff-filter=ACMR "$base"...HEAD 2>/dev/null \
+                    || git diff --name-only --diff-filter=ACMR "$base" HEAD)
+        else
+          changed=$(git ls-files)
+        fi
+        files=$(printf '%s\n' "$changed" | grep -E "$FILES_RE" || true)
+        if [ -z "$files" ]; then
+          echo "layoutlint: no changed files match $FILES_RE — nothing to check"
+          exit 0
+        fi
+        echo "layoutlint: checking $(printf '%s\n' "$files" | wc -l | tr -d ' ') file(s)"
+        args=(--viewports "$VIEWPORTS")
+        [ -n "$RULES" ] && args+=(--rules "$RULES")
+        # shellcheck disable=SC2086
+        printf '%s\n' "$files" | xargs layoutlint check "${args[@]}"

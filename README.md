@@ -37,6 +37,26 @@ npx layoutlint-mcp
 packages/skill/SKILL.md
 ```
 
+### GitHub Action
+
+Lint the layout of changed components on every PR (after npm publish):
+
+```yaml
+jobs:
+  layout:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 2 }   # so push events can diff against HEAD~1
+      - uses: saifulapm/layoutlint@v0
+        with:
+          files: '\.(tsx|jsx)$'        # default
+          viewports: '320,375,768,1440' # default
+```
+
+Checks only files changed vs the PR base (or `HEAD~1` on push); fails the
+job on violations. See [action.yml](./action.yml) for all inputs.
+
 A failing check answers *what, where, by how much, and a plausible fix*:
 
 ```json
