@@ -1,0 +1,44 @@
+{
+  "name": "space-between-wrap",
+  "viewport": 375,
+  "chromium": "148.0.7778.96",
+  "generatedAt": "2026-06-11T09:05:57.430Z",
+  "rects": {
+    "r": {
+      "x": 0,
+      "y": 0,
+      "width": 375,
+      "height": 96
+    },
+    "r.0": {
+      "x": 16,
+      "y": 16,
+      "width": 96,
+      "height": 28
+    },
+    "r.1": {
+      "x": 135.5,
+      "y": 16,
+      "width": 120,
+      "height": 28
+    },
+    "r.2": {
+      "x": 279,
+      "y": 16,
+      "width": 80,
+      "height": 28
+    },
+    "r.3": {
+      "x": 16,
+      "y": 52,
+      "width": 140,
+      "height": 28
+    },
+    "r.4": {
+      "x": 255,
+      "y": 52,
+      "width": 104,
+      "height": 28
+    }
+  }
+}

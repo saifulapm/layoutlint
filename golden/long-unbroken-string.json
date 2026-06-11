@@ -1,0 +1,20 @@
+{
+  "name": "long-unbroken-string",
+  "viewport": 320,
+  "chromium": "148.0.7778.96",
+  "generatedAt": "2026-06-11T09:05:56.330Z",
+  "rects": {
+    "r": {
+      "x": 0,
+      "y": 0,
+      "width": 320,
+      "height": 152
+    },
+    "r.0": {
+      "x": 16,
+      "y": 16,
+      "width": 288,
+      "height": 120
+    }
+  }
+}

@@ -1,0 +1,527 @@
+{
+  "generatedAt": "2026-06-11T09:08:32.268Z",
+  "passCount": 9,
+  "total": 10,
+  "results": [
+    {
+      "name": "row-fixed-gap",
+      "viewport": 320,
+      "nodes": [
+        {
+          "path": "r",
+          "name": "root",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0",
+          "name": "box-a",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.1",
+          "name": "box-b",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.2",
+          "name": "box-c",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "maxPosDelta": 0,
+      "maxSizeDelta": 0
+    },
+    {
+      "name": "column-padding-margin",
+      "viewport": 375,
+      "nodes": [
+        {
+          "path": "r",
+          "name": "root",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0",
+          "name": "header",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.1",
+          "name": "card",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.1.0",
+          "name": "card-line-1",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.1.1",
+          "name": "card-line-2",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.2",
+          "name": "footer",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "maxPosDelta": 0,
+      "maxSizeDelta": 0
+    },
+    {
+      "name": "nested-flex-grow",
+      "viewport": 768,
+      "nodes": [
+        {
+          "path": "r",
+          "name": "root",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0",
+          "name": "sidebar",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0.0",
+          "name": "nav-item-1",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0.1",
+          "name": "nav-item-2",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.1",
+          "name": "main",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.1.0",
+          "name": "content",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.2",
+          "name": "aside",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "maxPosDelta": 0,
+      "maxSizeDelta": 0
+    },
+    {
+      "name": "wrapping-text",
+      "viewport": 320,
+      "nodes": [
+        {
+          "path": "r",
+          "name": "root",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0",
+          "name": "heading",
+          "isText": true,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.1",
+          "name": "body",
+          "isText": true,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "maxPosDelta": 0,
+      "maxSizeDelta": 0
+    },
+    {
+      "name": "fixed-vs-auto-row",
+      "viewport": 375,
+      "nodes": [
+        {
+          "path": "r",
+          "name": "root",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0",
+          "name": "avatar",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.1",
+          "name": "details",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.1.0",
+          "name": "title-bar",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.1.1",
+          "name": "subtitle-bar",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.2",
+          "name": "action",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "maxPosDelta": 0,
+      "maxSizeDelta": 0
+    },
+    {
+      "name": "min-max-constraints",
+      "viewport": 768,
+      "nodes": [
+        {
+          "path": "r",
+          "name": "root",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0",
+          "name": "clamped-min",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 139.33,
+          "dh": 0,
+          "pass": false
+        },
+        {
+          "path": "r.1",
+          "name": "clamped-max",
+          "isText": false,
+          "dx": 139.33,
+          "dy": 0,
+          "dw": 28.67,
+          "dh": 0,
+          "pass": false
+        },
+        {
+          "path": "r.2",
+          "name": "free",
+          "isText": false,
+          "dx": 110.67,
+          "dy": 0,
+          "dw": 110.67,
+          "dh": 0,
+          "pass": false
+        }
+      ],
+      "pass": false,
+      "maxPosDelta": 139.33,
+      "maxSizeDelta": 139.33,
+      "worst": {
+        "path": "r.0",
+        "name": "clamped-min",
+        "isText": false,
+        "dx": 0,
+        "dy": 0,
+        "dw": 139.33,
+        "dh": 0,
+        "pass": false
+      }
+    },
+    {
+      "name": "long-unbroken-string",
+      "viewport": 320,
+      "nodes": [
+        {
+          "path": "r",
+          "name": "root",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0",
+          "name": "url-text",
+          "isText": true,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "maxPosDelta": 0,
+      "maxSizeDelta": 0
+    },
+    {
+      "name": "emoji-text",
+      "viewport": 375,
+      "nodes": [
+        {
+          "path": "r",
+          "name": "root",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0",
+          "name": "emoji-line",
+          "isText": true,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "maxPosDelta": 0,
+      "maxSizeDelta": 0
+    },
+    {
+      "name": "bangla-text",
+      "viewport": 320,
+      "nodes": [
+        {
+          "path": "r",
+          "name": "root",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0",
+          "name": "bangla-paragraph",
+          "isText": true,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "maxPosDelta": 0,
+      "maxSizeDelta": 0
+    },
+    {
+      "name": "space-between-wrap",
+      "viewport": 375,
+      "nodes": [
+        {
+          "path": "r",
+          "name": "root",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0",
+          "name": "chip-1",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.1",
+          "name": "chip-2",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.2",
+          "name": "chip-3",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.3",
+          "name": "chip-4",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.4",
+          "name": "chip-5",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "maxPosDelta": 0,
+      "maxSizeDelta": 0
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "name": "row-fixed-gap",
+  "viewport": 320,
+  "chromium": "148.0.7778.96",
+  "generatedAt": "2026-06-11T09:05:55.017Z",
+  "rects": {
+    "r": {
+      "x": 0,
+      "y": 0,
+      "width": 320,
+      "height": 72
+    },
+    "r.0": {
+      "x": 16,
+      "y": 16,
+      "width": 80,
+      "height": 40
+    },
+    "r.1": {
+      "x": 104,
+      "y": 16,
+      "width": 80,
+      "height": 40
+    },
+    "r.2": {
+      "x": 192,
+      "y": 16,
+      "width": 80,
+      "height": 40
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "name": "@agent-eyes/oracle",
+  "version": "0.0.0",
+  "type": "module",
+  "main": "src/index.ts",
+  "dependencies": {
+    "@agent-eyes/core": "workspace:*"
+  }
+}

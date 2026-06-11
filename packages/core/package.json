@@ -1,0 +1,10 @@
+{
+  "name": "@agent-eyes/core",
+  "version": "0.0.0",
+  "type": "module",
+  "main": "src/index.ts",
+  "dependencies": {
+    "fontkit": "^2.0.4",
+    "yoga-layout": "^3.2.1"
+  }
+}
