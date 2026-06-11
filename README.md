@@ -3,6 +3,8 @@
 Deterministic UI layout verification for AI coding agents: catch overflow,
 overlap, and truncation in milliseconds — **no browser, no screenshots**.
 
+![layoutlint demo: check catches an overflow at 320px, the suggested one-class fix makes it green](demo/demo.gif)
+
 Pure TypeScript: Yoga (flexbox) + HarfBuzz-WASM (text shaping — the same
 shaper Chrome uses) + fontkit (font parsing) + Intl.Segmenter (line
 breaking), validated against headless Chromium golden files, the same
