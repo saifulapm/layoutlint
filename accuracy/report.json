@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-06-11T21:46:23.116Z",
-  "passCount": 297,
-  "total": 297,
+  "generatedAt": "2026-06-11T22:47:05.553Z",
+  "passCount": 300,
+  "total": 300,
   "results": [
     {
       "name": "row-fixed-gap",
@@ -30857,6 +30857,294 @@
         },
         {
           "path": "r.0.1.1",
+          "isText": true,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "maxPosDelta": 0,
+      "maxSizeDelta": 0
+    },
+    {
+      "name": "react-profile-card",
+      "viewport": 375,
+      "nodes": [
+        {
+          "path": "r",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0.0",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0.0.0",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0.0.1",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0.01,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0.0.1.0",
+          "isText": true,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0.01,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0.0.1.1",
+          "isText": true,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0.01,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0.0.2",
+          "isText": true,
+          "dx": 0.01,
+          "dy": 0,
+          "dw": 0.01,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0.1",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0.1.0",
+          "isText": true,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0.1.1",
+          "isText": true,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0.1.2",
+          "isText": true,
+          "dx": 0.01,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0.1.3",
+          "isText": true,
+          "dx": 0.01,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "maxPosDelta": 0.01,
+      "maxSizeDelta": 0.01,
+      "worst": {
+        "path": "r.0.0.1",
+        "isText": false,
+        "dx": 0,
+        "dy": 0,
+        "dw": 0.01,
+        "dh": 0,
+        "pass": true
+      }
+    },
+    {
+      "name": "react-button-row",
+      "viewport": 320,
+      "nodes": [
+        {
+          "path": "r",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0",
+          "isText": true,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0.01,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.1",
+          "isText": true,
+          "dx": 0.01,
+          "dy": 0,
+          "dw": 0.01,
+          "dh": 0,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "maxPosDelta": 0.01,
+      "maxSizeDelta": 0.01,
+      "worst": {
+        "path": "r.0",
+        "isText": true,
+        "dx": 0,
+        "dy": 0,
+        "dw": 0.01,
+        "dh": 0,
+        "pass": true
+      }
+    },
+    {
+      "name": "react-pricing-props",
+      "viewport": 375,
+      "nodes": [
+        {
+          "path": "r",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0",
+          "isText": true,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.1",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.1.0",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.1.0.0",
+          "isText": true,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.1.0.1",
+          "isText": true,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.1.0.2",
+          "isText": true,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.1.1",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.1.1.0",
+          "isText": true,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.1.1.1",
+          "isText": true,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.1.1.2",
           "isText": true,
           "dx": 0,
           "dy": 0,

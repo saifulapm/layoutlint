@@ -7,9 +7,10 @@
     "noEmit": true,
     "skipLibCheck": true,
     "types": ["bun"],
+    "jsx": "react-jsx",
     "paths": {
       "@layoutlint/core": ["./packages/core/src/index.ts"]
     }
   },
-  "include": ["packages/*/src/**/*.ts", "corpora/**/*.ts"]
+  "include": ["packages/*/src/**/*.ts", "corpora/**/*.ts", "corpora/**/*.tsx"]
 }

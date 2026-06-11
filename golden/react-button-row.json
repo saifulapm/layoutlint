@@ -1,0 +1,26 @@
+{
+  "name": "react-button-row",
+  "viewport": 320,
+  "chromium": "148.0.7778.96",
+  "generatedAt": "2026-06-11T22:47:03.303Z",
+  "rects": {
+    "r": {
+      "x": 0,
+      "y": 0,
+      "width": 320,
+      "height": 66
+    },
+    "r.0": {
+      "x": 16,
+      "y": 16,
+      "width": 117.83,
+      "height": 34
+    },
+    "r.1": {
+      "x": 141.83,
+      "y": 16,
+      "width": 72.48,
+      "height": 34
+    }
+  }
+}

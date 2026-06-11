@@ -1,6 +1,6 @@
 # Accuracy scoreboard
 
-Engine (Yoga + fontkit) vs headless Chromium golden files. **297/297** cases within threshold (positions ≤1px, sizes ≤1px, text sizes ≤2px).
+Engine (Yoga + fontkit) vs headless Chromium golden files. **300/300** cases within threshold (positions ≤1px, sizes ≤1px, text sizes ≤2px).
 
 | case | vw | nodes | max Δpos | max Δsize | worst node | result |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -301,3 +301,6 @@ Engine (Yoga + fontkit) vs headless Chromium golden files. **297/297** cases wit
 | tw-user-dropdown | 375 | 8 | 0.00 | 0.00 | — | PASS |
 | tw-progress-card | 375 | 8 | 0.00 | 0.00 | — | PASS |
 | tw-bangla-mixed-feed | 375 | 6 | 0.00 | 0.00 | — | PASS |
+| react-profile-card | 375 | 13 | 0.01 | 0.01 | r.0.0.1 (Δw 0.01, Δh 0) | PASS |
+| react-button-row | 320 | 3 | 0.01 | 0.01 | r.0 (Δw 0.01, Δh 0) | PASS |
+| react-pricing-props | 375 | 11 | 0.00 | 0.00 | — | PASS |
