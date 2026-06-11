@@ -1,20 +1,20 @@
-#!/usr/bin/env bun
+#!/usr/bin/env node
 /**
- * agent-eyes CLI.
+ * layoutlint CLI.
  *
- *   agent-eyes check src/components/Card.tsx --viewports 320,1440
- *   agent-eyes check Card.tsx --json          # agent-shaped report on stdout
+ *   layoutlint check src/components/Card.tsx --viewports 320,1440
+ *   layoutlint check Card.tsx --json          # agent-shaped report on stdout
  *
  * Exit code 0 = all rules pass at all viewports; 1 = violations; 2 = usage error.
  */
 import { readFileSync } from 'node:fs';
 import { parseArgs } from 'node:util';
-import { check, ALL_RULES, DEFAULT_VIEWPORTS, type RuleName } from 'agent-eyes';
+import { check, ALL_RULES, DEFAULT_VIEWPORTS, type RuleName } from './index';
 
-const HELP = `agent-eyes — deterministic UI layout checks, no browser
+const HELP = `layoutlint — deterministic UI layout checks, no browser
 
 Usage:
-  agent-eyes check <file...> [options]
+  layoutlint check <file...> [options]
 
 Options:
   --viewports <list>        comma-separated widths (default ${DEFAULT_VIEWPORTS.join(',')})

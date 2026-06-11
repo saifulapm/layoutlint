@@ -1,4 +1,4 @@
-import type { CorpusCase } from '@agent-eyes/core';
+import type { CorpusCase } from '@layoutlint/core';
 
 /**
  * Corpus v0, first 10 of 50. Hardcoded style-object trees (Phase 0 — no

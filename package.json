@@ -1,5 +1,5 @@
 {
-  "name": "agent-eyes",
+  "name": "layoutlint-monorepo",
   "private": true,
   "version": "0.0.0",
   "workspaces": [
@@ -10,15 +10,14 @@
     "accuracy": "bun run packages/oracle/src/compare.ts"
   },
   "dependencies": {
-    "@agent-eyes/core": "workspace:*",
-    "@modelcontextprotocol/sdk": "^1.29.0",
-    "agent-eyes": "workspace:*",
-    "zod": "^4.4.3"
+    "@layoutlint/core": "workspace:*",
+    "layoutlint": "workspace:*"
   },
   "devDependencies": {
     "@types/bun": "^1.2.0",
     "@types/fontkit": "^2.0.9",
     "playwright": "^1.50.0",
-    "typescript": "^5.7.0"
+    "typescript": "^5.7.0",
+    "dts-bundle-generator": "^9.5.1"
   }
 }

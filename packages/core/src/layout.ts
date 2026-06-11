@@ -149,14 +149,14 @@ export function computeLayout(tree: TreeNode, viewportWidth: number, fonts: Font
   // CSS iteratively freezes min/max violators and redistributes. Pin the
   // spec-correct widths on conflicted row containers and relayout, repeating
   // so nested containers see their parents' corrected widths.
-  // AE_NO_FLEXFIX=1 disables the pass (debugging raw Yoga output).
+  // LL_NO_FLEXFIX=1 disables the pass (debugging raw Yoga output).
   // Both corrections are pure functions of (styles, current container width),
   // so re-applying is idempotent — iterate to a fixpoint, letting widths
   // settle top-down across passes. Pins must be reconciled every pass: a
   // child pinned while its container was narrow must be released once the
   // settled container no longer conflicts.
   const flexPinned = new Set<string>();
-  for (let pass = 0; pass < 8 && !process.env.AE_NO_FLEXFIX; pass++) {
+  for (let pass = 0; pass < 8 && !process.env.LL_NO_FLEXFIX; pass++) {
     let changed = false;
     const pin = (path: string, width: number, alsoFlex: boolean): void => {
       const yn = yogaNodes.get(path);

@@ -8,9 +8,9 @@ description: >
   at some screen size.
 ---
 
-# Layout checking with agent-eyes
+# Layout checking with layoutlint
 
-agent-eyes computes real flexbox layout (Yoga) with real font metrics
+layoutlint computes real flexbox layout (Yoga) with real font metrics
 (fontkit) in milliseconds and asserts layout invariants across viewports.
 It is validated against headless-Chromium golden files — treat its reports
 as ground truth for the supported subset (flexbox + Tailwind; grid is
@@ -21,10 +21,10 @@ approximated, see Limits).
 After **every** edit to a component's structure, classes, or copy:
 
 ```sh
-bun run packages/cli/src/cli.ts check <file> --json
+bun run packages/rules/src/cli.ts check <file> --json
 ```
 
-(or `npx agent-eyes check <file> --json` once installed). Default viewports
+(or `npx layoutlint check <file> --json` once installed). Default viewports
 are 320, 375, 768, 1440 — override with `--viewports 320,1440`.
 
 ## Reading the report

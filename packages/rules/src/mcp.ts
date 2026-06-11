@@ -1,15 +1,15 @@
-#!/usr/bin/env bun
+#!/usr/bin/env node
 /**
- * agent-eyes MCP server (stdio): exposes `check_layout` so agents can verify
+ * layoutlint MCP server (stdio): exposes `check_layout` so agents can verify
  * UI layout deterministically — no browser, no screenshots.
  */
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 import { z } from 'zod';
 import { readFileSync } from 'node:fs';
-import { check, ALL_RULES, DEFAULT_VIEWPORTS, type RuleName } from 'agent-eyes';
+import { check, ALL_RULES, DEFAULT_VIEWPORTS, type RuleName } from './index';
 
-const server = new McpServer({ name: 'agent-eyes', version: '0.0.0' });
+const server = new McpServer({ name: 'layoutlint', version: '0.0.0' });
 
 const inputSchema: z.ZodRawShape = {
   source: z

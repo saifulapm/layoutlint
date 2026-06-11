@@ -1,8 +1,8 @@
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { parseSource, type CorpusCase, type Style, type TreeNode } from '@agent-eyes/core';
+import { parseSource, type CorpusCase, type Style, type TreeNode } from '@layoutlint/core';
 
-export const FONTS_DIR = join(import.meta.dir, '../../../fonts');
+export const FONTS_DIR = join(import.meta.dir, '../../rules/fonts');
 const VENDOR_DIR = join(import.meta.dir, '../../../vendor');
 
 /** Props whose numeric values are unitless in CSS. */

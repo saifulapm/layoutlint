@@ -25,13 +25,16 @@ packages/core/        the engine
   src/layout.ts         Yoga bridge (web defaults) + corrective fixpoint loop
   src/flexfix.ts        CSS §9.7 resolver, §9.3 wrap lines, §4.5 auto minimums,
                         fit-content cross sizing, intrinsic width approximation
-packages/rules/       the product (npm name "agent-eyes")
+packages/rules/       the product — the published npm package "layoutlint"
   src/check.ts          check(source, {viewports, rules, fonts}) → report
   src/rules.ts          no-overflow, no-overlap, fits-viewport,
                         no-text-truncation — agent-shaped violations
+  src/cli.ts            layoutlint check <file> --viewports 320,1440 [--json]
+  src/mcp.ts            stdio MCP server, bin: layoutlint-mcp
+  fonts/                Inter 400/500/600/700 + Noto Sans Bengali (ships in pkg)
   test/check.test.ts    11 unit tests (bun test)
-packages/cli/         agent-eyes check <file> --viewports 320,1440 [--json]
-packages/mcp/         stdio MCP server exposing check_layout
+  package.json          build: bun bundle (core bundled, npm deps external) +
+                        dts-bundle-generator → dist/; bins point at dist/
 packages/skill/       SKILL.md (Claude Code skill)
 packages/oracle/      DEV-ONLY: Playwright golden generator + comparator
   src/generate.ts       renders corpus in Chromium → golden/*.json
@@ -43,7 +46,6 @@ corpora/tailwind-cases.ts  41 real-markup cases (full pipeline vs real
 corpora/generated.ts  120 seeded fuzz cases (deterministic from seed)
 golden/               committed Chromium golden files (regenerated in CI)
 accuracy/             scoreboard output (README.md + report.json)
-fonts/                Inter 400/500/600/700 + Noto Sans Bengali
 vendor/               pinned @tailwindcss/browser 4.1.16 (oracle only)
 .github/workflows/accuracy.yml   typecheck + bun test + regenerate goldens
                         + accuracy gate on every push/PR
@@ -58,7 +60,7 @@ bun test              # unit tests
 bun run oracle        # regenerate golden files (headless Chromium)
 bun run accuracy      # scoreboard; exit 1 if any case over threshold
 bun run packages/oracle/src/debug-case.ts gen-042   # grind one failure
-AE_NO_FLEXFIX=1 bun run packages/oracle/src/compare.ts  # raw Yoga (debugging)
+LL_NO_FLEXFIX=1 bun run packages/oracle/src/compare.ts  # raw Yoga (debugging)
 ```
 
 The loop that built this: add/widen corpus → `oracle` → `accuracy` → pick a
@@ -92,10 +94,14 @@ fit-content sizing of wrap containers is the documented envelope edge.
 
 ## Next steps, in recommended order
 
-1. **Name + npm + domain** (HANDOFF §9 — blocks everything public).
-   Candidates there; package is currently `agent-eyes` in packages/rules.
-   After deciding: rename packages, add `files`/`exports`/build (the
-   packages currently ship TS source, fine for bun, not for npm), publish.
+1. **Publish** — naming is DONE (`layoutlint`, decided 2026-06-11; the old
+   codename `agent-eyes` is squatted on npm by an active adjacent product).
+   Packaging is DONE: single package `layoutlint` (CLI + MCP bins folded in,
+   core bundled, fonts shipped, runs under plain Node — CI smoke-tests this).
+   Remaining, all manual: rename the GitHub repo (remote is still
+   `saifulapm/OpenEye-`; package.json points at `saifulapm/layoutlint`),
+   grab the domain, then `cd packages/rules && npm publish` (prepublishOnly
+   builds). License set to MIT (LICENSE at root + in package).
 2. **Demo GIF** for the README (HANDOFF §8: agent edits component → check
    catches overflow at 320 → fixes → green; no browser window).
 3. **Corpus to 300+**: bump `GENERATED_COUNT` in corpora/generated.ts

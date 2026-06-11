@@ -1,9 +1,10 @@
 {
-  "name": "@agent-eyes/oracle",
+  "name": "@layoutlint/oracle",
   "version": "0.0.0",
   "type": "module",
   "main": "src/index.ts",
   "dependencies": {
-    "@agent-eyes/core": "workspace:*"
-  }
+    "@layoutlint/core": "workspace:*"
+  },
+  "private": true
 }

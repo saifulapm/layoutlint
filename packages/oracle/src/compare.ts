@@ -9,7 +9,7 @@
  */
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { computeLayout, FontStore, parseSource, resolveTree, type Box, type TreeNode } from '@agent-eyes/core';
+import { computeLayout, FontStore, parseSource, resolveTree, type Box, type TreeNode } from '@layoutlint/core';
 import { cases } from '../../../corpora/cases';
 import { generatedCases } from '../../../corpora/generated';
 import { tailwindCases } from '../../../corpora/tailwind-cases';

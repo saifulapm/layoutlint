@@ -1,7 +1,7 @@
 /** Print one case's tree and engine-vs-golden boxes. Usage: bun run debug-case.ts <name> */
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { computeLayout, FontStore, parseSource, resolveTree, type TreeNode } from '@agent-eyes/core';
+import { computeLayout, FontStore, parseSource, resolveTree, type TreeNode } from '@layoutlint/core';
 import { cases } from '../../../corpora/cases';
 import { generatedCases } from '../../../corpora/generated';
 import { tailwindCases } from '../../../corpora/tailwind-cases';

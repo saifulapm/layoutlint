@@ -1,4 +1,4 @@
-# agent-eyes (working codename)
+# layoutlint
 
 Deterministic UI layout verification for AI coding agents: catch overflow,
 overlap, and truncation in milliseconds — **no browser, no screenshots**.
@@ -20,14 +20,16 @@ functional and green.
 
 ```sh
 # CLI — pretty output for humans, --json for agents (exit 1 on violations)
-bun run packages/cli/src/cli.ts check src/components/Card.tsx --viewports 320,1440
+npx layoutlint check src/components/Card.tsx --viewports 320,1440
+# (from this repo: bun run packages/rules/src/cli.ts check …)
 
 # Library
-import { check } from 'agent-eyes'
+import { check } from 'layoutlint'
 const report = await check(componentSource, { viewports: [320, 375, 768, 1440] })
 
 # MCP server (stdio) — exposes the check_layout tool
-bun run packages/mcp/src/server.ts
+npx layoutlint-mcp
+# (from this repo: bun run packages/rules/src/mcp.ts)
 
 # Claude Code skill
 packages/skill/SKILL.md
@@ -149,15 +151,14 @@ push).
 ```
 packages/
   core/      # parser, Tailwind resolver, Yoga bridge, fontkit text measure
-  rules/     # the `agent-eyes` package: 4 assertion rules + check() API
+  rules/     # the published `layoutlint` package: 4 assertion rules,
+             #   check() API, CLI (src/cli.ts), MCP server (src/mcp.ts),
+             #   bundled fonts (Inter ×4 + Noto Sans Bengali)
   oracle/    # Playwright golden-file generator + comparator (dev-dep only)
-  cli/       # `agent-eyes check <file>` (pretty + --json)
-  mcp/       # stdio MCP server exposing check_layout
   skill/     # Claude Code skill (SKILL.md)
 corpora/     # style-object cases + Tailwind-input cases + seeded fuzz corpus
 golden/      # Chromium golden files (committed, regenerated in CI)
 accuracy/    # scoreboard output (report.json + README.md)
-fonts/       # Inter (4 weights) + Noto Sans Bengali
 vendor/      # pinned @tailwindcss/browser build (oracle only)
 ```
 

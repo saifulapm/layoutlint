@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'bun:test';
 import { check } from '../src/check';
-import { resolveClasses, classAffectsLayout } from '@agent-eyes/core';
+import { resolveClasses, classAffectsLayout } from '@layoutlint/core';
 
 describe('check()', () => {
   test('clean component passes at all viewports', async () => {

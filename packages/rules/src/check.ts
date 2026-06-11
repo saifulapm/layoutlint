@@ -1,13 +1,15 @@
 import { existsSync } from 'node:fs';
-import { join } from 'node:path';
-import { computeLayout, FontStore, parseSource, resolveTree } from '@agent-eyes/core';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { computeLayout, FontStore, parseSource, resolveTree } from '@layoutlint/core';
 import { buildIndex, RULES } from './rules';
 import { ALL_RULES, type CheckOptions, type CheckReport, type ViewportResult } from './types';
 
 export const DEFAULT_VIEWPORTS = [320, 375, 768, 1440];
 
 const SYSTEM_EMOJI = '/usr/share/fonts/truetype/noto/NotoColorEmoji.ttf';
-const FONTS_DIR = join(import.meta.dir, '../../../fonts');
+// works from src/ (dev) and dist/ (published) — fonts/ sits at the package root
+const FONTS_DIR = join(dirname(fileURLToPath(import.meta.url)), '../fonts');
 
 let defaultStore: FontStore | undefined;
 

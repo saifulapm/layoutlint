@@ -1,4 +1,4 @@
-import { measureText, type Box, type FontStore, type Style, type TreeNode } from '@agent-eyes/core';
+import { measureText, type Box, type FontStore, type Style, type TreeNode } from '@layoutlint/core';
 import type { RuleName, Violation } from './types';
 
 const TOL = 0.5;

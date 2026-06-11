@@ -1,4 +1,4 @@
-import type { CorpusCase, Style, TreeNode } from '@agent-eyes/core';
+import type { CorpusCase, Style, TreeNode } from '@layoutlint/core';
 
 /**
  * Seeded fuzz corpus: deterministic pseudo-random flex trees within the

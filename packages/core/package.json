@@ -1,5 +1,5 @@
 {
-  "name": "@agent-eyes/core",
+  "name": "@layoutlint/core",
   "version": "0.0.0",
   "type": "module",
   "main": "src/index.ts",
@@ -9,5 +9,6 @@
     "harfbuzzjs": "^1.2.1",
     "htmlparser2": "^12.0.0",
     "yoga-layout": "^3.2.1"
-  }
+  },
+  "private": true
 }

@@ -28,6 +28,13 @@ jobs:
       - name: Unit tests (rules, resolver, check API)
         run: bun test
 
+      # The published package must run under plain Node (no Bun).
+      - name: Build npm package + smoke-test CLI under Node
+        run: |
+          cd packages/rules && bun run build
+          printf '<div className="flex gap-2 p-4"><span className="text-sm">ok</span></div>' > /tmp/smoke.tsx
+          node dist/cli.js check /tmp/smoke.tsx
+
       - name: Regenerate golden files against pinned Chromium
         run: bun run oracle
 
