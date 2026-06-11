@@ -1,7 +1,7 @@
 {
   "name": "layoutlint",
   "version": "0.1.0",
-  "description": "Deterministic UI layout checks for JSX/HTML + Tailwind \u2014 overflow, overlap, viewport fit, text truncation \u2014 in milliseconds, no browser. Validated against headless-Chromium golden files.",
+  "description": "Deterministic UI layout checks and screenshots for JSX/HTML + Tailwind — overflow, overlap, viewport fit, text truncation, SVG/PNG render — in milliseconds, no browser. Validated against headless-Chromium golden files.",
   "keywords": [
     "layout",
     "lint",

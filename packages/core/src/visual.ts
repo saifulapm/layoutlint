@@ -26,7 +26,6 @@ export interface VisualStyle {
   radius: CornerRadii;
   /** Inherited. */
   textAlign: 'left' | 'center' | 'right';
-  isImg: boolean;
 }
 
 /** v4 default theme radius scale (verified against the vendored browser build). */
@@ -159,7 +158,6 @@ export function resolveVisualTree(raw: TreeNode, opts: ResolveOptions): Map<stri
       borderColor: own.borderColor ?? textColor, // CSS default: currentColor
       radius: { tl: 0, tr: 0, br: 0, bl: 0, ...own.radius },
       textAlign: own.textAlign ?? inherited.textAlign,
-      isImg: n.tag === 'img',
     };
     out.set(path, style);
     (n.children ?? []).forEach((c, i) =>

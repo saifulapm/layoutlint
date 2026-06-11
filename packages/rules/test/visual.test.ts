@@ -47,8 +47,9 @@ describe('resolveVisualTree', () => {
     expect(v.get('r.1')!.textColor).toBe(PALETTE['gray-500']);
   });
 
-  test('img nodes are flagged', () => {
-    const v = at('<div><img className="h-12 w-12" /></div>');
-    expect(v.get('r.0')!.isImg).toBe(true);
+  test('srcless img paints via its bg class only (browser parity)', () => {
+    const v = at('<div><img className="h-12 w-12 bg-gray-100" /><img className="h-4 w-4" /></div>');
+    expect(v.get('r.0')!.background).toBe(PALETTE['gray-100']);
+    expect(v.get('r.1')!.background).toBeUndefined();
   });
 });
