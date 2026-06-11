@@ -10,7 +10,10 @@
     "accuracy": "bun run packages/oracle/src/compare.ts"
   },
   "dependencies": {
-    "@agent-eyes/core": "workspace:*"
+    "@agent-eyes/core": "workspace:*",
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "agent-eyes": "workspace:*",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@types/bun": "^1.2.0",

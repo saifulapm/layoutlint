@@ -54,25 +54,47 @@ export interface Style {
   marginBottom?: number | 'auto';
   marginLeft?: number | 'auto';
 
+  // borders (px — layout-relevant; style/color are not)
+  borderWidth?: number;
+  borderTopWidth?: number;
+  borderRightWidth?: number;
+  borderBottomWidth?: number;
+  borderLeftWidth?: number;
+
   // positioning
   position?: 'relative' | 'absolute';
-  top?: number;
-  right?: number;
-  bottom?: number;
-  left?: number;
+  top?: Length;
+  right?: Length;
+  bottom?: Length;
+  left?: Length;
+
+  /** width / height ratio (Tailwind aspect-*). */
+  aspectRatio?: number;
+
+  // display
+  /** 'none' removes the node from layout (zero box, children skipped). */
+  display?: 'flex' | 'none';
+  overflow?: 'visible' | 'hidden' | 'auto' | 'scroll';
 
   // text (leaf nodes only)
   fontSize?: number;
   /** px. Explicit in v0 — `line-height: normal` parity is out of scope for the spike. */
   lineHeight?: number;
-  fontWeight?: 400 | 700;
+  fontWeight?: number;
   letterSpacing?: number;
+  /** 'nowrap' lays the text out as a single line (the `truncate` pattern). */
+  whiteSpace?: 'normal' | 'nowrap';
+  textOverflow?: 'ellipsis';
 }
 
 /** Element tree node. A node with `text` is a leaf; `children` otherwise. */
 export interface TreeNode {
   /** Optional human-readable label used in diagnostics. */
   name?: string;
+  /** Source element tag (set by the parser), e.g. 'div'. */
+  tag?: string;
+  /** Source class list (set by the parser) — used for selectors/diagnostics. */
+  classes?: string[];
   style?: Style;
   text?: string;
   children?: TreeNode[];

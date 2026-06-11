@@ -9,9 +9,10 @@
  */
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { computeLayout, FontStore, type Box } from '@agent-eyes/core';
+import { computeLayout, FontStore, parseSource, resolveTree, type Box, type TreeNode } from '@agent-eyes/core';
 import { cases } from '../../../corpora/cases';
-import { ACCURACY_DIR, GOLDEN_DIR, type GoldenFile } from './golden';
+import { tailwindCases } from '../../../corpora/tailwind-cases';
+import { ACCURACY_DIR, GOLDEN_DIR, ORACLE_VIEWPORT_HEIGHT, type GoldenFile } from './golden';
 import { FONTS_DIR } from './html';
 
 const POS_THRESHOLD = 1;
@@ -22,10 +23,12 @@ const SYSTEM_EMOJI = '/usr/share/fonts/truetype/noto/NotoColorEmoji.ttf';
 
 const fonts = new FontStore([
   { family: 'AE Sans', path: join(FONTS_DIR, 'Inter-Regular.ttf'), weight: 400 },
+  { family: 'AE Sans', path: join(FONTS_DIR, 'Inter-Medium.ttf'), weight: 500 },
+  { family: 'AE Sans', path: join(FONTS_DIR, 'Inter-SemiBold.ttf'), weight: 600 },
   { family: 'AE Sans', path: join(FONTS_DIR, 'Inter-Bold.ttf'), weight: 700 },
   { family: 'AE Bengali', path: join(FONTS_DIR, 'NotoSansBengali-Regular.ttf'), weight: 400 },
   ...(existsSync(SYSTEM_EMOJI)
-    ? [{ family: 'Noto Color Emoji', path: SYSTEM_EMOJI, weight: 400 as const }]
+    ? [{ family: 'Noto Color Emoji', path: SYSTEM_EMOJI, weight: 400 }]
     : []),
 ]);
 
@@ -53,7 +56,16 @@ interface CaseResult {
 const round = (n: number) => Math.round(n * 100) / 100;
 const results: CaseResult[] = [];
 
-for (const c of cases) {
+const allCases: { name: string; viewport: number; tree: TreeNode }[] = [
+  ...cases,
+  ...tailwindCases.map((c) => ({
+    name: c.name,
+    viewport: c.viewport,
+    tree: resolveTree(parseSource(c.html), { viewport: c.viewport, viewportHeight: ORACLE_VIEWPORT_HEIGHT }).tree,
+  })),
+];
+
+for (const c of allCases) {
   const goldenPath = join(GOLDEN_DIR, `${c.name}.json`);
   if (!existsSync(goldenPath)) {
     console.error(`missing golden file for ${c.name} — run \`bun run oracle\` first`);

@@ -8,8 +8,9 @@ import { mkdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { chromium } from 'playwright';
 import { cases } from '../../../corpora/cases';
-import { renderCaseHtml } from './html';
-import { GOLDEN_DIR, type GoldenFile, type GoldenRect } from './golden';
+import { tailwindCases } from '../../../corpora/tailwind-cases';
+import { renderCaseHtml, renderTailwindCaseHtml } from './html';
+import { GOLDEN_DIR, ORACLE_VIEWPORT_HEIGHT, type GoldenFile, type GoldenRect } from './golden';
 
 const round = (n: number) => Math.round(n * 100) / 100;
 
@@ -20,13 +21,23 @@ const browser = await chromium.launch({ args: ['--font-render-hinting=none'] });
 const version = browser.version();
 mkdirSync(GOLDEN_DIR, { recursive: true });
 
-for (const c of cases) {
+const allCases = [
+  ...cases.map((c) => ({ name: c.name, viewport: c.viewport, html: renderCaseHtml(c) })),
+  ...tailwindCases.map((c) => ({ name: c.name, viewport: c.viewport, html: renderTailwindCaseHtml(c.html) })),
+];
+
+for (const c of allCases) {
   const page = await browser.newPage({
-    viewport: { width: c.viewport, height: 2000 },
+    viewport: { width: c.viewport, height: ORACLE_VIEWPORT_HEIGHT },
     deviceScaleFactor: 1,
   });
-  await page.setContent(renderCaseHtml(c), { waitUntil: 'load' });
+  await page.setContent(c.html, { waitUntil: 'load' });
   await page.evaluate(() => document.fonts.ready);
+  // Tailwind browser-build compilation has applied once the probe is display:none
+  await page.waitForFunction(() => {
+    const probe = document.getElementById('tw-probe');
+    return !probe || getComputedStyle(probe).display === 'none';
+  });
   const rects = await page.evaluate(() => {
     const out: Record<string, { x: number; y: number; width: number; height: number }> = {};
     for (const el of document.querySelectorAll('[data-aeid]')) {

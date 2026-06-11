@@ -30,6 +30,10 @@ export function measureText(
 
   const measure = (s: string) => store.measureWidth(s, fontSize, weight, letterSpacing);
 
+  if (style.whiteSpace === 'nowrap') {
+    return { width: measure(text), height: lineHeight, lineCount: 1 };
+  }
+
   const segments = [...segmenter.segment(text)].map((s) => s.segment);
 
   const lineWidths: number[] = [];

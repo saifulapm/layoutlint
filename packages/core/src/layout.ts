@@ -70,11 +70,19 @@ function applyStyle(node: ReturnType<typeof Yoga.Node.create>, s: Style): void {
   if (s.marginBottom !== undefined) node.setMargin(Yoga.EDGE_BOTTOM, s.marginBottom);
   if (s.marginLeft !== undefined) node.setMargin(Yoga.EDGE_LEFT, s.marginLeft);
 
+  if (s.borderWidth !== undefined) node.setBorder(Yoga.EDGE_ALL, s.borderWidth);
+  if (s.borderTopWidth !== undefined) node.setBorder(Yoga.EDGE_TOP, s.borderTopWidth);
+  if (s.borderRightWidth !== undefined) node.setBorder(Yoga.EDGE_RIGHT, s.borderRightWidth);
+  if (s.borderBottomWidth !== undefined) node.setBorder(Yoga.EDGE_BOTTOM, s.borderBottomWidth);
+  if (s.borderLeftWidth !== undefined) node.setBorder(Yoga.EDGE_LEFT, s.borderLeftWidth);
+
   if (s.position === 'absolute') node.setPositionType(Yoga.POSITION_TYPE_ABSOLUTE);
   if (s.top !== undefined) node.setPosition(Yoga.EDGE_TOP, s.top);
   if (s.right !== undefined) node.setPosition(Yoga.EDGE_RIGHT, s.right);
   if (s.bottom !== undefined) node.setPosition(Yoga.EDGE_BOTTOM, s.bottom);
   if (s.left !== undefined) node.setPosition(Yoga.EDGE_LEFT, s.left);
+
+  if (s.aspectRatio !== undefined) node.setAspectRatio(s.aspectRatio);
 }
 
 /**
@@ -91,10 +99,11 @@ export function computeLayout(tree: TreeNode, viewportWidth: number, fonts: Font
   type YogaNode = ReturnType<typeof Yoga.Node.create>;
   const yogaNodes = new Map<string, YogaNode>();
 
-  const build = (n: TreeNode, path: string): YogaNode => {
+  const build = (n: TreeNode, path: string): YogaNode | null => {
+    const style = n.style ?? {};
+    if (style.display === 'none') return null;
     const node = Yoga.Node.create(config);
     yogaNodes.set(path, node);
-    const style = n.style ?? {};
     applyStyle(node, style);
     if (n.text !== undefined) {
       const text = n.text;
@@ -102,24 +111,42 @@ export function computeLayout(tree: TreeNode, viewportWidth: number, fonts: Font
         const maxWidth =
           widthMode === Yoga.MEASURE_MODE_UNDEFINED ? Infinity : width;
         const m = measureText(fonts, text, style, maxWidth);
+        // CSS fit-content: once text wraps, the box fills the available
+        // width (lines sit inside it); only single-line text shrink-wraps.
         const outWidth =
-          widthMode === Yoga.MEASURE_MODE_EXACTLY ? width : Math.min(m.width, maxWidth);
+          widthMode === Yoga.MEASURE_MODE_EXACTLY
+            ? width
+            : m.lineCount > 1
+              ? maxWidth
+              : Math.min(m.width, maxWidth);
         return { width: outWidth, height: m.height };
       });
     } else {
+      let slot = 0;
       (n.children ?? []).forEach((child, i) => {
-        node.insertChild(build(child, `${path}.${i}`), i);
+        const childNode = build(child, `${path}.${i}`);
+        if (childNode) node.insertChild(childNode, slot++);
       });
     }
     return node;
   };
 
   const root = build(tree, 'r');
+  if (!root) return [{ path: 'r', name: tree.name, isText: false, x: 0, y: 0, width: 0, height: 0 }];
   root.calculateLayout(viewportWidth, undefined, Yoga.DIRECTION_LTR);
 
   const boxes: Box[] = [];
   const collect = (n: TreeNode, path: string, parentX: number, parentY: number) => {
-    const yn = yogaNodes.get(path)!;
+    const yn = yogaNodes.get(path);
+    if (!yn) {
+      // display:none subtree — zero box, matching getBoundingClientRect
+      const emit = (m: TreeNode, p: string) => {
+        boxes.push({ path: p, name: m.name, isText: m.text !== undefined, x: 0, y: 0, width: 0, height: 0 });
+        (m.children ?? []).forEach((c, i) => emit(c, `${p}.${i}`));
+      };
+      emit(n, path);
+      return;
+    }
     const x = parentX + yn.getComputedLeft();
     const y = parentY + yn.getComputedTop();
     boxes.push({

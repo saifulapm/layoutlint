@@ -1,6 +1,6 @@
 # Accuracy scoreboard
 
-Engine (Yoga + fontkit) vs headless Chromium golden files. **47/50** cases within threshold (positions ≤1px, sizes ≤1px, text sizes ≤2px).
+Engine (Yoga + fontkit) vs headless Chromium golden files. **62/65** cases within threshold (positions ≤1px, sizes ≤1px, text sizes ≤2px).
 
 | case | vw | nodes | max Δpos | max Δsize | worst node | result |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -44,7 +44,7 @@ Engine (Yoga + fontkit) vs headless Chromium golden files. **47/50** cases withi
 | absolute-right-bottom | 375 | 3 | 0.00 | 0.00 | — | PASS |
 | absolute-inset-overlay | 375 | 3 | 0.00 | 0.00 | — | PASS |
 | relative-offset | 320 | 4 | 0.00 | 0.00 | — | PASS |
-| text-in-row-shrink | 375 | 3 | 25.70 | 25.71 | label (Δw 25.71, Δh 0) | FAIL |
+| text-in-row-shrink | 375 | 3 | 25.04 | 25.05 | label (Δw 25.05, Δh 0) | FAIL |
 | text-min-content-floor | 320 | 3 | 0.00 | 0.00 | — | PASS |
 | text-center-natural-width | 375 | 2 | 0.00 | 0.01 | short-label (Δw 0.01, Δh 0) | PASS |
 | text-letter-spacing | 375 | 2 | 0.00 | 0.00 | — | PASS |
@@ -54,3 +54,18 @@ Engine (Yoga + fontkit) vs headless Chromium golden files. **47/50** cases withi
 | emoji-only-row | 375 | 2 | 0.00 | 0.00 | — | PASS |
 | text-with-padding | 320 | 2 | 0.00 | 0.00 | — | PASS |
 | card-kitchen-sink | 320 | 12 | 0.01 | 0.01 | primary-btn (Δw 0.01, Δh 0) | PASS |
+| tw-card | 320 | 12 | 0.01 | 0.01 | r.0.3.0 (Δw 0.01, Δh 0) | PASS |
+| tw-card-wide | 768 | 12 | 0.01 | 0.01 | r.0.3.0 (Δw 0.01, Δh 0) | PASS |
+| tw-navbar | 768 | 6 | 0.03 | 0.29 | r.0 (Δw 0.29, Δh 0) | PASS |
+| tw-hero | 375 | 6 | 0.01 | 0.00 | r.2 (Δw 0, Δh 0) | PASS |
+| tw-stats-responsive | 320 | 17 | 0.00 | 0.00 | — | PASS |
+| tw-stats-responsive-sm | 768 | 17 | 0.00 | 0.00 | — | PASS |
+| tw-form | 375 | 9 | 0.00 | 0.00 | — | PASS |
+| tw-badges | 320 | 6 | 0.02 | 0.22 | r.4 (Δw 0.22, Δh 0) | PASS |
+| tw-sidebar-layout | 1440 | 9 | 0.00 | 0.00 | — | PASS |
+| tw-media-object | 375 | 6 | 0.00 | 0.00 | — | PASS |
+| tw-alert | 320 | 6 | 0.00 | 0.00 | — | PASS |
+| tw-modal | 375 | 8 | 0.02 | 0.01 | r.1.2.0 (Δw 0.01, Δh 0) | PASS |
+| tw-breadcrumbs | 768 | 6 | 0.01 | 0.01 | r.1 (Δw 0.01, Δh 0) | PASS |
+| tw-footer | 375 | 6 | 0.02 | 0.01 | r.1.2 (Δw 0.01, Δh 0) | PASS |
+| tw-bangla-profile | 320 | 4 | 0.01 | 0.01 | r.1 (Δw 0.01, Δh 0) | PASS |

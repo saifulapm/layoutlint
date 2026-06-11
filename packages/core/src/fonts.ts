@@ -4,12 +4,12 @@ import type { Font } from 'fontkit';
 export interface FontFace {
   family: string;
   path: string;
-  weight: 400 | 700;
+  weight: number;
 }
 
 interface LoadedFace {
   family: string;
-  weight: 400 | 700;
+  weight: number;
   font: Font;
 }
 
@@ -59,18 +59,22 @@ export class FontStore {
     if (this.faces.length === 0) throw new Error('FontStore requires at least one font');
   }
 
-  /** Pick the first face of the requested weight (falling back to 400) that covers cp. */
-  private faceFor(cp: number, weight: 400 | 700): LoadedFace {
-    const candidates = this.faces.filter((f) => f.weight === weight);
-    const pool = candidates.length > 0 ? candidates : this.faces.filter((f) => f.weight === 400);
-    for (const face of pool) {
+  /**
+   * Pick the nearest-weight face that covers cp, in chain order within a
+   * weight (simplified CSS font-matching: nearest weight, lower wins ties).
+   */
+  private faceFor(cp: number, weight: number): LoadedFace {
+    const byDistance = [...this.faces].sort((a, b) => {
+      const da = Math.abs(a.weight - weight);
+      const db = Math.abs(b.weight - weight);
+      if (da !== db) return da - db;
+      if (a.weight !== b.weight) return a.weight - b.weight;
+      return this.faces.indexOf(a) - this.faces.indexOf(b);
+    });
+    for (const face of byDistance) {
       if (face.font.hasGlyphForCodePoint(cp)) return face;
     }
-    // also try other weights before giving up (browser synthesizes weight)
-    for (const face of this.faces) {
-      if (face.font.hasGlyphForCodePoint(cp)) return face;
-    }
-    return pool[0] ?? this.faces[0];
+    return byDistance[0];
   }
 
   /**
@@ -78,7 +82,7 @@ export class FontStore {
    * by codepoint coverage, then shapes each run with fontkit (kerning,
    * ligatures, complex-script shaping) like a browser would with HarfBuzz.
    */
-  measureWidth(text: string, fontSize: number, weight: 400 | 700, letterSpacing = 0): number {
+  measureWidth(text: string, fontSize: number, weight: number, letterSpacing = 0): number {
     if (text.length === 0) return 0;
     const runs: { face: LoadedFace; text: string }[] = [];
     let current: { face: LoadedFace; text: string } | null = null;

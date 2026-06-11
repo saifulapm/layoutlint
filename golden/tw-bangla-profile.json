@@ -1,0 +1,32 @@
+{
+  "name": "tw-bangla-profile",
+  "viewport": 320,
+  "chromium": "148.0.7778.96",
+  "generatedAt": "2026-06-11T09:46:32.146Z",
+  "rects": {
+    "r": {
+      "x": 0,
+      "y": 0,
+      "width": 320,
+      "height": 271
+    },
+    "r.0": {
+      "x": 120,
+      "y": 24,
+      "width": 80,
+      "height": 80
+    },
+    "r.1": {
+      "x": 99.94,
+      "y": 116,
+      "width": 120.11,
+      "height": 28
+    },
+    "r.2": {
+      "x": 24,
+      "y": 156,
+      "width": 272,
+      "height": 91
+    }
+  }
+}
