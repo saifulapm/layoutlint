@@ -1,0 +1,341 @@
+{
+  "thresholdPct": 5,
+  "results": [
+    {
+      "name": "tw-bangla-mixed-feed",
+      "viewport": 375,
+      "width": 375,
+      "height": 125,
+      "diffPct": 3.23,
+      "pass": true
+    },
+    {
+      "name": "tw-badges",
+      "viewport": 320,
+      "width": 320,
+      "height": 80,
+      "diffPct": 2.65,
+      "pass": true
+    },
+    {
+      "name": "tw-bangla-profile",
+      "viewport": 320,
+      "width": 320,
+      "height": 271,
+      "diffPct": 2.62,
+      "pass": true
+    },
+    {
+      "name": "tw-alert",
+      "viewport": 320,
+      "width": 320,
+      "height": 181,
+      "diffPct": 2.53,
+      "pass": true
+    },
+    {
+      "name": "tw-card",
+      "viewport": 320,
+      "width": 320,
+      "height": 339,
+      "diffPct": 1.9,
+      "pass": true
+    },
+    {
+      "name": "tw-notification-pref",
+      "viewport": 320,
+      "width": 320,
+      "height": 170,
+      "diffPct": 1.77,
+      "pass": true
+    },
+    {
+      "name": "tw-media-object",
+      "viewport": 375,
+      "width": 375,
+      "height": 116,
+      "diffPct": 1.59,
+      "pass": true
+    },
+    {
+      "name": "tw-file-rows",
+      "viewport": 375,
+      "width": 375,
+      "height": 108,
+      "diffPct": 1.59,
+      "pass": true
+    },
+    {
+      "name": "tw-inbox-row-overflowy",
+      "viewport": 320,
+      "width": 320,
+      "height": 134,
+      "diffPct": 1.44,
+      "pass": true
+    },
+    {
+      "name": "tw-timeline",
+      "viewport": 375,
+      "width": 375,
+      "height": 194,
+      "diffPct": 1.37,
+      "pass": true
+    },
+    {
+      "name": "tw-comment-thread",
+      "viewport": 375,
+      "width": 375,
+      "height": 176,
+      "diffPct": 1.35,
+      "pass": true
+    },
+    {
+      "name": "tw-banner-cta",
+      "viewport": 768,
+      "width": 768,
+      "height": 74,
+      "diffPct": 1.3,
+      "pass": true
+    },
+    {
+      "name": "tw-blog-list",
+      "viewport": 768,
+      "width": 768,
+      "height": 370,
+      "diffPct": 1.26,
+      "pass": true
+    },
+    {
+      "name": "tw-card-wide",
+      "viewport": 768,
+      "width": 768,
+      "height": 244,
+      "diffPct": 1.18,
+      "pass": true
+    },
+    {
+      "name": "tw-chat-bubbles",
+      "viewport": 375,
+      "width": 375,
+      "height": 224,
+      "diffPct": 1.18,
+      "pass": true
+    },
+    {
+      "name": "tw-toast",
+      "viewport": 375,
+      "width": 375,
+      "height": 96,
+      "diffPct": 1.06,
+      "pass": true
+    },
+    {
+      "name": "tw-progress-card",
+      "viewport": 375,
+      "width": 375,
+      "height": 150,
+      "diffPct": 1.04,
+      "pass": true
+    },
+    {
+      "name": "tw-tabs",
+      "viewport": 375,
+      "width": 375,
+      "height": 115,
+      "diffPct": 1.01,
+      "pass": true
+    },
+    {
+      "name": "demo-card",
+      "viewport": 375,
+      "width": 375,
+      "height": 110,
+      "diffPct": 1,
+      "pass": true
+    },
+    {
+      "name": "tw-product-card",
+      "viewport": 320,
+      "width": 320,
+      "height": 375,
+      "diffPct": 0.99,
+      "pass": true
+    },
+    {
+      "name": "tw-hero",
+      "viewport": 375,
+      "width": 375,
+      "height": 322,
+      "diffPct": 0.86,
+      "pass": true
+    },
+    {
+      "name": "tw-form",
+      "viewport": 375,
+      "width": 375,
+      "height": 268,
+      "diffPct": 0.85,
+      "pass": true
+    },
+    {
+      "name": "tw-cookie-banner",
+      "viewport": 320,
+      "width": 320,
+      "height": 384,
+      "diffPct": 0.68,
+      "pass": true
+    },
+    {
+      "name": "tw-navbar",
+      "viewport": 768,
+      "width": 768,
+      "height": 45,
+      "diffPct": 0.67,
+      "pass": true
+    },
+    {
+      "name": "tw-feature-grid-as-flex",
+      "viewport": 768,
+      "width": 768,
+      "height": 213,
+      "diffPct": 0.57,
+      "pass": true
+    },
+    {
+      "name": "tw-stats-responsive",
+      "viewport": 320,
+      "width": 320,
+      "height": 212,
+      "diffPct": 0.55,
+      "pass": true
+    },
+    {
+      "name": "tw-modal",
+      "viewport": 375,
+      "width": 375,
+      "height": 384,
+      "diffPct": 0.54,
+      "pass": true
+    },
+    {
+      "name": "tw-footer",
+      "viewport": 375,
+      "width": 375,
+      "height": 121,
+      "diffPct": 0.51,
+      "pass": true
+    },
+    {
+      "name": "tw-settings-row",
+      "viewport": 768,
+      "width": 768,
+      "height": 150,
+      "diffPct": 0.49,
+      "pass": true
+    },
+    {
+      "name": "tw-table-as-flex",
+      "viewport": 768,
+      "width": 768,
+      "height": 155,
+      "diffPct": 0.49,
+      "pass": true
+    },
+    {
+      "name": "tw-breadcrumbs",
+      "viewport": 768,
+      "width": 768,
+      "height": 44,
+      "diffPct": 0.48,
+      "pass": true
+    },
+    {
+      "name": "tw-avatar-stack-row",
+      "viewport": 375,
+      "width": 375,
+      "height": 58,
+      "diffPct": 0.48,
+      "pass": true
+    },
+    {
+      "name": "tw-pagination",
+      "viewport": 375,
+      "width": 375,
+      "height": 58,
+      "diffPct": 0.43,
+      "pass": true
+    },
+    {
+      "name": "tw-search-header",
+      "viewport": 768,
+      "width": 768,
+      "height": 61,
+      "diffPct": 0.43,
+      "pass": true
+    },
+    {
+      "name": "tw-stats-responsive-sm",
+      "viewport": 768,
+      "width": 768,
+      "height": 122,
+      "diffPct": 0.4,
+      "pass": true
+    },
+    {
+      "name": "tw-empty-state",
+      "viewport": 375,
+      "width": 375,
+      "height": 358,
+      "diffPct": 0.37,
+      "pass": true
+    },
+    {
+      "name": "tw-user-dropdown",
+      "viewport": 375,
+      "width": 375,
+      "height": 320,
+      "diffPct": 0.37,
+      "pass": true
+    },
+    {
+      "name": "tw-login-page",
+      "viewport": 375,
+      "width": 375,
+      "height": 436,
+      "diffPct": 0.36,
+      "pass": true
+    },
+    {
+      "name": "tw-kpi-cards",
+      "viewport": 1440,
+      "width": 1440,
+      "height": 170,
+      "diffPct": 0.35,
+      "pass": true
+    },
+    {
+      "name": "tw-stepper",
+      "viewport": 768,
+      "width": 768,
+      "height": 80,
+      "diffPct": 0.27,
+      "pass": true
+    },
+    {
+      "name": "tw-error-page",
+      "viewport": 375,
+      "width": 375,
+      "height": 2000,
+      "diffPct": 0.1,
+      "pass": true
+    },
+    {
+      "name": "tw-sidebar-layout",
+      "viewport": 1440,
+      "width": 1440,
+      "height": 2000,
+      "diffPct": 0.03,
+      "pass": true
+    }
+  ]
+}

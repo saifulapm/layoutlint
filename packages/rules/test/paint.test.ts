@@ -41,7 +41,8 @@ describe('paintSVG', () => {
     const svg = paint(readFileSync(new URL('../../../demo/Card.tsx', import.meta.url), 'utf8'));
     assertParses(svg);
     expect(svg).toContain('fill="#ffffff"');
-    expect(svg).toContain(`fill="${PALETTE['gray-200']}"`); // border + img placeholder
+    expect(svg).toContain(`fill="${PALETTE['gray-200']}"`); // card border
+    expect(svg).toContain(`fill="${PALETTE['gray-100']}"`); // avatar bg-gray-100
     expect(svg).toMatch(/<g fill="#000000"><path d=/); // text as outlines
     expect(svg).not.toContain('clipPath');
   });

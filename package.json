@@ -7,7 +7,9 @@
   ],
   "scripts": {
     "oracle": "bun run packages/oracle/src/generate.ts",
-    "accuracy": "bun run packages/oracle/src/compare.ts"
+    "accuracy": "bun run packages/oracle/src/compare.ts",
+    "paint-oracle": "bun run packages/oracle/src/screenshot.ts",
+    "paint-accuracy": "bun run packages/oracle/src/paint-compare.ts"
   },
   "dependencies": {
     "@layoutlint/core": "workspace:*",
@@ -16,8 +18,11 @@
   "devDependencies": {
     "@types/bun": "^1.2.0",
     "@types/fontkit": "^2.0.9",
+    "@types/pngjs": "^6.0.5",
+    "dts-bundle-generator": "^9.5.1",
+    "pixelmatch": "^7.2.0",
     "playwright": "^1.50.0",
-    "typescript": "^5.7.0",
-    "dts-bundle-generator": "^9.5.1"
+    "pngjs": "^7.0.0",
+    "typescript": "^5.7.0"
   }
 }

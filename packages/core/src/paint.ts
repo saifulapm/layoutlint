@@ -44,8 +44,6 @@ function roundedRectPath(
   );
 }
 
-const IMG_PLACEHOLDER = '#e5e7eb'; // gray-200
-
 interface Ctx {
   boxes: Map<string, Box>;
   visuals: Map<string, VisualStyle>;
@@ -68,8 +66,10 @@ function paintElement(ctx: Ctx, node: TreeNode, box: Box, v: VisualStyle): void 
   const s = node.style ?? {};
   const bw = borderWidths(s);
   const hasBorder = bw.t > 0 || bw.r > 0 || bw.b > 0 || bw.l > 0;
+  // <img> without a background class paints nothing — matching Chrome,
+  // which renders srcless images as an empty box (style imgs with bg-*)
   const { tl, tr, br, bl } = v.radius;
-  const background = v.background ?? (v.isImg ? IMG_PLACEHOLDER : undefined);
+  const background = v.background;
 
   if (hasBorder) {
     // outer rect filled border-color; inner rect (inset per side, radii reduced) filled bg
@@ -92,12 +92,18 @@ function paintElement(ctx: Ctx, node: TreeNode, box: Box, v: VisualStyle): void 
 function paintText(ctx: Ctx, node: TreeNode, box: Box, v: VisualStyle): void {
   const s = node.style ?? {};
   const text = node.text ?? '';
-  if (text.length === 0 || box.width <= 0) return;
+  // lines lay out inside the content box (border + padding insets)
+  const bw = borderWidths(s);
+  const cx = box.x + bw.l + (s.paddingLeft ?? s.padding ?? 0);
+  const cy = box.y + bw.t + (s.paddingTop ?? s.padding ?? 0);
+  const cw = box.width - bw.l - bw.r
+    - (s.paddingLeft ?? s.padding ?? 0) - (s.paddingRight ?? s.padding ?? 0);
+  if (text.length === 0 || cw <= 0) return;
   const fontSize = s.fontSize ?? 16;
   const lineHeight = s.lineHeight ?? Math.round(fontSize * 1.5);
   const weight = s.fontWeight ?? 400;
   const spacing = s.letterSpacing ?? 0;
-  const lines = breakLines(ctx.fonts, text, s, box.width);
+  const lines = breakLines(ctx.fonts, text, s, cw);
   const m = ctx.fonts.lineMetrics(fontSize, weight);
   const halfLeading = (lineHeight - (m.ascent + m.descent)) / 2;
 
@@ -105,18 +111,28 @@ function paintText(ctx: Ctx, node: TreeNode, box: Box, v: VisualStyle): void {
   lines.forEach((line, i) => {
     if (line.text.length === 0) return;
     const lineX =
-      v.textAlign === 'center' ? box.x + (box.width - line.width) / 2
-      : v.textAlign === 'right' ? box.x + box.width - line.width
-      : box.x;
-    const baselineY = box.y + i * lineHeight + halfLeading + m.ascent;
+      v.textAlign === 'center' ? cx + (cw - line.width) / 2
+      : v.textAlign === 'right' ? cx + cw - line.width
+      : cx;
+    const baselineY = cy + i * lineHeight + halfLeading + m.ascent;
     for (const run of ctx.fonts.glyphRuns(line.text, fontSize, weight, spacing)) {
       const scale = run.fontSize / run.upem;
       for (const g of run.glyphs) {
-        const glyph = run.font.getGlyph(g.glyphId);
-        const d = glyph.path.toSVG();
+        let glyph: ReturnType<typeof run.font.getGlyph> | null = null;
+        let d = '';
+        try {
+          glyph = run.font.getGlyph(g.glyphId);
+          d = glyph?.path?.toSVG() ?? ''; // CBDT/sbix glyphs have no outlines
+        } catch {
+          d = '';
+        }
+        if (glyph === null) continue;
         if (d.length > 0) {
+          // scale must keep full precision: 14px/2048upem ≈ 0.0068 — rounding
+          // it to 2dp inflates every glyph by ~46%
+          const sc = scale.toPrecision(6);
           glyphPaths.push(
-            `<path d="${d}" transform="translate(${r2(lineX + g.x)} ${r2(baselineY + g.y)}) scale(${r2(scale)} ${r2(-scale)})"/>`,
+            `<path d="${d}" transform="translate(${r2(lineX + g.x)} ${r2(baselineY + g.y)}) scale(${sc} -${sc})"/>`,
           );
           continue;
         }
@@ -149,6 +165,9 @@ function walk(ctx: Ctx, node: TreeNode, path: string): void {
   if (node.style?.display === 'none' || box.width <= 0 || box.height <= 0) return;
 
   if (node.text !== undefined) {
+    // collapsed inline elements keep their box styles on the text leaf —
+    // paint the box (bg/border) first, then the lines inside its content box
+    paintElement(ctx, node, box, v);
     paintText(ctx, node, box, v);
     return;
   }
