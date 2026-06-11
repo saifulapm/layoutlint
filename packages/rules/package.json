@@ -38,18 +38,27 @@
     "node": ">=20"
   },
   "scripts": {
-    "build": "rm -rf dist && bun build src/index.ts src/cli.ts src/mcp.ts --outdir dist --target node --splitting --external fontkit --external harfbuzzjs --external htmlparser2 --external domhandler --external yoga-layout --external zod --external '@resvg/resvg-js' --external '@modelcontextprotocol/sdk/*' && bunx dts-bundle-generator --project ../../tsconfig.json --external-inlines @layoutlint/core -o dist/index.d.ts src/index.ts",
+    "build": "rm -rf dist && bun build src/index.ts src/cli.ts src/mcp.ts --outdir dist --target node --splitting --external fontkit --external harfbuzzjs --external htmlparser2 --external domhandler --external yoga-layout --external zod --external esbuild --external '@resvg/resvg-js' --external '@modelcontextprotocol/sdk/*' && bunx dts-bundle-generator --project ../../tsconfig.json --external-inlines @layoutlint/core -o dist/index.d.ts src/index.ts",
     "prepublishOnly": "bun run build"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.21.0",
     "@resvg/resvg-js": "^2",
     "domhandler": "^6.0.1",
+    "esbuild": "^0.25.0",
     "fontkit": "^2.0.4",
     "harfbuzzjs": "^1.2.1",
     "htmlparser2": "^12.0.0",
     "yoga-layout": "^3.2.1",
     "zod": "^3.25.0"
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18"
+  },
+  "peerDependenciesMeta": {
+    "react": { "optional": true },
+    "react-dom": { "optional": true }
   },
   "devDependencies": {
     "@layoutlint/core": "workspace:*"

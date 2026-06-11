@@ -1,6 +1,6 @@
 # Accuracy scoreboard
 
-Engine (Yoga + fontkit) vs headless Chromium golden files. **297/297** cases within threshold (positions ≤1px, sizes ≤1px, text sizes ≤2px).
+Engine (Yoga + fontkit) vs headless Chromium golden files. **316/316** cases within threshold (positions ≤1px, sizes ≤1px, text sizes ≤2px).
 
 | case | vw | nodes | max Δpos | max Δsize | worst node | result |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -301,3 +301,22 @@ Engine (Yoga + fontkit) vs headless Chromium golden files. **297/297** cases wit
 | tw-user-dropdown | 375 | 8 | 0.00 | 0.00 | — | PASS |
 | tw-progress-card | 375 | 8 | 0.00 | 0.00 | — | PASS |
 | tw-bangla-mixed-feed | 375 | 6 | 0.00 | 0.00 | — | PASS |
+| react-profile-card | 375 | 13 | 0.01 | 0.01 | r.0.0.1 (Δw 0.01, Δh 0) | PASS |
+| react-button-row | 320 | 3 | 0.01 | 0.01 | r.0 (Δw 0.01, Δh 0) | PASS |
+| react-css-import | 375 | 6 | 0.00 | 0.00 | — | PASS |
+| react-css-module | 320 | 3 | 0.00 | 0.00 | — | PASS |
+| react-asset-logo | 375 | 4 | 0.00 | 0.00 | — | PASS |
+| react-multi-file | 768 | 10 | 0.00 | 0.01 | r.1 (Δw 0.01, Δh 0) | PASS |
+| react-alias-import | 320 | 7 | 0.00 | 0.00 | — | PASS |
+| react-memo-card | 375 | 3 | 0.00 | 0.00 | — | PASS |
+| react-named-exports | 375 | 3 | 0.00 | 0.00 | — | PASS |
+| react-settings-form | 375 | 12 | 0.02 | 0.01 | r.3.0 (Δw 0.01, Δh 0) | PASS |
+| react-stat-dashboard | 375 | 17 | 0.00 | 0.00 | — | PASS |
+| react-navbar-signed-in | 768 | 7 | 0.01 | 0.01 | r.1 (Δw 0.01, Δh 0) | PASS |
+| react-navbar-signed-out | 375 | 7 | 0.78 | 0.78 | r.3 (Δw 0.78, Δh 0) | PASS |
+| react-chat-list | 375 | 22 | 0.01 | 0.01 | r.0.1.0.0 (Δw 0.01, Δh 0) | PASS |
+| react-data-table | 768 | 17 | 0.01 | 0.01 | r.0.1 (Δw 0.01, Δh 0) | PASS |
+| react-context-theme | 375 | 11 | 0.01 | 0.01 | r.1.1 (Δw 0.01, Δh 0) | PASS |
+| react-banner | 320 | 3 | 0.02 | 0.02 | r.0 (Δw 0.02, Δh 0) | PASS |
+| react-footer-columns | 320 | 17 | 0.00 | 0.00 | — | PASS |
+| react-pricing-props | 375 | 11 | 0.00 | 0.00 | — | PASS |

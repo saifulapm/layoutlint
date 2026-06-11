@@ -1,0 +1,4 @@
+/* Decorative only — CSS-module imports resolve to an identity proxy. */
+.badge {
+  letter-spacing: 0;
+}

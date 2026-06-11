@@ -10,6 +10,30 @@
       "pass": true
     },
     {
+      "name": "react-banner",
+      "viewport": 320,
+      "width": 320,
+      "height": 40,
+      "diffPct": 3.14,
+      "pass": true
+    },
+    {
+      "name": "react-navbar-signed-out",
+      "viewport": 375,
+      "width": 375,
+      "height": 69,
+      "diffPct": 2.92,
+      "pass": true
+    },
+    {
+      "name": "react-css-import",
+      "viewport": 375,
+      "width": 375,
+      "height": 130,
+      "diffPct": 2.67,
+      "pass": true
+    },
+    {
       "name": "tw-badges",
       "viewport": 320,
       "width": 320,
@@ -39,6 +63,14 @@
       "width": 320,
       "height": 339,
       "diffPct": 1.9,
+      "pass": true
+    },
+    {
+      "name": "react-css-module",
+      "viewport": 320,
+      "width": 320,
+      "height": 72,
+      "diffPct": 1.8,
       "pass": true
     },
     {
@@ -90,6 +122,22 @@
       "pass": true
     },
     {
+      "name": "react-button-row",
+      "viewport": 320,
+      "width": 320,
+      "height": 66,
+      "diffPct": 1.35,
+      "pass": true
+    },
+    {
+      "name": "react-profile-card",
+      "viewport": 375,
+      "width": 375,
+      "height": 152,
+      "diffPct": 1.32,
+      "pass": true
+    },
+    {
       "name": "tw-banner-cta",
       "viewport": 768,
       "width": 768,
@@ -122,6 +170,14 @@
       "pass": true
     },
     {
+      "name": "react-named-exports",
+      "viewport": 375,
+      "width": 375,
+      "height": 109,
+      "diffPct": 1.11,
+      "pass": true
+    },
+    {
       "name": "tw-toast",
       "viewport": 375,
       "width": 375,
@@ -146,6 +202,14 @@
       "pass": true
     },
     {
+      "name": "react-chat-list",
+      "viewport": 375,
+      "width": 375,
+      "height": 195,
+      "diffPct": 1.01,
+      "pass": true
+    },
+    {
       "name": "demo-card",
       "viewport": 375,
       "width": 375,
@@ -159,6 +223,22 @@
       "width": 320,
       "height": 375,
       "diffPct": 0.99,
+      "pass": true
+    },
+    {
+      "name": "react-data-table",
+      "viewport": 768,
+      "width": 768,
+      "height": 146,
+      "diffPct": 0.99,
+      "pass": true
+    },
+    {
+      "name": "react-memo-card",
+      "viewport": 375,
+      "width": 375,
+      "height": 102,
+      "diffPct": 0.95,
       "pass": true
     },
     {
@@ -178,6 +258,14 @@
       "pass": true
     },
     {
+      "name": "react-asset-logo",
+      "viewport": 375,
+      "width": 375,
+      "height": 65,
+      "diffPct": 0.72,
+      "pass": true
+    },
+    {
       "name": "tw-cookie-banner",
       "viewport": 320,
       "width": 320,
@@ -191,6 +279,22 @@
       "width": 768,
       "height": 45,
       "diffPct": 0.67,
+      "pass": true
+    },
+    {
+      "name": "react-settings-form",
+      "viewport": 375,
+      "width": 375,
+      "height": 300,
+      "diffPct": 0.66,
+      "pass": true
+    },
+    {
+      "name": "react-stat-dashboard",
+      "viewport": 375,
+      "width": 375,
+      "height": 196,
+      "diffPct": 0.6,
       "pass": true
     },
     {
@@ -226,6 +330,14 @@
       "pass": true
     },
     {
+      "name": "react-navbar-signed-in",
+      "viewport": 768,
+      "width": 768,
+      "height": 49,
+      "diffPct": 0.51,
+      "pass": true
+    },
+    {
       "name": "tw-settings-row",
       "viewport": 768,
       "width": 768,
@@ -238,6 +350,14 @@
       "viewport": 768,
       "width": 768,
       "height": 155,
+      "diffPct": 0.49,
+      "pass": true
+    },
+    {
+      "name": "react-context-theme",
+      "viewport": 375,
+      "width": 375,
+      "height": 170,
       "diffPct": 0.49,
       "pass": true
     },
@@ -255,6 +375,22 @@
       "width": 375,
       "height": 58,
       "diffPct": 0.48,
+      "pass": true
+    },
+    {
+      "name": "react-pricing-props",
+      "viewport": 375,
+      "width": 375,
+      "height": 384,
+      "diffPct": 0.48,
+      "pass": true
+    },
+    {
+      "name": "react-alias-import",
+      "viewport": 320,
+      "width": 320,
+      "height": 200,
+      "diffPct": 0.44,
       "pass": true
     },
     {
@@ -311,6 +447,22 @@
       "width": 1440,
       "height": 170,
       "diffPct": 0.35,
+      "pass": true
+    },
+    {
+      "name": "react-multi-file",
+      "viewport": 768,
+      "width": 768,
+      "height": 110,
+      "diffPct": 0.34,
+      "pass": true
+    },
+    {
+      "name": "react-footer-columns",
+      "viewport": 320,
+      "width": 320,
+      "height": 469,
+      "diffPct": 0.34,
       "pass": true
     },
     {

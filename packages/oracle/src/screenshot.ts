@@ -11,6 +11,7 @@ import { join } from 'node:path';
 import { chromium } from 'playwright';
 import { tailwindCases } from '../../../corpora/tailwind-cases';
 import { renderTailwindCaseHtml } from './html';
+import { resolvedReactCases } from './react-html';
 
 export const SCREENSHOT_DIR = join(import.meta.dir, '../../../screenshots');
 
@@ -18,6 +19,7 @@ const demoCard = readFileSync(join(import.meta.dir, '../../../demo/Card.tsx'), '
 const allCases = [
   ...tailwindCases.map((c) => ({ name: c.name, viewport: c.viewport, html: c.html })),
   { name: 'demo-card', viewport: 375, html: demoCard },
+  ...(await resolvedReactCases()).map((c) => ({ name: c.name, viewport: c.viewport, html: c.html })),
 ];
 
 if (import.meta.main) {

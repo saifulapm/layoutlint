@@ -3,6 +3,10 @@ description: >-
   Deterministic UI layout checks for changed JSX/HTML + Tailwind components —
   overflow, overlap, viewport fit, text truncation — in milliseconds, no
   browser. Fails the job when a changed component violates a layout rule.
+  SECURITY: React component modules are EXECUTED to render them (like your
+  tests are). Trigger on pull_request from trusted branches only — never run
+  this action against fork code via pull_request_target — or set
+  execute: 'false' for a static parse.
 branding:
   icon: layout
   color: purple
@@ -28,6 +32,12 @@ inputs:
   version:
     description: layoutlint version to install from npm.
     default: 'latest'
+  execute:
+    description: >-
+      Execute React component modules (.tsx/.jsx with import/export) via the
+      project's react-dom to get real markup. Set 'false' to force a static
+      parse (e.g. if this job can see untrusted code).
+    default: 'true'
 
 runs:
   using: composite
@@ -42,6 +52,7 @@ runs:
         FILES_RE: ${{ inputs.files }}
         VIEWPORTS: ${{ inputs.viewports }}
         RULES: ${{ inputs.rules }}
+        EXECUTE: ${{ inputs.execute }}
         BASE: ${{ inputs.base != '' && inputs.base || github.event.pull_request.base.sha || '' }}
       run: |
         set -euo pipefail
@@ -62,5 +73,6 @@ runs:
         echo "layoutlint: checking $(printf '%s\n' "$files" | wc -l | tr -d ' ') file(s)"
         args=(--viewports "$VIEWPORTS")
         [ -n "$RULES" ] && args+=(--rules "$RULES")
+        [ "$EXECUTE" != "true" ] && args+=(--no-execute)
         # shellcheck disable=SC2086
         printf '%s\n' "$files" | xargs layoutlint check "${args[@]}"

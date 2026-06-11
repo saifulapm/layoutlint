@@ -1,0 +1,26 @@
+{
+  "name": "react-banner",
+  "viewport": 320,
+  "chromium": "148.0.7778.96",
+  "generatedAt": "2026-06-11T23:02:54.305Z",
+  "rects": {
+    "r": {
+      "x": 0,
+      "y": 0,
+      "width": 320,
+      "height": 40
+    },
+    "r.0": {
+      "x": 16,
+      "y": 10,
+      "width": 215.23,
+      "height": 20
+    },
+    "r.1": {
+      "x": 243.23,
+      "y": 8,
+      "width": 60.77,
+      "height": 24
+    }
+  }
+}

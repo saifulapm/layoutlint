@@ -9,7 +9,7 @@
  */
 import { readFileSync, writeFileSync } from 'node:fs';
 import { parseArgs } from 'node:util';
-import { check, render, ALL_RULES, DEFAULT_VIEWPORTS, type RuleName } from './index';
+import { check, componentToHtml, isComponentModule, render, ALL_RULES, DEFAULT_VIEWPORTS, type RuleName } from './index';
 
 const HELP = `layoutlint — deterministic UI layout checks and screenshots, no browser
 
@@ -29,7 +29,14 @@ Render options:
 
 Common:
   --viewport-height <px>    height for h-screen/vh units (default 800)
+  --props <json>            props for a React component file (JSON object)
+  --component <name>        named export to render (default: default export)
+  --no-execute              never execute component modules; static parse only
   --help                    show this help
+
+React component files (.tsx/.jsx with import/export) are executed via your
+project's react-dom (renderToStaticMarkup) — hooks and className logic
+evaluate; effects don't run. NOTE: this runs the file's code.
 `;
 
 const { values, positionals } = parseArgs({
@@ -42,6 +49,9 @@ const { values, positionals } = parseArgs({
     rules: { type: 'string' },
     json: { type: 'boolean', default: false },
     out: { type: 'string', short: 'o' },
+    props: { type: 'string' },
+    component: { type: 'string' },
+    'no-execute': { type: 'boolean', default: false },
     help: { type: 'boolean', default: false },
   },
 });
@@ -54,15 +64,41 @@ if (values.help || (command !== 'check' && command !== 'render') || positionals.
 
 const viewportHeight = values['viewport-height'] ? parseInt(values['viewport-height'], 10) : undefined;
 
-if (command === 'render') {
-  const file = positionals[1];
-  let source: string;
+let props: Record<string, unknown> | undefined;
+if (values.props !== undefined) {
   try {
-    source = readFileSync(file, 'utf8');
+    props = JSON.parse(values.props);
+  } catch {
+    console.error(`--props is not valid JSON: ${values.props}`);
+    process.exit(2);
+  }
+  if (props === null || typeof props !== 'object' || Array.isArray(props)) {
+    console.error(`--props must be a JSON object, got: ${values.props}`);
+    process.exit(2);
+  }
+}
+
+/** File contents — executed via the user's React when it's a component module. */
+async function loadSource(file: string): Promise<string> {
+  let raw: string;
+  try {
+    raw = readFileSync(file, 'utf8');
   } catch {
     console.error(`cannot read ${file}`);
     process.exit(2);
   }
+  if (values['no-execute'] || !isComponentModule(file, raw)) return raw;
+  try {
+    return await componentToHtml(file, { props, component: values.component });
+  } catch (e) {
+    console.error(`${file}: ${(e as Error).message}`);
+    process.exit(2);
+  }
+}
+
+if (command === 'render') {
+  const file = positionals[1];
+  const source = await loadSource(file);
   const viewport = values.viewport ? parseInt(values.viewport, 10) : undefined;
   if (values.viewport && (!Number.isFinite(viewport) || viewport! <= 0)) {
     console.error(`invalid viewport: ${values.viewport}`);
@@ -117,14 +153,7 @@ let anyFail = false;
 const jsonOut: Record<string, unknown>[] = [];
 
 for (const file of positionals.slice(1)) {
-  let source: string;
-  try {
-    source = readFileSync(file, 'utf8');
-  } catch {
-    console.error(`cannot read ${file}`);
-    process.exit(2);
-  }
-
+  const source = await loadSource(file);
   const report = await check(source, { viewports, rules, viewportHeight });
   if (!report.pass) anyFail = true;
 

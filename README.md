@@ -10,7 +10,7 @@ shaper as Chrome, real font metrics — instead of launching a browser. Then
 it either **asserts** (overflow, overlap, viewport fit, truncation) or
 **paints** what it computed.
 
-Verified, not approximate: **297/297 layout cases match headless Chromium
+Verified, not approximate: **316/316 layout cases match headless Chromium
 within 1px** (most at 0.00px), and every render is **pixel-diffed against a
 Chromium screenshot**, gated in CI on every push.
 
@@ -48,6 +48,35 @@ That image came from the engine, not Chrome: real Tailwind v4 colors
 that measured it, borders, radii, clipping. The SVG is self-contained —
 renders identically anywhere, no fonts needed.
 
+## React components
+
+A `.tsx`/`.jsx` file with imports/exports is **executed**, not just parsed:
+your project's own React renders it (`renderToStaticMarkup`), so hooks,
+context, conditional classNames, and multi-file imports all resolve before
+the layout check.
+
+```sh
+npx @saifulapm/layoutlint check Navbar.tsx --props '{"signedIn":true}'
+npx @saifulapm/layoutlint render Sections.tsx --component Footer -o footer.png
+```
+
+- needs `react` + `react-dom` installed in *your* project (optional peers —
+  layoutlint never ships its own copy, so hooks always work)
+- TSX/TS transpile, tsconfig `paths`, CSS / CSS-module / asset imports are
+  handled (stylesheets are stubbed — layout comes from Tailwind classes)
+- `--component <Name>` picks a named export; the default export otherwise
+- out of scope in v1: RSC, suspense/data fetching; effects never run
+  (`renderToStaticMarkup` semantics)
+- `--no-execute` forces a static parse without running anything
+
+> **Security:** checking a component file executes that file's module graph,
+> top-level code included — treat it like running the project's tests. In
+> CI, never run it on untrusted code: trigger on `pull_request` from trusted
+> branches, never `pull_request_target` against fork code.
+
+19 real React components (forms, context, `useState`, multi-file imports)
+sit in the corpus and pass the same Chromium gates as everything else.
+
 ## For agents
 
 ```jsonc
@@ -69,7 +98,8 @@ const { png } = await render(source, { viewport: 375, format: 'png' });
 
 ## Scope, honestly
 
-Flexbox + Tailwind v4, static JSX/HTML. CSS Grid approximates as a column
+Flexbox + Tailwind v4; JSX/HTML fragments or executed React components
+(client-rendered, no RSC). CSS Grid approximates as a column
 (warned). Shadows/gradients/opacity aren't painted yet. Not a browser
 replacement for E2E — a deterministic bug-catcher and renderer for the
 edit-check-fix loop, with documented
@@ -77,7 +107,8 @@ edit-check-fix loop, with documented
 
 ## How it's validated
 
-A 297-case corpus (hand-written + real Tailwind markup + seeded fuzzing) is
+A 316-case corpus (hand-written + real Tailwind markup + seeded fuzzing +
+executed React components) is
 rendered in pinned headless Chromium; the engine must match every
 `getBoundingClientRect` within 1px and every screenshot within a documented
 pixel-diff budget — on every push. Scoreboards:

@@ -143,6 +143,19 @@ export function computeLayout(tree: TreeNode, viewportWidth: number, fonts: Font
 
   const root = build(tree, 'r');
   if (!root) return [{ path: 'r', name: tree.name, isText: false, x: 0, y: 0, width: 0, height: 0 }];
+
+  // CSS: a block-level root stretches to the viewport and max-width then
+  // clamps; Yoga's top-level AT_MOST measure shrinks it to fit instead. Pin
+  // the stretched-then-clamped width. Auto margins absorb leftover space, so
+  // they don't reduce the available width (mx-auto centering still works).
+  const rootStyle = tree.style ?? {};
+  if (rootStyle.width === undefined && typeof rootStyle.maxWidth === 'number') {
+    const side = (v: number | 'auto' | undefined): number =>
+      typeof v === 'number' ? v : v === 'auto' ? 0 : (rootStyle.margin ?? 0);
+    const available = viewportWidth - side(rootStyle.marginLeft) - side(rootStyle.marginRight);
+    root.setWidth(Math.min(rootStyle.maxWidth, available));
+  }
+
   root.calculateLayout(viewportWidth, undefined, Yoga.DIRECTION_LTR);
 
   // §9.7 corrective passes: Yoga resolves flexible lengths in a single pass;

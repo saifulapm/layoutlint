@@ -11,6 +11,7 @@ import { cases } from '../../../corpora/cases';
 import { generatedCases } from '../../../corpora/generated';
 import { tailwindCases } from '../../../corpora/tailwind-cases';
 import { renderCaseHtml, renderTailwindCaseHtml } from './html';
+import { resolvedReactCases } from './react-html';
 import { GOLDEN_DIR, ORACLE_VIEWPORT_HEIGHT, type GoldenFile, type GoldenRect } from './golden';
 
 const round = (n: number) => Math.round(n * 100) / 100;
@@ -29,6 +30,7 @@ const allCases = [
   ...cases.map((c) => ({ name: c.name, viewport: c.viewport, html: renderCaseHtml(c) })),
   ...generatedCases.map((c) => ({ name: c.name, viewport: c.viewport, html: renderCaseHtml(c) })),
   ...tailwindCases.map((c) => ({ name: c.name, viewport: c.viewport, html: renderTailwindCaseHtml(c.html) })),
+  ...(await resolvedReactCases()).map((c) => ({ name: c.name, viewport: c.viewport, html: renderTailwindCaseHtml(c.html) })),
 ];
 
 for (const c of allCases) {

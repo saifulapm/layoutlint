@@ -14,6 +14,7 @@ import { cases } from '../../../corpora/cases';
 import { generatedCases } from '../../../corpora/generated';
 import { tailwindCases } from '../../../corpora/tailwind-cases';
 import { ACCURACY_DIR, GOLDEN_DIR, ORACLE_VIEWPORT_HEIGHT, type GoldenFile } from './golden';
+import { resolvedReactCases } from './react-html';
 import { FONTS_DIR, VENDOR_EMOJI } from './html';
 
 const POS_THRESHOLD = 1;
@@ -57,6 +58,11 @@ const allCases: { name: string; viewport: number; tree: TreeNode }[] = [
   ...cases,
   ...generatedCases,
   ...tailwindCases.map((c) => ({
+    name: c.name,
+    viewport: c.viewport,
+    tree: resolveTree(parseSource(c.html), { viewport: c.viewport, viewportHeight: ORACLE_VIEWPORT_HEIGHT }).tree,
+  })),
+  ...(await resolvedReactCases()).map((c) => ({
     name: c.name,
     viewport: c.viewport,
     tree: resolveTree(parseSource(c.html), { viewport: c.viewport, viewportHeight: ORACLE_VIEWPORT_HEIGHT }).tree,
