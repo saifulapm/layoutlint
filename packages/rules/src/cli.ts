@@ -72,6 +72,10 @@ if (values.props !== undefined) {
     console.error(`--props is not valid JSON: ${values.props}`);
     process.exit(2);
   }
+  if (props === null || typeof props !== 'object' || Array.isArray(props)) {
+    console.error(`--props must be a JSON object, got: ${values.props}`);
+    process.exit(2);
+  }
 }
 
 /** File contents — executed via the user's React when it's a component module. */
