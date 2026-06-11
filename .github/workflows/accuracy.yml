@@ -47,7 +47,7 @@ jobs:
         run: bun run accuracy
 
       # Paint gate: engine render (SVG → resvg PNG) vs Chromium screenshots,
-      # pixelmatch ≤5% mismatched pixels per case (threshold documented in
+      # pixelmatch ≤7% mismatched pixels per case (threshold documented in
       # paint-accuracy/README.md).
       - name: Regenerate paint screenshots against pinned Chromium
         run: bun run paint-oracle

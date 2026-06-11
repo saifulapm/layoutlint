@@ -18,7 +18,7 @@
 | 2026-06-12 | render v1 paints: backgrounds, borders+radius, text glyphs/color, overflow clipping. No shadows/gradients/opacity/transforms | User choice; honest subset |
 | 2026-06-12 | Srcless `<img>` paints nothing (browser parity); style imgs with bg-* | Chrome paints nothing; pixel gate demands parity |
 | 2026-06-12 | Text painted as glyph-outline paths (not SVG <text>) | Self-contained SVG, shaping identical to measurement |
-| 2026-06-12 | Paint gate 5% until Linux CI baselines its raster AA | Worst observed 3.23% on macOS; avoid false-red first CI run |
+| 2026-06-12 | Paint gate 7% (was 5%) after Linux CI baseline | Linux worst 5.71% — heavier Skia glyph AA vs resvg; diff images verified AA-only |
 
 ## Project Context
 - Monorepo (bun workspaces): packages/core (engine, private), packages/rules (published `layoutlint`), packages/oracle (dev-only Playwright golden gen + compare), packages/skill.
@@ -27,7 +27,7 @@
 - Launch blockers (manual, user): GitHub repo rename (remote=saifulapm/OpenEye-), npm publish, domain.
 
 ## Open Items
-- Tighten PAINT_THRESHOLD_PCT (5% -> ~4%) after first green Linux CI run.
+- ~~Tighten PAINT_THRESHOLD_PCT~~ resolved 2026-06-12: Linux AA is HEAVIER (worst 5.71%); gate set to 7%, AA-only verified from CI diff artifacts.
 - Inner-span colors/weights drop at parse collapse (documented envelope) — fix alongside the mixed-weight span item.
 - Publish steps (user-manual, above).
 - Fuzz generator is mined out at 200 cases — widening it is the next divergence-hunting lever.

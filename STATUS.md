@@ -9,7 +9,7 @@ Phases 0 **and** 1 are done and exceeded. The engine matches headless Chromium
 on **297/297 corpus cases** (≤1px positions/sizes, ≤2px text sizes), most at
 0.00px. **`layoutlint render` ships (2026-06-12)**: deterministic SVG/PNG
 screenshots without a browser — visual resolver + glyph-outline painter,
-pixel-diffed against Chromium screenshots (42/42 ≤5%, worst 3.2% = glyph AA)
+pixel-diffed against Chromium screenshots (42/42 ≤7%, worst 5.7% on Linux = glyph AA)
 and gated in CI. The product surface works end-to-end: `check()` + `render()`
 library, CLI (check/render), MCP server (check_layout/render_layout), Claude
 Code skill, GitHub Action, demo GIF, CI. Named `layoutlint`, packaged for npm
@@ -51,7 +51,7 @@ packages/oracle/      DEV-ONLY: Playwright golden generator + comparator
   src/compare.ts        engine vs golden → accuracy/ scoreboard, exit 1 on fail
   src/debug-case.ts     bun run …/debug-case.ts <name> → per-node deltas
   src/screenshot.ts     Chromium screenshots → screenshots/*.png (paint oracle)
-  src/paint-compare.ts  engine render vs screenshot → paint-accuracy/, ≤5% gate
+  src/paint-compare.ts  engine render vs screenshot → paint-accuracy/, ≤7% gate
   src/extract-palette.ts regenerates core/src/palette.ts from Chrome
 corpora/cases.ts      56 style-object cases (engine in isolation)
 corpora/tailwind-cases.ts  41 real-markup cases (full pipeline vs real

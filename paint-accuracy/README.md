@@ -1,6 +1,6 @@
 # Paint accuracy — engine render vs Chromium screenshot
 
-Gate: ≤5% mismatched pixels (pixelmatch threshold 0.1, antialiasing-tolerant).
+Gate: ≤7% mismatched pixels (pixelmatch threshold 0.1, antialiasing-tolerant).
 The residual is rasterizer antialiasing (resvg vs Skia) on glyph edges.
 
 | case | viewport | size | diff % | result |

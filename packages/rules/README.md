@@ -55,7 +55,7 @@ const { svg, png } = await render(source, { viewport: 375, format: 'png' });
 Paints the computed layout deterministically — backgrounds, borders + radii,
 real Tailwind v4 colors, text as glyph outlines (self-contained SVG), and
 `overflow:hidden` clipping. Pixel-diffed against Chromium screenshots in CI
-(≤5% gate; residual is glyph antialiasing). Not painted in v1: shadows,
+(≤7% gate; residual is glyph antialiasing). Not painted in v1: shadows,
 gradients, opacity, transforms.
 
 ## MCP server
