@@ -46,7 +46,7 @@ including the vendored Noto Color Emoji — is embedded as an `@font-face`
 data URI (per page, only when the case content needs it), so macOS and Linux
 regenerate identical rects (verified ≤0.03px).
 
-## The corpus (297 layout cases, 42 paint cases)
+## The corpus (316 layout cases, 61 paint cases)
 
 - **56 style-object cases** exercise the engine in isolation: nested
   rows/columns, every justify/align value, wrap variants + align-content,
@@ -57,12 +57,20 @@ regenerate identical rects (verified ≤0.03px).
 - **41 Tailwind cases** (cards, navbars, heroes, forms, modals, chat
   bubbles, dashboards, Bangla content, …) run the full pipeline — parser →
   resolver → Yoga — against headless Chromium executing the real, vendored
-  Tailwind v4 browser build. These 41 (+ the demo card) are also the paint
-  corpus, pixel-diffed against Chromium screenshots.
+  Tailwind v4 browser build. These 41 (+ the demo card and the 19 React
+  cases) are also the paint corpus, pixel-diffed against Chromium
+  screenshots.
 - **200 seeded fuzz cases** ([corpora/generated.ts](../corpora/generated.ts)):
   deterministic pseudo-random trees mixing every supported feature. The
   fuzzer found six divergence classes the curated corpus missed; all fixed.
   Widening the generator is the cheapest way to hunt the next one.
+- **19 React component cases** ([corpora/react/](../corpora/react/)): real
+  `.tsx` modules — props, hooks, context, CSS/asset imports, tsconfig
+  aliases, memo/named exports — executed at oracle time through the
+  **product loader** (`componentToHtml`), then through the same Tailwind
+  golden + paint pipeline. They validate loader + engine end-to-end and
+  already caught two real bugs (React 19's hoisted `<link rel="preload">`;
+  root `max-width` stretch-then-clamp).
 
 ## Engine notes (hard-won parity lessons)
 
@@ -113,9 +121,16 @@ regenerate identical rects (verified ≤0.03px).
 
 ## Scope notes (parser + resolver)
 
-- Input is **static** JSX/HTML — expressions, props, and conditionals are
-  not evaluated (React component support via react-test-renderer is
-  planned).
+- Raw fragments are parsed **statically** — expressions in pasted JSX are
+  not evaluated. Component **modules** (`.tsx`/`.jsx` with import/export)
+  are executed instead: esbuild bundles the file (TSX, tsconfig `paths`;
+  bare imports stay external; stylesheets/assets stubbed by a plugin), the
+  bundle is imported as a temp `.mjs` **next to the source file** so
+  `react`/`react-dom` resolve from the user's project (a second React copy
+  would break hooks via dispatcher mismatch), and the user's
+  `renderToStaticMarkup` produces the HTML the parser sees. Effects never
+  run; RSC/suspense are out of scope. Metadata tags (`link`, `script`,
+  `style`, …) generate no box — including React 19's hoisted preload links.
 - `grid` resolves as a flex column with a warning; Taffy-backed grid is the
   planned fix. `order-*`, `line-clamp-*`, `w-fit/min/max`, and `max-w-prose`
   warn and are skipped.

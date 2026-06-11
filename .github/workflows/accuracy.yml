@@ -23,17 +23,24 @@ jobs:
         run: npx playwright install chromium --with-deps
 
       - name: Typecheck
-        run: npx tsc --noEmit
+        run: |
+          npx tsc --noEmit
+          npx tsc --noEmit -p corpora/react/tsconfig.json
 
       - name: Unit tests (rules, resolver, check API)
         run: bun test
 
-      # The published package must run under plain Node (no Bun).
+      # The published package must run under plain Node (no Bun) — including
+      # React component execution (esbuild TSX transpile + user-react render).
       - name: Build npm package + smoke-test CLI under Node
         run: |
           cd packages/rules && bun run build
           printf '<div className="flex gap-2 p-4"><span className="text-sm">ok</span></div>' > /tmp/smoke.tsx
           node dist/cli.js check /tmp/smoke.tsx
+          cd ../..
+          node packages/rules/dist/cli.js check corpora/react/navbar-auth.tsx --props '{"signedIn":true,"userName":"CI Smoke"}' --viewports 375,768 --json > /tmp/react-check.json
+          node packages/rules/dist/cli.js render corpora/react/profile-card.tsx --props '{"name":"CI Smoke","tags":["node"]}' -o /tmp/react-smoke.png
+          test -s /tmp/react-smoke.png
 
       - name: Regenerate golden files against pinned Chromium
         run: bun run oracle
