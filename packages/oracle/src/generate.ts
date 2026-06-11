@@ -18,8 +18,15 @@ const round = (n: number) => Math.round(n * 100) / 100;
 // Without this flag, headless Linux Chromium grid-fits glyph advances to
 // whole pixels (FreeType full hinting), diverging from both fontkit's linear
 // metrics and from Chrome on macOS/Windows, which use subpixel positioning.
-const browser = await chromium.launch({ args: ['--font-render-hinting=none'] });
+const LAUNCH_ARGS = ['--font-render-hinting=none'];
+
+// Chromium's memory grows across hundreds of setContent pages and has
+// OOM-killed CI runners mid-run — relaunch every N cases to bound it.
+const RELAUNCH_EVERY = 50;
+
+let browser = await chromium.launch({ args: LAUNCH_ARGS });
 const version = browser.version();
+let pagesServed = 0;
 mkdirSync(GOLDEN_DIR, { recursive: true });
 
 const allCases = [
@@ -29,6 +36,11 @@ const allCases = [
 ];
 
 for (const c of allCases) {
+  if (pagesServed > 0 && pagesServed % RELAUNCH_EVERY === 0) {
+    await browser.close();
+    browser = await chromium.launch({ args: LAUNCH_ARGS });
+  }
+  pagesServed++;
   const page = await browser.newPage({
     viewport: { width: c.viewport, height: ORACLE_VIEWPORT_HEIGHT },
     deviceScaleFactor: 1,
