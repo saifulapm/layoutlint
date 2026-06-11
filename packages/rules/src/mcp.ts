@@ -7,7 +7,7 @@ import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 import { z } from 'zod';
 import { readFileSync } from 'node:fs';
-import { check, render, ALL_RULES, DEFAULT_VIEWPORTS, type RuleName } from './index';
+import { check, componentToHtml, isComponentModule, render, ALL_RULES, DEFAULT_VIEWPORTS, type RuleName } from './index';
 
 const server = new McpServer({ name: 'layoutlint', version: '0.0.0' });
 
@@ -16,7 +16,14 @@ const inputSchema: z.ZodRawShape = {
     .string()
     .optional()
     .describe('JSX/HTML source with Tailwind classes. Provide either source or file.'),
-  file: z.string().optional().describe('Path to a component file to check.'),
+  file: z.string().optional().describe(
+    'Path to a component file to check. React component modules (.tsx/.jsx with ' +
+    'import/export) are executed via the project\'s react-dom (renderToStaticMarkup) — ' +
+    'hooks and className logic evaluate. NOTE: this runs the file\'s code.',
+  ),
+  props: z.record(z.unknown()).optional().describe('Props for a React component file (JSON object).'),
+  component: z.string().optional().describe('Named export to render (default: the default export).'),
+  execute: z.boolean().optional().describe('Set false to force a static parse (never execute component modules).'),
   viewports: z
     .array(z.number().int().positive())
     .optional()
@@ -36,6 +43,28 @@ type ToolContent =
   | { type: 'text'; text: string }
   | { type: 'image'; mimeType: string; data: string };
 type ToolResult = { content: ToolContent[]; isError?: boolean };
+
+interface SourceArgs {
+  source?: string;
+  file?: string;
+  props?: Record<string, unknown>;
+  component?: string;
+  execute?: boolean;
+}
+
+/** Source markup; component-module files are executed unless execute === false. */
+async function resolveSource(args: SourceArgs): Promise<string | undefined> {
+  if (args.source !== undefined) return args.source;
+  if (args.file === undefined) return undefined;
+  const raw = readFileSync(args.file, 'utf8');
+  if (args.execute === false || !isComponentModule(args.file, raw)) return raw;
+  return componentToHtml(args.file, { props: args.props, component: args.component });
+}
+
+const errorResult = (e: unknown): ToolResult => ({
+  content: [{ type: 'text', text: `error: ${(e as Error).message}` }],
+  isError: true,
+});
 const registerTool = server.registerTool.bind(server) as (
   name: string,
   config: { title?: string; description?: string; inputSchema?: z.ZodRawShape },
@@ -55,14 +84,17 @@ registerTool(
     inputSchema,
   },
   async (rawArgs) => {
-    const args = rawArgs as {
-      source?: string;
-      file?: string;
+    const args = rawArgs as SourceArgs & {
       viewports?: number[];
       viewportHeight?: number;
       rules?: string[];
     };
-    const source = args.source ?? (args.file ? readFileSync(args.file, 'utf8') : undefined);
+    let source: string | undefined;
+    try {
+      source = await resolveSource(args);
+    } catch (e) {
+      return errorResult(e);
+    }
     if (!source) {
       return {
         content: [{ type: 'text' as const, text: 'error: provide either `source` or `file`' }],
@@ -99,14 +131,22 @@ registerTool(
     inputSchema: {
       source: inputSchema.source,
       file: inputSchema.file,
+      props: inputSchema.props,
+      component: inputSchema.component,
+      execute: inputSchema.execute,
       viewport: z.number().int().positive().optional()
         .describe('Viewport width in px (default 375).'),
       viewportHeight: inputSchema.viewportHeight,
     },
   },
   async (rawArgs) => {
-    const args = rawArgs as { source?: string; file?: string; viewport?: number; viewportHeight?: number };
-    const source = args.source ?? (args.file ? readFileSync(args.file, 'utf8') : undefined);
+    const args = rawArgs as SourceArgs & { viewport?: number; viewportHeight?: number };
+    let source: string | undefined;
+    try {
+      source = await resolveSource(args);
+    } catch (e) {
+      return errorResult(e);
+    }
     if (!source) {
       return {
         content: [{ type: 'text' as const, text: 'error: provide either `source` or `file`' }],
