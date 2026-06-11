@@ -15,14 +15,19 @@
 | 2026-06-11 | Goldens made platform-independent (hermetic @font-face incl. vendored NotoColorEmoji) | macOS dev loop; proven ≤0.03px vs Linux set |
 | 2026-06-12 | render v1: SVG always + PNG via @resvg/resvg-js dependency | User choice; PNG is the agent/vision use case |
 | 2026-06-12 | render validated by pixel-diff vs Chromium screenshots, gated in CI | User choice; extends the accuracy brand to paint |
-| 2026-06-12 | render v1 paints: backgrounds, borders+radius, text glyphs/color, img placeholders. No shadows/gradients/opacity/transforms | User choice; honest subset |
+| 2026-06-12 | render v1 paints: backgrounds, borders+radius, text glyphs/color, overflow clipping. No shadows/gradients/opacity/transforms | User choice; honest subset |
+| 2026-06-12 | Srcless `<img>` paints nothing (browser parity); style imgs with bg-* | Chrome paints nothing; pixel gate demands parity |
+| 2026-06-12 | Text painted as glyph-outline paths (not SVG <text>) | Self-contained SVG, shaping identical to measurement |
+| 2026-06-12 | Paint gate 5% until Linux CI baselines its raster AA | Worst observed 3.23% on macOS; avoid false-red first CI run |
 
 ## Project Context
 - Monorepo (bun workspaces): packages/core (engine, private), packages/rules (published `layoutlint`), packages/oracle (dev-only Playwright golden gen + compare), packages/skill.
-- Accuracy state: 297/297 corpus cases within threshold (56 style-object, 41 Tailwind, 200 fuzz).
+- Accuracy state: 297/297 geometry (56 style-object, 41 Tailwind, 200 fuzz); paint 42/42 <=5% vs Chromium screenshots.
 - READ README "Engine notes" before touching layout code — hard-won parity lessons live there.
 - Launch blockers (manual, user): GitHub repo rename (remote=saifulapm/OpenEye-), npm publish, domain.
 
 ## Open Items
+- Tighten PAINT_THRESHOLD_PCT (5% -> ~4%) after first green Linux CI run.
+- Inner-span colors/weights drop at parse collapse (documented envelope) — fix alongside the mixed-weight span item.
 - Publish steps (user-manual, above).
 - Fuzz generator is mined out at 200 cases — widening it is the next divergence-hunting lever.
