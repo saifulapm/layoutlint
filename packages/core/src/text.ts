@@ -36,34 +36,32 @@ export function measureText(
 
   const segments = [...segmenter.segment(text)].map((s) => s.segment);
 
-  const lineWidths: number[] = [];
-  let lineWidth = 0; // includes trailing spaces
-  let lineTrimmedWidth = 0; // excludes trailing spaces — what determines the box
-  let lineHasContent = false;
+  // Each line is shaped as a whole (cumulatively per candidate segment),
+  // not as a sum of independently-shaped words — kerning and contextual
+  // alternates can span word boundaries (e.g. Inter shapes "2.1" differently
+  // alone than mid-string), and browsers shape per line.
+  const measureLine = (s: string) => measure(s.replace(/\s+$/, ''));
 
-  const pushLine = () => {
-    lineWidths.push(lineTrimmedWidth);
-    lineWidth = 0;
-    lineTrimmedWidth = 0;
-    lineHasContent = false;
-  };
+  const lineWidths: number[] = [];
+  let line = '';
 
   for (const seg of segments) {
-    const isSpace = /^\s+$/.test(seg);
-    const w = measure(seg);
-    if (isSpace) {
+    if (/^\s+$/.test(seg)) {
       // trailing whitespace never forces a break; it hangs past the edge
-      lineWidth += w;
+      if (line.length > 0) line += seg;
       continue;
     }
-    if (lineHasContent && lineWidth + w > maxWidth + EPSILON) {
-      pushLine();
+    const candidate = line + seg;
+    if (line.replace(/\s+$/, '').length > 0 && measureLine(candidate) > maxWidth + EPSILON) {
+      lineWidths.push(measureLine(line));
+      line = seg;
+    } else {
+      line = candidate;
     }
-    lineWidth += w;
-    lineTrimmedWidth = lineWidth;
-    lineHasContent = true;
   }
-  if (lineHasContent || lineWidths.length === 0) pushLine();
+  if (line.replace(/\s+$/, '').length > 0 || lineWidths.length === 0) {
+    lineWidths.push(measureLine(line));
+  }
 
   return {
     width: Math.max(...lineWidths),

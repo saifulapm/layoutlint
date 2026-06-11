@@ -1,0 +1,26 @@
+{
+  "name": "truncate-text-next-to-fixed",
+  "viewport": 320,
+  "chromium": "148.0.7778.96",
+  "generatedAt": "2026-06-11T10:20:01.263Z",
+  "rects": {
+    "r": {
+      "x": 0,
+      "y": 0,
+      "width": 320,
+      "height": 40
+    },
+    "r.0": {
+      "x": 8,
+      "y": 8,
+      "width": 96.05,
+      "height": 24
+    },
+    "r.1": {
+      "x": 112.05,
+      "y": 8,
+      "width": 199.95,
+      "height": 24
+    }
+  }
+}

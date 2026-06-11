@@ -1,5 +1,6 @@
 import { parseDocument } from 'htmlparser2';
 import { Element, Text, type AnyNode } from 'domhandler';
+import { classAffectsLayout } from './tailwind';
 import type { TreeNode } from './types';
 
 /**
@@ -19,9 +20,14 @@ function isWhitespaceText(n: AnyNode): boolean {
 function isInlineSubtree(n: AnyNode): boolean {
   if (n instanceof Text) return true;
   if (n instanceof Element) {
-    // a classed inline element is its own box (flex item / styled badge) —
-    // only unstyled inline markup collapses into the parent's text
-    return INLINE_TAGS.has(n.name) && classList(n).length === 0 && n.children.every(isInlineSubtree);
+    // an inline element with geometry-affecting classes (padding, size,
+    // display…) is its own box (flex item / styled badge); color- and
+    // weight-only inline markup collapses into the parent's text
+    return (
+      INLINE_TAGS.has(n.name) &&
+      !classList(n).some(classAffectsLayout) &&
+      n.children.every(isInlineSubtree)
+    );
   }
   return true; // comments etc. don't break inline-ness
 }
@@ -37,11 +43,18 @@ function classList(el: Element): string[] {
   return raw.split(/\s+/).filter(Boolean);
 }
 
+/** Children of a flex/grid container are blockified into items — never inline. */
+function isFlexLikeContainer(el: Element): boolean {
+  return classList(el).some((c) =>
+    ['flex', 'inline-flex', 'grid', 'inline-grid'].includes(c.split(':').pop()!),
+  );
+}
+
 function convert(el: Element): TreeNode {
   const node: TreeNode = { tag: el.name, classes: classList(el) };
   const meaningful = el.children.filter((c) => !isWhitespaceText(c));
 
-  if (meaningful.length > 0 && meaningful.every(isInlineSubtree)) {
+  if (!isFlexLikeContainer(el) && meaningful.length > 0 && meaningful.every(isInlineSubtree)) {
     // collapse whitespace the way `white-space: normal` does
     const text = el.children.map(textContent).join('').replace(/\s+/g, ' ').trim();
     if (text.length > 0) {

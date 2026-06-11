@@ -384,6 +384,29 @@ function applyBorderEdges(s: Style, edge: string, v: number): void {
   }
 }
 
+/**
+ * Whether a class changes box geometry. Used by the parser to decide if an
+ * inline element must stay its own box: color/decoration classes (and plain
+ * font-weight, which only nudges text metrics) collapse into the parent's
+ * text run; padding/size/display classes make the span a real box.
+ */
+export function classAffectsLayout(cls: string): boolean {
+  const base = cls.split(':').pop()!;
+  if (FONT_WEIGHTS[base.replace(/^font-/, '')] !== undefined) return false;
+  const r: ClassResolution = { style: {}, warnings: [] };
+  applyClass(base, r, { viewport: 1024, viewportHeight: 800 });
+  return (
+    Object.keys(r.style).length > 0 ||
+    r.textSize !== undefined ||
+    r.leadingFactor !== undefined ||
+    r.leadingPx !== undefined ||
+    r.trackingEm !== undefined ||
+    r.spaceX !== undefined ||
+    r.spaceY !== undefined ||
+    r.isFlex === true
+  );
+}
+
 /** Split variant prefixes; returns null if the class doesn't apply (state variants, inactive breakpoints). */
 function activeClass(cls: string, viewport: number): string | null {
   const parts = cls.split(':');

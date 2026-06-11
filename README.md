@@ -49,44 +49,43 @@ A 4-viewport check on a typical component runs in ~30ms, no browser involved.
 ## Accuracy scoreboard
 
 Engine vs Chromium `getBoundingClientRect`, thresholds: positions ≤1px,
-sizes ≤1px (text sizes ≤2px). **62/65 corpus cases within threshold**, the
-overwhelming majority at a flat **0.00px delta** (full per-case table in
-[accuracy/README.md](./accuracy/README.md)).
+sizes ≤1px (text sizes ≤2px). **97/97 corpus cases within threshold** —
+the overwhelming majority at a flat **0.00px delta** (full per-case table
+in [accuracy/README.md](./accuracy/README.md), regenerated in CI on every
+push).
 
-- 50 style-object cases exercise the layout engine in isolation: nested
+- 56 style-object cases exercise the layout engine in isolation: nested
   rows/columns, every justify/align value, wrap variants + align-content,
-  percentage widths and flex-basis, shrink, min/max constraints, auto and
-  negative margins, absolute/relative positioning, and text — Latin
-  wrapping, unbreakable URLs, letter-spacing, emoji (CBDT color-font
+  percentage widths and flex-basis, shrink, min/max constraint conflicts,
+  auto and negative margins, absolute/relative positioning, and text —
+  Latin wrapping, unbreakable URLs, letter-spacing, emoji (CBDT color-font
   metrics), Bangla complex-script shaping, and a kitchen-sink card.
-- 15 Tailwind-input cases (cards, navbars, hero, responsive stat grids,
-  forms, badges, sidebar layouts, media objects, alerts, modals,
-  breadcrumbs, footers, a Bangla profile) run the **full pipeline** —
-  parser → resolver → Yoga — against headless Chromium executing the real,
-  vendored Tailwind v4 browser build. **All 15 pass**, including responsive
-  `sm:` breakpoint behavior verified at two viewports.
+- 41 Tailwind-input cases (cards, navbars, heroes, responsive stat tiles,
+  forms, badges, sidebar layouts, media objects, alerts, modals, chat
+  bubbles, settings rows, steppers, timelines, KPI dashboards, paginations,
+  tabs, toasts, login and error pages, Bangla content, …) run the **full
+  pipeline** — parser → resolver → Yoga — against headless Chromium
+  executing the real, vendored Tailwind v4 browser build.
 
-The 3 failures:
+### Engine notes (hard-won parity lessons)
 
-| case | what diverges |
-| --- | --- |
-| min-max-constraints | Δ up to 139px — Yoga single-pass min/max resolution |
-| min-width-freeze-redistribute | Δ 160px — same root cause |
-| text-in-row-shrink | Δ 26px — text flex-basis ≠ max-content in Yoga |
-
-### Known gaps (root-caused)
-
-- **Yoga flexible-length resolution ≠ CSS §9.7.** All three failures are one
-  algorithm family. CSS iteratively freezes min/max violators and
-  *redistributes* the recovered space
+- **Yoga's flexible-length resolution ≠ CSS §9.7, corrected by our own
+  pass.** CSS iteratively freezes min/max violators and *redistributes*
+  recovered space
   ([spec](https://www.w3.org/TR/css-flexbox-1/#resolve-flexible-lengths));
-  Yoga clamps each item's base size once and distributes in a single pass
-  (`min-max-constraints`: Chrome 262/180/262 vs Yoga 401/151/151).
-  Relatedly, Yoga doesn't use a text item's max-content width as its flex
-  base in rows, so siblings don't shrink when long text competes for space
-  (`text-in-row-shrink`). Not a config issue — `UseWebDefaults` is on.
-  Candidate Phase 1 fixes: a post-pass iterative resolution of our own, or
-  routing constrained rows through Taffy.
+  Yoga clamps each item's base once and distributes in a single pass
+  (Chrome 262/180/262 vs Yoga 401/151/151 on three competing-grow items).
+  `packages/core/src/flexfix.ts` implements the spec algorithm — including
+  unclamped flex bases, max-content bases for text items, and §4.5
+  automatic minimums (`min(content suggestion, specified width)`, zero for
+  scrollable boxes — the `min-w-0`/`truncate` semantics) — and pins the
+  corrected widths on conflicted single-line row containers. Column
+  main-axis conflicts, wrap lines, and auto-margin rows still fall through
+  to Yoga's answer.
+- **Lines must be shaped whole, not as summed words.** Kerning and
+  contextual alternates cross word boundaries — Inter shapes "2.1"
+  differently standalone than mid-string — so the line breaker measures
+  each candidate line cumulatively, like a browser.
 - **The oracle must run Chromium with `--font-render-hinting=none`.**
   Headless Linux Chromium otherwise grid-fits every glyph advance to whole
   pixels (FreeType full hinting) — "Dismiss" at 14px measures 49px hinted vs
@@ -116,9 +115,12 @@ The 3 failures:
   inline-block **shrink-to-fit in block flow** are not modeled — a bare
   `<button>` in a non-flex parent measures full-width. Keep buttons in flex
   rows (as Tailwind components almost always do).
-- Unstyled inline elements (`<strong>`, `<span>` without classes) collapse
-  into their parent's text and measure with the parent's font style; a bold
-  span inside a paragraph measures at the paragraph's weight.
+- Inline elements whose classes don't affect geometry (colors, plain
+  font-weight) collapse into their parent's text and measure with the
+  parent's font style — a bold span inside a paragraph measures at the
+  paragraph's weight (≤2px on realistic lines). Spans with geometry classes
+  (padding, size, display) and all children of flex containers stay boxes,
+  matching CSS blockification.
 - Everything measures with the bundled font chain (Inter, Noto Sans
   Bengali, system emoji); `font-mono`/`font-serif` are ignored.
 

@@ -1,5 +1,6 @@
 import Yoga from 'yoga-layout';
 import type { FontStore } from './fonts';
+import { correctRowContainer } from './flexfix';
 import { measureText } from './text';
 import type { Box, Style, TreeNode } from './types';
 
@@ -134,6 +135,37 @@ export function computeLayout(tree: TreeNode, viewportWidth: number, fonts: Font
   const root = build(tree, 'r');
   if (!root) return [{ path: 'r', name: tree.name, isText: false, x: 0, y: 0, width: 0, height: 0 }];
   root.calculateLayout(viewportWidth, undefined, Yoga.DIRECTION_LTR);
+
+  // §9.7 corrective passes: Yoga resolves flexible lengths in a single pass;
+  // CSS iteratively freezes min/max violators and redistributes. Pin the
+  // spec-correct widths on conflicted row containers and relayout, repeating
+  // so nested containers see their parents' corrected widths.
+  const corrected = new Set<string>();
+  for (let pass = 0; pass < 4; pass++) {
+    let changed = false;
+    const visit = (n: TreeNode, path: string) => {
+      const yn = yogaNodes.get(path);
+      if (!yn) return;
+      if (n.text === undefined && !corrected.has(path)) {
+        const corr = correctRowContainer(n, yn.getComputedWidth(), fonts);
+        if (corr?.conflict) {
+          corrected.add(path);
+          for (const { index, width } of corr.children) {
+            const childYoga = yogaNodes.get(`${path}.${index}`);
+            if (!childYoga || Math.abs(childYoga.getComputedWidth() - width) <= 0.5) continue;
+            childYoga.setWidth(width);
+            childYoga.setFlexGrow(0);
+            childYoga.setFlexShrink(0);
+            changed = true;
+          }
+        }
+      }
+      (n.children ?? []).forEach((c, i) => visit(c, `${path}.${i}`));
+    };
+    visit(tree, 'r');
+    if (!changed) break;
+    root.calculateLayout(viewportWidth, undefined, Yoga.DIRECTION_LTR);
+  }
 
   const boxes: Box[] = [];
   const collect = (n: TreeNode, path: string, parentX: number, parentY: number) => {

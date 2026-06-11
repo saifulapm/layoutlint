@@ -1,0 +1,26 @@
+{
+  "name": "percent-basis-with-min",
+  "viewport": 768,
+  "chromium": "148.0.7778.96",
+  "generatedAt": "2026-06-11T10:20:01.956Z",
+  "rects": {
+    "r": {
+      "x": 0,
+      "y": 0,
+      "width": 768,
+      "height": 72
+    },
+    "r.0": {
+      "x": 16,
+      "y": 16,
+      "width": 200,
+      "height": 40
+    },
+    "r.1": {
+      "x": 232,
+      "y": 16,
+      "width": 520,
+      "height": 40
+    }
+  }
+}

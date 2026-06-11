@@ -584,6 +584,100 @@ export const cases: CorpusCase[] = [
     },
   },
 
+  // ---- §9.7 flexible-length resolution (the flexfix pass) -------------------
+  {
+    name: 'shrink-with-min-floor',
+    viewport: 320,
+    tree: {
+      name: 'root',
+      style: { flexDirection: 'row', gap: 8 },
+      children: [
+        { name: 'floored', style: { width: 200, minWidth: 170, height: 40 } },
+        { name: 'free-shrink', style: { width: 200, height: 40 } },
+      ],
+    },
+  },
+  {
+    name: 'grow-max-redistribute-pair',
+    viewport: 768,
+    tree: {
+      name: 'root',
+      style: { flexDirection: 'row', gap: 12, padding: 12 },
+      children: [
+        { name: 'capped-a', style: { flexGrow: 1, maxWidth: 120, height: 40 } },
+        { name: 'capped-b', style: { flexGrow: 1, maxWidth: 150, height: 40 } },
+        { name: 'absorbs-rest', style: { flexGrow: 1, height: 40 } },
+      ],
+    },
+  },
+  {
+    name: 'truncate-text-next-to-fixed',
+    viewport: 320,
+    tree: {
+      name: 'root',
+      style: { flexDirection: 'row', gap: 8, padding: 8 },
+      children: [
+        { name: 'leading-box', style: { width: 180, height: 24 } },
+        {
+          name: 'squeezed-truncate',
+          style: { flexGrow: 1, fontSize: 14, lineHeight: 24, whiteSpace: 'nowrap', overflow: 'hidden' },
+          text: 'a single line that will certainly not fit in the leftover space',
+        },
+      ],
+    },
+  },
+  {
+    name: 'two-texts-share-row',
+    viewport: 375,
+    tree: {
+      name: 'root',
+      style: { flexDirection: 'row', gap: 12, padding: 12 },
+      children: [
+        {
+          name: 'left-text',
+          style: { fontSize: 14, lineHeight: 20 },
+          text: 'shorter label here',
+        },
+        {
+          name: 'right-text',
+          style: { fontSize: 14, lineHeight: 20 },
+          text: 'a considerably longer piece of text that wants much more of the row',
+        },
+      ],
+    },
+  },
+  {
+    name: 'nested-corrected-rows',
+    viewport: 375,
+    tree: {
+      name: 'root',
+      style: { flexDirection: 'row', gap: 8, padding: 8 },
+      children: [
+        { name: 'outer-fixed', style: { width: 100, height: 80, minWidth: 80 } },
+        {
+          name: 'inner-row',
+          style: { flexGrow: 1, flexDirection: 'row', gap: 8 },
+          children: [
+            { name: 'inner-capped', style: { flexGrow: 1, maxWidth: 60, height: 80 } },
+            { name: 'inner-free', style: { flexGrow: 1, height: 80 } },
+          ],
+        },
+      ],
+    },
+  },
+  {
+    name: 'percent-basis-with-min',
+    viewport: 768,
+    tree: {
+      name: 'root',
+      style: { flexDirection: 'row', gap: 16, padding: 16 },
+      children: [
+        { name: 'basis-20-min-200', style: { flexBasis: '20%', minWidth: 200, height: 40 } },
+        { name: 'basis-80', style: { flexBasis: '80%', height: 40 } },
+      ],
+    },
+  },
+
   // ---- text (41–50) ------------------------------------------------------------
   {
     name: 'text-in-row-shrink',

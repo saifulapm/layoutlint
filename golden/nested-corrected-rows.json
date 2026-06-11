@@ -1,0 +1,38 @@
+{
+  "name": "nested-corrected-rows",
+  "viewport": 375,
+  "chromium": "148.0.7778.96",
+  "generatedAt": "2026-06-11T10:20:01.732Z",
+  "rects": {
+    "r": {
+      "x": 0,
+      "y": 0,
+      "width": 375,
+      "height": 96
+    },
+    "r.0": {
+      "x": 8,
+      "y": 8,
+      "width": 100,
+      "height": 80
+    },
+    "r.1": {
+      "x": 116,
+      "y": 8,
+      "width": 251,
+      "height": 80
+    },
+    "r.1.0": {
+      "x": 116,
+      "y": 8,
+      "width": 60,
+      "height": 80
+    },
+    "r.1.1": {
+      "x": 184,
+      "y": 8,
+      "width": 183,
+      "height": 80
+    }
+  }
+}
