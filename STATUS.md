@@ -7,11 +7,15 @@
 
 Phases 0 **and** 1 are done and exceeded. The engine matches headless Chromium
 on **297/297 corpus cases** (≤1px positions/sizes, ≤2px text sizes), most at
-0.00px. The product surface works end-to-end: `check()` library, CLI, MCP
-server, Claude Code skill, GitHub Action, demo GIF, CI. Named `layoutlint`,
-packaged for npm (single package, Node-ready), goldens platform-independent.
-What remains before launch is manual publish steps (GitHub repo rename, npm
-publish, domain); after that, Phase 2 (grid via Taffy, React components).
+0.00px. **`layoutlint render` ships (2026-06-12)**: deterministic SVG/PNG
+screenshots without a browser — visual resolver + glyph-outline painter,
+pixel-diffed against Chromium screenshots (42/42 ≤5%, worst 3.2% = glyph AA)
+and gated in CI. The product surface works end-to-end: `check()` + `render()`
+library, CLI (check/render), MCP server (check_layout/render_layout), Claude
+Code skill, GitHub Action, demo GIF, CI. Named `layoutlint`, packaged for npm
+(single package, Node-ready), goldens platform-independent. What remains
+before launch is manual publish steps (GitHub repo rename, npm publish,
+domain); after that, Phase 2 (grid via Taffy, React components).
 
 ## What exists (repo tour)
 
@@ -26,6 +30,11 @@ packages/core/        the engine
   src/layout.ts         Yoga bridge (web defaults) + corrective fixpoint loop
   src/flexfix.ts        CSS §9.7 resolver, §9.3 wrap lines, §4.5 auto minimums,
                         fit-content cross sizing, intrinsic width approximation
+  src/visual.ts         visual resolver: colors/radius/align (parallel to
+                        layout; Style + goldens untouched)
+  src/paint.ts          SVG painter: rounded rects, borders, clipping,
+                        glyph-outline text (same shaping as measurement)
+  src/palette.ts        GENERATED Chrome-exact sRGB Tailwind palette
 packages/rules/       the product — the published npm package "layoutlint"
   src/check.ts          check(source, {viewports, rules, fonts}) → report
   src/rules.ts          no-overflow, no-overlap, fits-viewport,
@@ -41,12 +50,17 @@ packages/oracle/      DEV-ONLY: Playwright golden generator + comparator
   src/generate.ts       renders corpus in Chromium → golden/*.json
   src/compare.ts        engine vs golden → accuracy/ scoreboard, exit 1 on fail
   src/debug-case.ts     bun run …/debug-case.ts <name> → per-node deltas
+  src/screenshot.ts     Chromium screenshots → screenshots/*.png (paint oracle)
+  src/paint-compare.ts  engine render vs screenshot → paint-accuracy/, ≤5% gate
+  src/extract-palette.ts regenerates core/src/palette.ts from Chrome
 corpora/cases.ts      56 style-object cases (engine in isolation)
 corpora/tailwind-cases.ts  41 real-markup cases (full pipeline vs real
                         vendored Tailwind v4 browser build in the oracle)
 corpora/generated.ts  200 seeded fuzz cases (deterministic from seed)
 golden/               committed Chromium golden files (regenerated in CI)
 accuracy/             scoreboard output (README.md + report.json)
+screenshots/          committed Chromium screenshots (paint oracle, regen in CI)
+paint-accuracy/       paint scoreboard (README.md + report.json; diff/ ignored)
 vendor/               pinned @tailwindcss/browser 4.1.16 (oracle only)
 .github/workflows/accuracy.yml   typecheck + bun test + regenerate goldens
                         + accuracy gate on every push/PR

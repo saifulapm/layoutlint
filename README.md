@@ -23,7 +23,8 @@ functional and green.
 ```sh
 # CLI — pretty output for humans, --json for agents (exit 1 on violations)
 npx layoutlint check src/components/Card.tsx --viewports 320,1440
-# (from this repo: bun run packages/rules/src/cli.ts check …)
+npx layoutlint render src/components/Card.tsx --viewport 375 -o card.png
+# (from this repo: bun run packages/rules/src/cli.ts check|render …)
 
 # Library
 import { check } from 'layoutlint'
@@ -72,6 +73,37 @@ A failing check answers *what, where, by how much, and a plausible fix*:
 
 Rules: `no-overflow`, `no-overlap`, `fits-viewport`, `no-text-truncation`.
 A 4-viewport check on a typical component runs in ~8ms, no browser involved.
+
+## Render — deterministic screenshots, no browser
+
+`layoutlint render` paints the computed layout into a self-contained SVG or
+PNG — the agent's eyes. This is the demo card, rendered by the engine (not
+a browser):
+
+![demo card rendered by layoutlint](demo/card-375.png)
+
+```sh
+layoutlint render Card.tsx --viewport 375 -o card.png   # or .svg, or stdout
+```
+
+- Text is painted as **glyph outlines** from the same HarfBuzz shaping that
+  measured it — the SVG renders identically everywhere, no fonts needed.
+- Tailwind v4 colors come from a table extracted from Chrome itself (canvas
+  `getImageData` of the real Tailwind build) — no oklch→sRGB approximation.
+- Validated like everything else: every Tailwind corpus case is pixel-diffed
+  against a pinned-Chromium screenshot in CI (`pixelmatch`, ≤5% mismatched
+  pixels gate; observed worst 3.2%, median ~0.9% — the residual is glyph
+  antialiasing between rasterizers; see
+  [paint-accuracy/README.md](./paint-accuracy/README.md)).
+- v1 paints backgrounds, per-side borders + radii, `overflow:hidden`
+  clipping, and text (color/size/weight/align). Not yet painted: shadows,
+  gradients, opacity, transforms, text-decoration; colors on *inner inline
+  spans* fall back to the parent's color (same envelope as mixed-weight
+  span measurement). Srcless `<img>` paints nothing, like a browser —
+  style images with `bg-*`.
+- MCP: the `render_layout` tool returns the PNG as an image content block,
+  so an agent can literally look at the component after `check_layout`
+  passes.
 
 ## Accuracy scoreboard
 

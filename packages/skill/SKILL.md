@@ -36,6 +36,20 @@ much, and a plausible fix:
 - `detail` — measured vs available px, e.g. `text is 342px wide but its box is 288px`
 - `suggestion` — a starting point, not a mandate
 
+## Seeing the result (render)
+
+After `check` passes (or to inspect a reported violation visually):
+
+```sh
+bun run packages/rules/src/cli.ts render <file> --viewport 375 -o /tmp/c.png
+```
+
+(or `npx layoutlint render …` once installed; via MCP use the
+`render_layout` tool, which returns the PNG directly.) The PNG is the
+engine's own deterministic paint — pixel-validated against Chromium in CI —
+so use it to judge visual structure (spacing, alignment, colors), not
+shadows/gradients, which v1 does not paint.
+
 ## Fixing violations
 
 1. Fix the **root cause**, not the symptom: an overflow at 320px usually

@@ -41,6 +41,23 @@ const report = await check(componentSource, { viewports: [320, 375, 768, 1440] }
 // report.pass, report.viewports[n].violations[…], report.warnings
 ```
 
+## Render — see the component without a browser
+
+```sh
+npx layoutlint render Card.tsx --viewport 375 -o card.png   # or .svg / stdout
+```
+
+```ts
+import { render } from 'layoutlint';
+const { svg, png } = await render(source, { viewport: 375, format: 'png' });
+```
+
+Paints the computed layout deterministically — backgrounds, borders + radii,
+real Tailwind v4 colors, text as glyph outlines (self-contained SVG), and
+`overflow:hidden` clipping. Pixel-diffed against Chromium screenshots in CI
+(≤5% gate; residual is glyph antialiasing). Not painted in v1: shadows,
+gradients, opacity, transforms.
+
 ## MCP server
 
 `layoutlint-mcp` is a stdio MCP server exposing a `check_layout` tool, so
@@ -50,6 +67,9 @@ agents can verify layout after every UI edit:
 // e.g. Claude Code: .mcp.json
 { "mcpServers": { "layoutlint": { "command": "npx", "args": ["layoutlint-mcp"] } } }
 ```
+
+Tools: `check_layout` (violations report) and `render_layout` (PNG image of
+the component — the agent's eyes).
 
 ## Rules
 

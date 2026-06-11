@@ -46,9 +46,20 @@ jobs:
       - name: Accuracy scoreboard
         run: bun run accuracy
 
-      - name: Upload accuracy report
+      # Paint gate: engine render (SVG → resvg PNG) vs Chromium screenshots,
+      # pixelmatch ≤5% mismatched pixels per case (threshold documented in
+      # paint-accuracy/README.md).
+      - name: Regenerate paint screenshots against pinned Chromium
+        run: bun run paint-oracle
+
+      - name: Paint accuracy gate
+        run: bun run paint-accuracy
+
+      - name: Upload accuracy reports
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: accuracy-report
-          path: accuracy/
+          path: |
+            accuracy/
+            paint-accuracy/
