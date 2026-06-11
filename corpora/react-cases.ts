@@ -57,6 +57,22 @@ export const reactCases: ReactCase[] = [
     file: 'corpora/react/multi-file.tsx',
   },
   {
+    name: 'react-alias-import',
+    viewport: 320,
+    file: 'corpora/react/alias-import.tsx',
+  },
+  {
+    name: 'react-memo-card',
+    viewport: 375,
+    file: 'corpora/react/memo-card.tsx',
+  },
+  {
+    name: 'react-named-exports',
+    viewport: 375,
+    file: 'corpora/react/named-exports.tsx',
+    component: 'Footer',
+  },
+  {
     name: 'react-pricing-props',
     viewport: 375,
     file: 'corpora/react/pricing-props.tsx',

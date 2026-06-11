@@ -1,0 +1,26 @@
+{
+  "name": "react-memo-card",
+  "viewport": 375,
+  "chromium": "148.0.7778.96",
+  "generatedAt": "2026-06-11T22:54:22.756Z",
+  "rects": {
+    "r": {
+      "x": 16,
+      "y": 16,
+      "width": 343,
+      "height": 102
+    },
+    "r.0": {
+      "x": 33,
+      "y": 33,
+      "width": 309,
+      "height": 20
+    },
+    "r.1": {
+      "x": 33,
+      "y": 61,
+      "width": 309,
+      "height": 40
+    }
+  }
+}

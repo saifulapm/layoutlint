@@ -1,0 +1,26 @@
+{
+  "name": "react-named-exports",
+  "viewport": 375,
+  "chromium": "148.0.7778.96",
+  "generatedAt": "2026-06-11T22:54:22.980Z",
+  "rects": {
+    "r": {
+      "x": 0,
+      "y": 0,
+      "width": 375,
+      "height": 109
+    },
+    "r.0": {
+      "x": 24,
+      "y": 25,
+      "width": 327,
+      "height": 20
+    },
+    "r.1": {
+      "x": 24,
+      "y": 53,
+      "width": 327,
+      "height": 32
+    }
+  }
+}

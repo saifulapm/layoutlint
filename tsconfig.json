@@ -12,5 +12,6 @@
       "@layoutlint/core": ["./packages/core/src/index.ts"]
     }
   },
-  "include": ["packages/*/src/**/*.ts", "corpora/**/*.ts", "corpora/**/*.tsx"]
+  "include": ["packages/*/src/**/*.ts", "corpora/**/*.ts", "corpora/**/*.tsx"],
+  "exclude": ["corpora/react"]
 }
