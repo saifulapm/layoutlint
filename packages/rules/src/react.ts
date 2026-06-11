@@ -16,7 +16,7 @@ import { rmSync, writeFileSync } from 'node:fs';
 import { createRequire } from 'node:module';
 import { dirname, join, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { build } from 'esbuild';
+import { build, type Plugin } from 'esbuild';
 
 export interface ComponentOptions {
   /** Props passed to the component (JSON-shaped). */
@@ -73,6 +73,35 @@ async function loadUserModule(specifier: string, from: string): Promise<any> {
   return m.default ?? m;
 }
 
+/**
+ * Stylesheets and assets can't affect layoutlint's measurement (layout comes
+ * from Tailwind classes), so their imports are stubbed: plain stylesheets
+ * become empty modules, CSS modules export an identity proxy (className logic
+ * keeps producing strings), assets export their import path.
+ */
+const stubPlugin: Plugin = {
+  name: 'layoutlint-stubs',
+  setup(b) {
+    b.onResolve({ filter: /\.(css|scss|sass|less|styl)$/ }, (a) => ({
+      path: a.path,
+      namespace: /\.module\.[a-z]+$/.test(a.path) ? 'll-cssmod' : 'll-empty',
+    }));
+    b.onLoad({ filter: /.*/, namespace: 'll-empty' }, () => ({ contents: '', loader: 'js' }));
+    b.onLoad({ filter: /.*/, namespace: 'll-cssmod' }, () => ({
+      contents: 'export default new Proxy({}, { get: (_, p) => String(p) })',
+      loader: 'js',
+    }));
+    b.onResolve({ filter: /\.(svg|png|jpe?g|gif|webp|avif|ico|bmp|woff2?|ttf|otf|eot|mp4|webm|mp3|wav)$/ }, (a) => ({
+      path: a.path,
+      namespace: 'll-asset',
+    }));
+    b.onLoad({ filter: /.*/, namespace: 'll-asset' }, (a) => ({
+      contents: `export default ${JSON.stringify(a.path)}`,
+      loader: 'js',
+    }));
+  },
+};
+
 let tmpSeq = 0;
 
 /** Execute a React component module and return its static HTML markup. */
@@ -87,6 +116,7 @@ export async function componentToHtml(file: string, opts: ComponentOptions = {})
     jsx: 'automatic',
     packages: 'external',
     logLevel: 'silent',
+    plugins: [stubPlugin],
   });
   const tmp = join(dirname(entry), `.layoutlint-${process.pid}-${++tmpSeq}.mjs`);
   writeFileSync(tmp, out.outputFiles[0].text);

@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-06-11T22:47:05.553Z",
-  "passCount": 300,
-  "total": 300,
+  "generatedAt": "2026-06-11T22:52:15.550Z",
+  "passCount": 304,
+  "total": 304,
   "results": [
     {
       "name": "row-fixed-gap",
@@ -31042,6 +31042,258 @@
       "worst": {
         "path": "r.0",
         "isText": true,
+        "dx": 0,
+        "dy": 0,
+        "dw": 0.01,
+        "dh": 0,
+        "pass": true
+      }
+    },
+    {
+      "name": "react-css-import",
+      "viewport": 375,
+      "nodes": [
+        {
+          "path": "r",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0.0",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0.1",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0.1.0",
+          "isText": true,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0.1.1",
+          "isText": true,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "maxPosDelta": 0,
+      "maxSizeDelta": 0
+    },
+    {
+      "name": "react-css-module",
+      "viewport": 320,
+      "nodes": [
+        {
+          "path": "r",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0",
+          "isText": true,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.1",
+          "isText": true,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "maxPosDelta": 0,
+      "maxSizeDelta": 0
+    },
+    {
+      "name": "react-asset-logo",
+      "viewport": 375,
+      "nodes": [
+        {
+          "path": "r",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.1",
+          "isText": true,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.2",
+          "isText": true,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "maxPosDelta": 0,
+      "maxSizeDelta": 0
+    },
+    {
+      "name": "react-multi-file",
+      "viewport": 768,
+      "nodes": [
+        {
+          "path": "r",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0.0",
+          "isText": true,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.0.1",
+          "isText": true,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.1",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0.01,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.1.0",
+          "isText": true,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0.01,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.1.1",
+          "isText": true,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0.01,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.2",
+          "isText": false,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.2.0",
+          "isText": true,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        },
+        {
+          "path": "r.2.1",
+          "isText": true,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
+        }
+      ],
+      "pass": true,
+      "maxPosDelta": 0,
+      "maxSizeDelta": 0.01,
+      "worst": {
+        "path": "r.1",
+        "isText": false,
         "dx": 0,
         "dy": 0,
         "dw": 0.01,

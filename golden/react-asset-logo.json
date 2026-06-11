@@ -1,0 +1,32 @@
+{
+  "name": "react-asset-logo",
+  "viewport": 375,
+  "chromium": "148.0.7778.96",
+  "generatedAt": "2026-06-11T22:52:13.135Z",
+  "rects": {
+    "r": {
+      "x": 0,
+      "y": 0,
+      "width": 375,
+      "height": 65
+    },
+    "r.0": {
+      "x": 16,
+      "y": 16,
+      "width": 32,
+      "height": 32
+    },
+    "r.1": {
+      "x": 60,
+      "y": 18,
+      "width": 81.97,
+      "height": 28
+    },
+    "r.2": {
+      "x": 330.08,
+      "y": 22,
+      "width": 28.92,
+      "height": 20
+    }
+  }
+}

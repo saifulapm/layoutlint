@@ -13,6 +13,14 @@ const INLINE_TAGS = new Set([
   'span', 'strong', 'em', 'b', 'i', 'a', 'code', 'small', 'abbr', 'u', 's', 'sub', 'sup', 'mark',
 ]);
 
+/**
+ * Metadata content is display:none in every browser and generates no box —
+ * skipped entirely. Covers React 19's hoisted resource hints (e.g. the
+ * `<link rel="preload">` renderToStaticMarkup emits for img src) and
+ * `<style>`/`<script>` text in pasted HTML, which must never be measured.
+ */
+const METADATA_TAGS = new Set(['base', 'link', 'meta', 'noscript', 'script', 'style', 'template', 'title']);
+
 function isWhitespaceText(n: AnyNode): boolean {
   return n instanceof Text && /^\s*$/.test(n.data);
 }
@@ -20,6 +28,7 @@ function isWhitespaceText(n: AnyNode): boolean {
 function isInlineSubtree(n: AnyNode): boolean {
   if (n instanceof Text) return true;
   if (n instanceof Element) {
+    if (METADATA_TAGS.has(n.name)) return true; // invisible — doesn't break inline-ness
     // an inline element with geometry-affecting classes (padding, size,
     // display…) is its own box (flex item / styled badge); color- and
     // weight-only inline markup collapses into the parent's text
@@ -34,7 +43,9 @@ function isInlineSubtree(n: AnyNode): boolean {
 
 function textContent(n: AnyNode): string {
   if (n instanceof Text) return n.data;
-  if (n instanceof Element) return n.children.map(textContent).join('');
+  if (n instanceof Element) {
+    return METADATA_TAGS.has(n.name) ? '' : n.children.map(textContent).join('');
+  }
   return '';
 }
 
@@ -52,7 +63,9 @@ function isFlexLikeContainer(el: Element): boolean {
 
 function convert(el: Element): TreeNode {
   const node: TreeNode = { tag: el.name, classes: classList(el) };
-  const meaningful = el.children.filter((c) => !isWhitespaceText(c));
+  const meaningful = el.children.filter(
+    (c) => !isWhitespaceText(c) && !(c instanceof Element && METADATA_TAGS.has(c.name)),
+  );
 
   if (!isFlexLikeContainer(el) && meaningful.length > 0 && meaningful.every(isInlineSubtree)) {
     // collapse whitespace the way `white-space: normal` does
@@ -83,7 +96,9 @@ function convert(el: Element): TreeNode {
  */
 export function parseSource(source: string): TreeNode {
   const doc = parseDocument(source, { recognizeSelfClosing: true });
-  const roots = doc.children.filter((c): c is Element => c instanceof Element);
+  const roots = doc.children.filter(
+    (c): c is Element => c instanceof Element && !METADATA_TAGS.has(c.name),
+  );
   if (roots.length === 0) throw new Error('no elements found in source');
   if (roots.length === 1) return convert(roots[0]);
   return { tag: 'div', classes: [], children: roots.map(convert) };

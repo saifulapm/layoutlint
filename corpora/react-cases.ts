@@ -35,6 +35,28 @@ export const reactCases: ReactCase[] = [
     component: 'ButtonRow',
   },
   {
+    name: 'react-css-import',
+    viewport: 375,
+    file: 'corpora/react/css-import.tsx',
+  },
+  {
+    name: 'react-css-module',
+    viewport: 320,
+    file: 'corpora/react/css-module.tsx',
+    component: 'StatusBadge',
+    props: { status: 'Deployed to production' },
+  },
+  {
+    name: 'react-asset-logo',
+    viewport: 375,
+    file: 'corpora/react/asset-logo.tsx',
+  },
+  {
+    name: 'react-multi-file',
+    viewport: 768,
+    file: 'corpora/react/multi-file.tsx',
+  },
+  {
     name: 'react-pricing-props',
     viewport: 375,
     file: 'corpora/react/pricing-props.tsx',

@@ -1,0 +1,5 @@
+/* Decorative only — layoutlint ignores stylesheet imports; this file exists
+   to prove the import doesn't break component loading. */
+.alert {
+  color: #1f2937;
+}

@@ -1,0 +1,26 @@
+{
+  "name": "react-css-module",
+  "viewport": 320,
+  "chromium": "148.0.7778.96",
+  "generatedAt": "2026-06-11T22:52:12.974Z",
+  "rects": {
+    "r": {
+      "x": 0,
+      "y": 0,
+      "width": 320,
+      "height": 72
+    },
+    "r.0": {
+      "x": 16,
+      "y": 18,
+      "width": 91.67,
+      "height": 36
+    },
+    "r.1": {
+      "x": 115.67,
+      "y": 16,
+      "width": 188.33,
+      "height": 40
+    }
+  }
+}

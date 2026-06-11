@@ -1,6 +1,6 @@
 # Accuracy scoreboard
 
-Engine (Yoga + fontkit) vs headless Chromium golden files. **300/300** cases within threshold (positions ≤1px, sizes ≤1px, text sizes ≤2px).
+Engine (Yoga + fontkit) vs headless Chromium golden files. **304/304** cases within threshold (positions ≤1px, sizes ≤1px, text sizes ≤2px).
 
 | case | vw | nodes | max Δpos | max Δsize | worst node | result |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -303,4 +303,8 @@ Engine (Yoga + fontkit) vs headless Chromium golden files. **300/300** cases wit
 | tw-bangla-mixed-feed | 375 | 6 | 0.00 | 0.00 | — | PASS |
 | react-profile-card | 375 | 13 | 0.01 | 0.01 | r.0.0.1 (Δw 0.01, Δh 0) | PASS |
 | react-button-row | 320 | 3 | 0.01 | 0.01 | r.0 (Δw 0.01, Δh 0) | PASS |
+| react-css-import | 375 | 6 | 0.00 | 0.00 | — | PASS |
+| react-css-module | 320 | 3 | 0.00 | 0.00 | — | PASS |
+| react-asset-logo | 375 | 4 | 0.00 | 0.00 | — | PASS |
+| react-multi-file | 768 | 10 | 0.00 | 0.01 | r.1 (Δw 0.01, Δh 0) | PASS |
 | react-pricing-props | 375 | 11 | 0.00 | 0.00 | — | PASS |
