@@ -1,4 +1,10 @@
-export { FontStore, type FontFace } from './fonts';
+export {
+  FontStore,
+  type FontFace,
+  type GlyphRun,
+  type LineMetrics,
+  type PositionedGlyph,
+} from './fonts';
 export { breakLines, measureText, type LineBox, type TextMeasurement } from './text';
 export { computeLayout } from './layout';
 export { parseSource } from './parser';
