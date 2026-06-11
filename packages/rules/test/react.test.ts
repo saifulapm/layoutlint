@@ -1,5 +1,6 @@
 import { describe, expect, test } from 'bun:test';
-import { readdirSync } from 'node:fs';
+import { mkdtempSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { componentToHtml, isComponentModule } from '../src/react';
 
@@ -50,6 +51,20 @@ describe('componentToHtml', () => {
 
   test('null render → actionable error', async () => {
     await expect(componentToHtml(join(FIXTURES, 'empty.tsx'))).rejects.toThrow(/rendered nothing/);
+  });
+
+  test('missing react in the project → actionable error naming the fix', async () => {
+    // a dir outside the monorepo, so react cannot resolve from any parent
+    const dir = mkdtempSync(join(tmpdir(), 'll-noreact-'));
+    try {
+      writeFileSync(join(dir, 'Card.tsx'), 'export default function Card() { return <div className="p-4">x</div>; }');
+      await expect(componentToHtml(join(dir, 'Card.tsx'))).rejects.toThrow(
+        /install react and react-dom.*--no-execute/,
+      );
+      expect(tmpFilesIn(dir)).toEqual([]); // friendly error fires before any temp bundle is written
+    } finally {
+      rmSync(dir, { recursive: true, force: true });
+    }
   });
 
   test('temp bundle cleaned up on success and on throw', async () => {

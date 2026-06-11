@@ -118,13 +118,16 @@ export async function componentToHtml(file: string, opts: ComponentOptions = {})
     logLevel: 'silent',
     plugins: [stubPlugin],
   });
+  // Resolve the user's react BEFORE importing the bundle: the bundle's own
+  // external `react/jsx-runtime` import would otherwise fail first with a
+  // raw ERR_MODULE_NOT_FOUND pointing at the (deleted) temp file.
+  const react = await loadUserModule('react', entry);
+  const server = await loadUserModule('react-dom/server', entry);
   const tmp = join(dirname(entry), `.layoutlint-${process.pid}-${++tmpSeq}.mjs`);
   writeFileSync(tmp, out.outputFiles[0].text);
   try {
     const mod = (await import(pathToFileURL(tmp).href)) as Record<string, unknown>;
     const component = pickComponent(mod, opts.component, file);
-    const react = await loadUserModule('react', entry);
-    const server = await loadUserModule('react-dom/server', entry);
     const html: string = server.renderToStaticMarkup(react.createElement(component, opts.props ?? {}));
     if (html.trim() === '') throw new Error(`${file}: component rendered nothing (null or empty output)`);
     return html;
