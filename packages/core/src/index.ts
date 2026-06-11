@@ -15,4 +15,6 @@ export {
   type ResolveOptions,
   type ResolveResult,
 } from './tailwind';
+export { resolveVisualTree, type CornerRadii, type VisualStyle } from './visual';
+export { PALETTE } from './palette';
 export type { Box, CorpusCase, Length, Style, TreeNode } from './types';

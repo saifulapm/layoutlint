@@ -17,7 +17,7 @@ export interface ResolveResult {
   warnings: string[];
 }
 
-const BREAKPOINTS: Record<string, number> = { sm: 640, md: 768, lg: 1024, xl: 1280, '2xl': 1536 };
+export const BREAKPOINTS: Record<string, number> = { sm: 640, md: 768, lg: 1024, xl: 1280, '2xl': 1536 };
 
 const REM = 16;
 const SPACING = 0.25 * REM; // Tailwind v4 --spacing
@@ -65,7 +65,7 @@ const IGNORABLE = [
 ];
 
 /** Tailwind color keywords that collide with size-ish prefixes (text-red-500, border-gray-200). */
-const COLOR_RE =
+export const COLOR_RE =
   /^(inherit|current|transparent|black|white|(slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)(-\d{2,3})?(\/\d+)?)$/;
 
 /** Parse a Tailwind numeric suffix: spacing scale, px, fraction, full, auto, arbitrary. */
@@ -408,7 +408,8 @@ export function classAffectsLayout(cls: string): boolean {
 }
 
 /** Split variant prefixes; returns null if the class doesn't apply (state variants, inactive breakpoints). */
-function activeClass(cls: string, viewport: number): string | null {
+/** Strip responsive prefixes; null when inactive at this viewport (or stateful). */
+export function activeClass(cls: string, viewport: number): string | null {
   const parts = cls.split(':');
   const base = parts.pop()!;
   let order = -1;
