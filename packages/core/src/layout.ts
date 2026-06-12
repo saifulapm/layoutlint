@@ -95,11 +95,32 @@ function applyStyle(node: ReturnType<typeof Yoga.Node.create>, s: Style): void {
   if (s.aspectRatio !== undefined) node.setAspectRatio(s.aspectRatio);
 }
 
+/** Result of laying out a subtree as its own root. */
+export interface SubtreeResult {
+  width: number;
+  height: number;
+  boxes: Box[];
+}
+
 /**
  * Compute the layout of a tree at a given viewport width.
  * Returns absolute-position boxes keyed by tree path (root = "r").
  */
 export function computeLayout(tree: TreeNode, viewportWidth: number, fonts: FontStore): Box[] {
+  return layoutSubtree(tree, viewportWidth, fonts).boxes;
+}
+
+/**
+ * Lay out `tree` as a root inside an `availableWidth`-wide containing block
+ * (undefined = max-content sizing). This is the full engine pipeline —
+ * build Yoga nodes, stretch-then-clamp root max-width, calculateLayout,
+ * §9.7 flexfix fixpoint, collect — reusable for grid-item subtrees.
+ */
+export function layoutSubtree(
+  tree: TreeNode,
+  availableWidth: number | undefined,
+  fonts: FontStore,
+): SubtreeResult {
   const config = Yoga.Config.create();
   // Match browser flexbox semantics: row default, flex-shrink:1, etc.
   config.setUseWebDefaults(true);
@@ -142,21 +163,30 @@ export function computeLayout(tree: TreeNode, viewportWidth: number, fonts: Font
   };
 
   const root = build(tree, 'r');
-  if (!root) return [{ path: 'r', name: tree.name, isText: false, x: 0, y: 0, width: 0, height: 0 }];
+  if (!root)
+    return {
+      width: 0,
+      height: 0,
+      boxes: [{ path: 'r', name: tree.name, isText: false, x: 0, y: 0, width: 0, height: 0 }],
+    };
 
   // CSS: a block-level root stretches to the viewport and max-width then
   // clamps; Yoga's top-level AT_MOST measure shrinks it to fit instead. Pin
   // the stretched-then-clamped width. Auto margins absorb leftover space, so
   // they don't reduce the available width (mx-auto centering still works).
   const rootStyle = tree.style ?? {};
-  if (rootStyle.width === undefined && typeof rootStyle.maxWidth === 'number') {
+  if (
+    availableWidth !== undefined &&
+    rootStyle.width === undefined &&
+    typeof rootStyle.maxWidth === 'number'
+  ) {
     const side = (v: number | 'auto' | undefined): number =>
       typeof v === 'number' ? v : v === 'auto' ? 0 : (rootStyle.margin ?? 0);
-    const available = viewportWidth - side(rootStyle.marginLeft) - side(rootStyle.marginRight);
+    const available = availableWidth - side(rootStyle.marginLeft) - side(rootStyle.marginRight);
     root.setWidth(Math.min(rootStyle.maxWidth, available));
   }
 
-  root.calculateLayout(viewportWidth, undefined, Yoga.DIRECTION_LTR);
+  root.calculateLayout(availableWidth, undefined, Yoga.DIRECTION_LTR);
 
   // §9.7 corrective passes: Yoga resolves flexible lengths in a single pass;
   // CSS iteratively freezes min/max violators and redistributes. Pin the
@@ -217,7 +247,7 @@ export function computeLayout(tree: TreeNode, viewportWidth: number, fonts: Font
     };
     visit(tree, 'r');
     if (!changed) break;
-    root.calculateLayout(viewportWidth, undefined, Yoga.DIRECTION_LTR);
+    root.calculateLayout(availableWidth, undefined, Yoga.DIRECTION_LTR);
   }
 
   const boxes: Box[] = [];
@@ -247,6 +277,11 @@ export function computeLayout(tree: TreeNode, viewportWidth: number, fonts: Font
   };
   collect(tree, 'r', 0, 0);
 
+  const result: SubtreeResult = {
+    width: root.getComputedWidth(),
+    height: root.getComputedHeight(),
+    boxes,
+  };
   root.freeRecursive();
-  return boxes;
+  return result;
 }
