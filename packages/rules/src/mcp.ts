@@ -125,7 +125,7 @@ registerTool(
     title: 'Render UI layout to an image',
     description:
       'Deterministically render a JSX/HTML + Tailwind component to a PNG ' +
-      'screenshot without a browser — real flexbox layout, real text shaping, ' +
+      'screenshot without a browser — real flexbox + grid layout, real text shaping, ' +
       'real Tailwind colors. Use it to SEE what a component looks like at a ' +
       'viewport after check_layout passes (or to inspect a reported violation).',
     inputSchema: {

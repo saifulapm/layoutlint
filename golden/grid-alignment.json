@@ -1,0 +1,32 @@
+{
+  "name": "grid-alignment",
+  "viewport": 600,
+  "chromium": "148.0.7778.96",
+  "generatedAt": "2026-06-12T00:39:31.111Z",
+  "rects": {
+    "r": {
+      "x": 0,
+      "y": 0,
+      "width": 600,
+      "height": 80
+    },
+    "r.0": {
+      "x": 67.33,
+      "y": 50,
+      "width": 60,
+      "height": 30
+    },
+    "r.1": {
+      "x": 202.66,
+      "y": 50,
+      "width": 194.67,
+      "height": 30
+    },
+    "r.2": {
+      "x": 405.33,
+      "y": 0,
+      "width": 60,
+      "height": 30
+    }
+  }
+}

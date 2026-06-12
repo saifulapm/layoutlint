@@ -2,6 +2,35 @@
 export type Length = number | `${number}%`;
 
 /**
+ * One grid track sizing function. Bare values are CSS keywords/lengths;
+ * the object form is `minmax(min, max)`. `'1fr'` ≡ `minmax(auto, 1fr)`;
+ * Tailwind's `grid-cols-N` emits `minmax(0, 1fr)` tracks (different under
+ * min-content pressure).
+ */
+export type GridTrack =
+  | number // px
+  | `${number}%`
+  | `${number}fr`
+  | 'auto'
+  | 'min-content'
+  | 'max-content'
+  | {
+      min: number | `${number}%` | 'auto' | 'min-content' | 'max-content';
+      max: number | `${number}%` | `${number}fr` | 'auto' | 'min-content' | 'max-content';
+    };
+
+/**
+ * Grid item placement on one axis (`grid-column` / `grid-row`).
+ * Line numbers are 1-based; negative counts from the end (-1 = last line).
+ * `span` without `start`/`end` is auto-placed (`grid-column: span N`).
+ */
+export interface GridPlacement {
+  start?: number | 'auto';
+  end?: number | 'auto';
+  span?: number;
+}
+
+/**
  * Style object — a CSS-like subset that both the Yoga bridge and the
  * oracle's HTML renderer understand. Phase 0 input format (no parser yet).
  */
@@ -33,6 +62,21 @@ export interface Style {
   flexShrink?: number;
   flexBasis?: Length | 'auto';
   alignSelf?: 'auto' | 'stretch' | 'flex-start' | 'flex-end' | 'center';
+
+  // grid container (display: 'grid')
+  gridTemplateColumns?: GridTrack[];
+  gridTemplateRows?: GridTrack[];
+  gridAutoFlow?: 'row' | 'column' | 'row dense' | 'column dense';
+  gridAutoColumns?: GridTrack;
+  gridAutoRows?: GridTrack;
+  /** Default inline-axis alignment of items inside their grid area. */
+  justifyItems?: 'start' | 'end' | 'center' | 'stretch';
+
+  // grid item
+  gridColumn?: GridPlacement;
+  gridRow?: GridPlacement;
+  /** Per-item override of the container's justifyItems. */
+  justifySelf?: 'auto' | 'start' | 'end' | 'center' | 'stretch';
 
   // sizing
   width?: Length;
@@ -73,7 +117,7 @@ export interface Style {
 
   // display
   /** 'none' removes the node from layout (zero box, children skipped). */
-  display?: 'flex' | 'none';
+  display?: 'flex' | 'grid' | 'none';
   overflow?: 'visible' | 'hidden' | 'auto' | 'scroll';
 
   // text (leaf nodes only)

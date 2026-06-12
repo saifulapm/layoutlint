@@ -1,6 +1,6 @@
 # Accuracy scoreboard
 
-Engine (Yoga + fontkit) vs headless Chromium golden files. **316/316** cases within threshold (positions ≤1px, sizes ≤1px, text sizes ≤2px).
+Engine (Yoga + fontkit) vs headless Chromium golden files. **336/336** cases within threshold (positions ≤1px, sizes ≤1px, text sizes ≤2px).
 
 | case | vw | nodes | max Δpos | max Δsize | worst node | result |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -260,6 +260,20 @@ Engine (Yoga + fontkit) vs headless Chromium golden files. **316/316** cases wit
 | gen-198 | 1440 | 27 | 0.01 | 0.01 | r.0 (Δw 0.01, Δh 0) | PASS |
 | gen-199 | 1440 | 5 | 0.02 | 0.01 | r.3 (Δw 0.01, Δh 0) | PASS |
 | gen-200 | 768 | 7 | 0.00 | 0.00 | — | PASS |
+| grid-basic-3col | 600 | 7 | 0.01 | 0.01 | a (Δw 0.01, Δh 0) | PASS |
+| grid-fr-mix | 400 | 4 | 0.00 | 0.00 | — | PASS |
+| grid-col-span | 600 | 5 | 0.00 | 0.00 | — | PASS |
+| grid-explicit-placement | 600 | 5 | 0.00 | 0.00 | — | PASS |
+| grid-row-placement | 600 | 5 | 0.00 | 0.00 | — | PASS |
+| grid-auto-flow-column | 600 | 6 | 0.00 | 0.00 | — | PASS |
+| grid-auto-flow-dense | 600 | 4 | 0.00 | 0.00 | — | PASS |
+| grid-auto-rows-content | 375 | 5 | 0.00 | 0.00 | — | PASS |
+| grid-percent-tracks | 400 | 5 | 0.00 | 0.00 | — | PASS |
+| grid-in-flex | 600 | 7 | 0.00 | 0.00 | — | PASS |
+| flex-in-grid | 600 | 5 | 0.00 | 0.00 | — | PASS |
+| grid-nested | 600 | 7 | 0.00 | 0.00 | — | PASS |
+| grid-alignment | 600 | 4 | 0.01 | 0.00 | stretched (Δw 0, Δh 0) | PASS |
+| grid-min-content-pressure | 320 | 3 | 0.00 | 0.00 | — | PASS |
 | tw-card | 320 | 12 | 0.01 | 0.01 | r.0.3.0 (Δw 0.01, Δh 0) | PASS |
 | tw-card-wide | 768 | 12 | 0.01 | 0.01 | r.0.3.0 (Δw 0.01, Δh 0) | PASS |
 | tw-navbar | 768 | 6 | 0.03 | 0.03 | r.1 (Δw 0.03, Δh 0) | PASS |
@@ -301,6 +315,12 @@ Engine (Yoga + fontkit) vs headless Chromium golden files. **316/316** cases wit
 | tw-user-dropdown | 375 | 8 | 0.00 | 0.00 | — | PASS |
 | tw-progress-card | 375 | 8 | 0.00 | 0.00 | — | PASS |
 | tw-bangla-mixed-feed | 375 | 6 | 0.00 | 0.00 | — | PASS |
+| tw-grid-cards | 768 | 13 | 0.01 | 0.00 | r.2 (Δw 0, Δh 0) | PASS |
+| tw-grid-dashboard | 1024 | 16 | 0.00 | 0.02 | r.4.1 (Δw 0.02, Δh 0) | PASS |
+| tw-grid-form | 375 | 11 | 0.00 | 0.00 | — | PASS |
+| tw-grid-stats | 768 | 13 | 0.00 | 0.00 | — | PASS |
+| tw-grid-flow-col | 600 | 6 | 0.01 | 0.01 | r.0 (Δw 0.01, Δh 0) | PASS |
+| tw-grid-hero | 768 | 4 | 0.01 | 0.01 | r.0.1 (Δw 0.01, Δh 0) | PASS |
 | react-profile-card | 375 | 13 | 0.01 | 0.01 | r.0.0.1 (Δw 0.01, Δh 0) | PASS |
 | react-button-row | 320 | 3 | 0.01 | 0.01 | r.0 (Δw 0.01, Δh 0) | PASS |
 | react-css-import | 375 | 6 | 0.00 | 0.00 | — | PASS |

@@ -21,7 +21,7 @@ accuracy/, paint-accuracy/   # scoreboards (regenerated in CI)
 vendor/      # pinned @tailwindcss/browser build + NotoColorEmoji (oracle only)
 ```
 
-The stack: Yoga (flexbox) + HarfBuzz-WASM (text shaping — the same shaper
+The stack: Yoga (flexbox) + Taffy (CSS Grid) + HarfBuzz-WASM (text shaping — the same shaper
 Chrome uses) + fontkit (font parsing/outlines) + Intl.Segmenter (line
 breaking), validated against headless Chromium golden files — the oracle
 method [Pretext](https://github.com/chenglou/pretext) proved for text layout.
@@ -46,7 +46,7 @@ including the vendored Noto Color Emoji — is embedded as an `@font-face`
 data URI (per page, only when the case content needs it), so macOS and Linux
 regenerate identical rects (verified ≤0.03px).
 
-## The corpus (316 layout cases, 61 paint cases)
+## The corpus (336 layout cases, 67 paint cases)
 
 - **56 style-object cases** exercise the engine in isolation: nested
   rows/columns, every justify/align value, wrap variants + align-content,
@@ -64,6 +64,12 @@ regenerate identical rects (verified ≤0.03px).
   deterministic pseudo-random trees mixing every supported feature. The
   fuzzer found six divergence classes the curated corpus missed; all fixed.
   Widening the generator is the cheapest way to hunt the next one.
+- **20 grid cases** ([corpora/grid-cases.ts](../corpora/grid-cases.ts) +
+  6 Tailwind `tw-grid-*` components): fr math, minmax(0,1fr) vs 1fr under
+  min-content pressure, spans and negative lines, dense auto-flow, percent
+  tracks, content-sized implicit rows, grids in flex and flex in grid,
+  nested grids, place-* alignment. The Tailwind six are also paint cases
+  (worst 0.6% pixel diff).
 - **19 React component cases** ([corpora/react/](../corpora/react/)): real
   `.tsx` modules — props, hooks, context, CSS/asset imports, tsconfig
   aliases, memo/named exports — executed at oracle time through the
@@ -131,8 +137,19 @@ regenerate identical rects (verified ≤0.03px).
   `renderToStaticMarkup` produces the HTML the parser sees. Effects never
   run; RSC/suspense are out of scope. Metadata tags (`link`, `script`,
   `style`, …) generate no box — including React 19's hoisted preload links.
-- `grid` resolves as a flex column with a warning; Taffy-backed grid is the
-  planned fix. `order-*`, `line-clamp-*`, `w-fit/min/max`, and `max-w-prose`
+- `display:grid` lays out via a Taffy island: the grid subtree is computed
+  by Taffy (WASM) while each grid item's interior recurses back into Yoga;
+  the island is opaque to the flexfix pass. Supported: numbered tracks
+  (`grid-cols-N` as `minmax(0,1fr)`, like Tailwind), spans and explicit
+  lines (negatives included), `grid-flow-*` incl. dense, `auto-cols/rows-*`,
+  `justify-items/self`, `place-*`. Out of scope (warned): arbitrary track
+  lists (`grid-cols-[...]`), named areas/lines, subgrid (Taffy limitation),
+  baseline alignment in grid; `inline-grid` is treated as `grid`
+  (shrink-to-fit in block flow not modeled). Min-content contributions of
+  flex subtrees inside tracks are estimated per CSS rules (text = longest
+  segment; nowrap rows sum; columns/wrap take the max) — an envelope edge,
+  exact for the corpus.
+- `order-*`, `line-clamp-*`, `w-fit/min/max`, and `max-w-prose`
   warn and are skipped.
 - Non-flex elements lay out as stretch columns: correct for Tailwind's
   zeroed-margin world, but block-flow **margin collapsing** and

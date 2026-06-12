@@ -10,11 +10,11 @@ description: >
 
 # Layout checking with layoutlint
 
-layoutlint computes real flexbox layout (Yoga) with real font metrics
-(fontkit) in milliseconds and asserts layout invariants across viewports.
-It is validated against headless-Chromium golden files — treat its reports
-as ground truth for the supported subset (flexbox + Tailwind; grid is
-approximated, see Limits).
+layoutlint computes real flexbox (Yoga) and CSS Grid (Taffy) layout with
+real font metrics (fontkit) in milliseconds and asserts layout invariants
+across viewports. It is validated against headless-Chromium golden files —
+treat its reports as ground truth for the supported subset (flexbox + grid
++ Tailwind, see Limits).
 
 ## When to run
 
@@ -64,7 +64,9 @@ shadows/gradients, which v1 does not paint.
 
 ## Limits (v0)
 
-- Flexbox only; `grid` is approximated as a column and emits a warning.
+- Grid: numbered tracks, spans, auto-flow and place-* work; arbitrary
+  track lists (`grid-cols-[...]`), named areas and subgrid warn and are
+  skipped.
 - Static markup only: JSX expressions/props are not evaluated.
 - Text measures with the bundled Inter font unless fonts are configured.
 - Yoga resolves competing min/max flex constraints single-pass (CSS does it

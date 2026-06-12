@@ -4,6 +4,7 @@ import { join } from 'node:path';
 import { computeLayout, FontStore, parseSource, resolveTree, type TreeNode } from '@layoutlint/core';
 import { cases } from '../../../corpora/cases';
 import { generatedCases } from '../../../corpora/generated';
+import { gridCases } from '../../../corpora/grid-cases';
 import { tailwindCases } from '../../../corpora/tailwind-cases';
 import { GOLDEN_DIR, ORACLE_VIEWPORT_HEIGHT, type GoldenFile } from './golden';
 import { FONTS_DIR, VENDOR_EMOJI } from './html';
@@ -20,6 +21,7 @@ const fonts = new FontStore([
 const name = process.argv[2];
 const all: { name: string; viewport: number; tree: TreeNode }[] = [
   ...cases,
+  ...gridCases,
   ...generatedCases,
   ...tailwindCases.map((c) => ({
     name: c.name,

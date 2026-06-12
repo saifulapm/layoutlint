@@ -290,6 +290,14 @@
       "pass": true
     },
     {
+      "name": "tw-grid-stats",
+      "viewport": 768,
+      "width": 768,
+      "height": 104,
+      "diffPct": 0.6,
+      "pass": true
+    },
+    {
       "name": "react-stat-dashboard",
       "viewport": 375,
       "width": 375,
@@ -386,6 +394,14 @@
       "pass": true
     },
     {
+      "name": "tw-grid-form",
+      "viewport": 375,
+      "width": 375,
+      "height": 220,
+      "diffPct": 0.46,
+      "pass": true
+    },
+    {
       "name": "react-alias-import",
       "viewport": 320,
       "width": 320,
@@ -406,6 +422,14 @@
       "viewport": 768,
       "width": 768,
       "height": 61,
+      "diffPct": 0.43,
+      "pass": true
+    },
+    {
+      "name": "tw-grid-cards",
+      "viewport": 768,
+      "width": 768,
+      "height": 273,
       "diffPct": 0.43,
       "pass": true
     },
@@ -474,6 +498,14 @@
       "pass": true
     },
     {
+      "name": "tw-grid-dashboard",
+      "viewport": 1024,
+      "width": 1024,
+      "height": 252,
+      "diffPct": 0.27,
+      "pass": true
+    },
+    {
       "name": "tw-error-page",
       "viewport": 375,
       "width": 375,
@@ -482,11 +514,27 @@
       "pass": true
     },
     {
+      "name": "tw-grid-hero",
+      "viewport": 768,
+      "width": 768,
+      "height": 256,
+      "diffPct": 0.07,
+      "pass": true
+    },
+    {
       "name": "tw-sidebar-layout",
       "viewport": 1440,
       "width": 1440,
       "height": 2000,
       "diffPct": 0.03,
+      "pass": true
+    },
+    {
+      "name": "tw-grid-flow-col",
+      "viewport": 600,
+      "width": 600,
+      "height": 72,
+      "diffPct": 0,
       "pass": true
     }
   ]

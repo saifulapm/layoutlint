@@ -1,0 +1,38 @@
+{
+  "name": "grid-explicit-placement",
+  "viewport": 600,
+  "chromium": "148.0.7778.96",
+  "generatedAt": "2026-06-12T00:39:30.055Z",
+  "rects": {
+    "r": {
+      "x": 0,
+      "y": 0,
+      "width": 600,
+      "height": 136
+    },
+    "r.0": {
+      "x": 152,
+      "y": 0,
+      "width": 296,
+      "height": 40
+    },
+    "r.1": {
+      "x": 0,
+      "y": 48,
+      "width": 144,
+      "height": 40
+    },
+    "r.2": {
+      "x": 304,
+      "y": 48,
+      "width": 296,
+      "height": 40
+    },
+    "r.3": {
+      "x": 0,
+      "y": 96,
+      "width": 144,
+      "height": 40
+    }
+  }
+}

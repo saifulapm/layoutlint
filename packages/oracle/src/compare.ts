@@ -12,6 +12,7 @@ import { join } from 'node:path';
 import { computeLayout, FontStore, parseSource, resolveTree, type Box, type TreeNode } from '@layoutlint/core';
 import { cases } from '../../../corpora/cases';
 import { generatedCases } from '../../../corpora/generated';
+import { gridCases } from '../../../corpora/grid-cases';
 import { tailwindCases } from '../../../corpora/tailwind-cases';
 import { ACCURACY_DIR, GOLDEN_DIR, ORACLE_VIEWPORT_HEIGHT, type GoldenFile } from './golden';
 import { resolvedReactCases } from './react-html';
@@ -57,6 +58,7 @@ const results: CaseResult[] = [];
 const allCases: { name: string; viewport: number; tree: TreeNode }[] = [
   ...cases,
   ...generatedCases,
+  ...gridCases,
   ...tailwindCases.map((c) => ({
     name: c.name,
     viewport: c.viewport,

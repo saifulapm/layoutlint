@@ -1,0 +1,26 @@
+{
+  "name": "grid-min-content-pressure",
+  "viewport": 320,
+  "chromium": "148.0.7778.96",
+  "generatedAt": "2026-06-12T00:39:31.235Z",
+  "rects": {
+    "r": {
+      "x": 0,
+      "y": 0,
+      "width": 320,
+      "height": 56
+    },
+    "r.0": {
+      "x": 8,
+      "y": 8,
+      "width": 148,
+      "height": 40
+    },
+    "r.1": {
+      "x": 164,
+      "y": 8,
+      "width": 148,
+      "height": 40
+    }
+  }
+}

@@ -128,10 +128,51 @@ function applyClass(cls: string, r: ClassResolution, opts: ResolveOptions): void
     case 'flex': case 'inline-flex': r.isFlex = true; return;
     case 'block': case 'inline-block': case 'flow-root': case 'inline': return;
     case 'hidden': s.display = 'none'; return;
-    case 'grid': case 'inline-grid':
-      warn(`"${cls}" approximated as a flex column in v0 (Taffy grid support is planned)`);
-      s.flexDirection = 'column';
+    case 'grid': s.display = 'grid'; return;
+    case 'inline-grid':
+      warn('"inline-grid" treated as grid (inline shrink-to-fit in block flow is not modeled)');
+      s.display = 'grid';
       return;
+    case 'grid-flow-row': s.gridAutoFlow = 'row'; return;
+    case 'grid-flow-col': s.gridAutoFlow = 'column'; return;
+    case 'grid-flow-dense': s.gridAutoFlow = 'row dense'; return;
+    case 'grid-flow-row-dense': s.gridAutoFlow = 'row dense'; return;
+    case 'grid-flow-col-dense': s.gridAutoFlow = 'column dense'; return;
+    case 'col-span-full': s.gridColumn = { start: 1, end: -1 }; return;
+    case 'row-span-full': s.gridRow = { start: 1, end: -1 }; return;
+    case 'col-auto': case 'row-auto': return; // grid-column/row: auto — the default
+    case 'justify-items-start': s.justifyItems = 'start'; return;
+    case 'justify-items-end': s.justifyItems = 'end'; return;
+    case 'justify-items-center': s.justifyItems = 'center'; return;
+    case 'justify-items-stretch': s.justifyItems = 'stretch'; return;
+    case 'justify-self-auto': s.justifySelf = 'auto'; return;
+    case 'justify-self-start': s.justifySelf = 'start'; return;
+    case 'justify-self-end': s.justifySelf = 'end'; return;
+    case 'justify-self-center': s.justifySelf = 'center'; return;
+    case 'justify-self-stretch': s.justifySelf = 'stretch'; return;
+    case 'place-items-start': s.alignItems = 'flex-start'; s.justifyItems = 'start'; return;
+    case 'place-items-end': s.alignItems = 'flex-end'; s.justifyItems = 'end'; return;
+    case 'place-items-center': s.alignItems = 'center'; s.justifyItems = 'center'; return;
+    case 'place-items-stretch': s.alignItems = 'stretch'; s.justifyItems = 'stretch'; return;
+    case 'place-content-start': s.alignContent = 'flex-start'; s.justifyContent = 'flex-start'; return;
+    case 'place-content-end': s.alignContent = 'flex-end'; s.justifyContent = 'flex-end'; return;
+    case 'place-content-center': s.alignContent = 'center'; s.justifyContent = 'center'; return;
+    case 'place-content-between': s.alignContent = 'space-between'; s.justifyContent = 'space-between'; return;
+    case 'place-content-around': s.alignContent = 'space-around'; s.justifyContent = 'space-around'; return;
+    case 'place-content-evenly':
+      warn('"place-content-evenly" cross-axis approximated as space-around (no space-evenly align-content)');
+      s.alignContent = 'space-around';
+      s.justifyContent = 'space-evenly';
+      return;
+    case 'place-content-stretch':
+      warn('"place-content-stretch" inline axis not modeled (justify-content has no stretch)');
+      s.alignContent = 'stretch';
+      return;
+    case 'place-self-auto': s.alignSelf = 'auto'; s.justifySelf = 'auto'; return;
+    case 'place-self-start': s.alignSelf = 'flex-start'; s.justifySelf = 'start'; return;
+    case 'place-self-end': s.alignSelf = 'flex-end'; s.justifySelf = 'end'; return;
+    case 'place-self-center': s.alignSelf = 'center'; s.justifySelf = 'center'; return;
+    case 'place-self-stretch': s.alignSelf = 'stretch'; s.justifySelf = 'stretch'; return;
     case 'flex-row': s.flexDirection = 'row'; return;
     case 'flex-row-reverse': s.flexDirection = 'row-reverse'; return;
     case 'flex-col': s.flexDirection = 'column'; return;
@@ -221,6 +262,49 @@ function applyClass(cls: string, r: ClassResolution, opts: ResolveOptions): void
     if (!sub) r.style.gap = v;
     else if (sub[1] === 'x') r.style.columnGap = v;
     else r.style.rowGap = v;
+    return;
+  }
+
+  // grid template tracks: grid-cols-N emits repeat(N, minmax(0,1fr)) like Tailwind
+  if ((m = cls.match(/^grid-(cols|rows)-(.+)$/))) {
+    const key = m[1] === 'cols' ? 'gridTemplateColumns' : 'gridTemplateRows';
+    if (/^\d+$/.test(m[2])) {
+      s[key] = Array.from({ length: parseInt(m[2]) }, () => ({ min: 0, max: '1fr' as const }));
+      return;
+    }
+    if (m[2] === 'none') { delete s[key]; return; }
+    if (m[2] === 'subgrid') return warn(`"${cls}" — subgrid is not supported (Taffy limitation)`);
+    return warn(`"${cls}" — arbitrary grid track lists are not supported in v1`);
+  }
+
+  // grid item placement: col/row start/end lines (negative lines allowed)
+  if ((m = cls.match(/^(col|row)-(start|end)-(.+)$/))) {
+    const key = m[1] === 'col' ? 'gridColumn' : 'gridRow';
+    const v = m[3] === 'auto' ? ('auto' as const) : /^-?\d+$/.test(m[3]) ? parseInt(m[3]) : undefined;
+    if (v === undefined) return warn(`could not resolve "${cls}"`);
+    s[key] = { ...s[key], [m[2]]: v };
+    return;
+  }
+
+  // grid item spans (col-span-full / row-span-full are handled above)
+  if ((m = cls.match(/^(col|row)-span-(.+)$/))) {
+    const key = m[1] === 'col' ? 'gridColumn' : 'gridRow';
+    if (!/^\d+$/.test(m[2])) return warn(`could not resolve "${cls}"`);
+    s[key] = { ...s[key], span: parseInt(m[2]) };
+    return;
+  }
+
+  // implicit track sizing (auto-cols-fr is minmax(0,1fr), like Tailwind)
+  if ((m = cls.match(/^auto-(cols|rows)-(.+)$/))) {
+    const key = m[1] === 'cols' ? 'gridAutoColumns' : 'gridAutoRows';
+    const v =
+      m[2] === 'auto' ? ('auto' as const)
+      : m[2] === 'min' ? ('min-content' as const)
+      : m[2] === 'max' ? ('max-content' as const)
+      : m[2] === 'fr' ? { min: 0, max: '1fr' as const }
+      : undefined;
+    if (v === undefined) return warn(`could not resolve "${cls}"`);
+    s[key] = v;
     return;
   }
 
@@ -492,8 +576,10 @@ export function resolveTree(raw: TreeNode, opts: ResolveOptions): ResolveResult 
       return node;
     }
 
-    // block elements lay out like a stretch column; flex defaults to row
-    if (!r.isFlex && style.flexDirection === undefined) style.flexDirection = 'column';
+    // block elements lay out like a stretch column; flex defaults to row;
+    // grid containers take neither (the grid island ignores flexDirection)
+    if (!r.isFlex && style.display !== 'grid' && style.flexDirection === undefined)
+      style.flexDirection = 'column';
 
     node.children = (n.children ?? []).map((c, i) => {
       const childSel = `${selector} > ${c.tag ?? 'div'}${(c.classes?.[0] && `.${c.classes[0]}`) || ''}`;

@@ -1,0 +1,32 @@
+{
+  "name": "grid-auto-flow-dense",
+  "viewport": 600,
+  "chromium": "148.0.7778.96",
+  "generatedAt": "2026-06-12T00:39:30.402Z",
+  "rects": {
+    "r": {
+      "x": 0,
+      "y": 0,
+      "width": 600,
+      "height": 106
+    },
+    "r.0": {
+      "x": 202,
+      "y": 0,
+      "width": 398,
+      "height": 50
+    },
+    "r.1": {
+      "x": 0,
+      "y": 56,
+      "width": 398,
+      "height": 50
+    },
+    "r.2": {
+      "x": 0,
+      "y": 0,
+      "width": 196,
+      "height": 50
+    }
+  }
+}
