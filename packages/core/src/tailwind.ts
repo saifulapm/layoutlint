@@ -164,7 +164,10 @@ function applyClass(cls: string, r: ClassResolution, opts: ResolveOptions): void
       s.alignContent = 'space-around';
       s.justifyContent = 'space-evenly';
       return;
-    case 'place-content-stretch': s.alignContent = 'stretch'; return;
+    case 'place-content-stretch':
+      warn('"place-content-stretch" inline axis not modeled (justify-content has no stretch)');
+      s.alignContent = 'stretch';
+      return;
     case 'place-self-auto': s.alignSelf = 'auto'; s.justifySelf = 'auto'; return;
     case 'place-self-start': s.alignSelf = 'flex-start'; s.justifySelf = 'start'; return;
     case 'place-self-end': s.alignSelf = 'flex-end'; s.justifySelf = 'end'; return;

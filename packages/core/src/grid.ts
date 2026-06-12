@@ -9,14 +9,15 @@
  * raw FRACTIONS ('0.25%' = CSS 25%), rounding must be disabled, and
  * getLayout returns item border-box rects.
  */
+import { readFileSync } from 'node:fs';
 import {
   AlignContent,
   AlignItems,
   AlignSelf,
   Display,
   GridAutoFlow,
+  initSync,
   JustifyContent,
-  loadTaffy,
   Style as TaffyStyle,
   TaffyTree,
   type GridPlacement as TaffyGridPlacement,
@@ -28,7 +29,16 @@ import type { SubtreeResult } from './layout';
 import { measureText } from './text';
 import type { Box, GridPlacement, GridTrack, Style, TreeNode } from './types';
 
-await loadTaffy();
+// Lazy, synchronous WASM init on the first grid encounter — flex-only checks
+// never pay the ~500KB Taffy compile. (loadTaffy() is async; computeLayout is
+// sync, so read + initSync the module ourselves.)
+let taffyReady = false;
+function ensureTaffy(): void {
+  if (taffyReady) return;
+  const js = import.meta.resolve('taffy-layout/wasm');
+  initSync({ module: readFileSync(new URL('./taffy_wasm_bg.wasm', js)) });
+  taffyReady = true;
+}
 
 /** Injected to break the layout.ts ↔ grid.ts runtime cycle (type-only above). */
 export type SubtreeLayoutFn = (
@@ -257,6 +267,7 @@ export function layoutGridIsland(
   path: string,
   layoutSubtree: SubtreeLayoutFn,
 ): SubtreeResult {
+  ensureTaffy();
   const style = container.style ?? {};
   const children = container.children ?? [];
   const tree = new TaffyTree();
