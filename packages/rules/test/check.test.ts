@@ -70,11 +70,19 @@ describe('check()', () => {
     expect(at1440.pass).toBe(true); // row fits at desktop
   });
 
-  test('grid emits a warning, not a crash', async () => {
-    const report = await check(`<div className="grid gap-2 p-2"><p>cell</p></div>`, {
+  test('grid resolves without warnings', async () => {
+    const report = await check(
+      `<div className="grid grid-cols-2 gap-2 p-2"><p>cell</p><p>cell</p></div>`,
+      { viewports: [375] },
+    );
+    expect(report.warnings).toEqual([]);
+  });
+
+  test('out-of-scope grid classes warn, not crash', async () => {
+    const report = await check(`<div className="grid grid-cols-[200px_1fr] gap-2"><p>cell</p></div>`, {
       viewports: [375],
     });
-    expect(report.warnings.some((w) => w.includes('grid'))).toBe(true);
+    expect(report.warnings.some((w) => w.includes('arbitrary grid track lists'))).toBe(true);
   });
 
   test('min-w-0 + truncate row resolves like the browser (no false overflow)', async () => {
