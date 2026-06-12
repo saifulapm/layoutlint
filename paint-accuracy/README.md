@@ -41,6 +41,7 @@ The residual is rasterizer antialiasing (resvg vs Skia) on glyph edges.
 | tw-cookie-banner | 320 | 320×384 | 0.68 | PASS |
 | tw-navbar | 768 | 768×45 | 0.67 | PASS |
 | react-settings-form | 375 | 375×300 | 0.66 | PASS |
+| tw-grid-stats | 768 | 768×104 | 0.6 | PASS |
 | react-stat-dashboard | 375 | 375×196 | 0.6 | PASS |
 | tw-feature-grid-as-flex | 768 | 768×213 | 0.57 | PASS |
 | tw-stats-responsive | 320 | 320×212 | 0.55 | PASS |
@@ -53,9 +54,11 @@ The residual is rasterizer antialiasing (resvg vs Skia) on glyph edges.
 | tw-breadcrumbs | 768 | 768×44 | 0.48 | PASS |
 | tw-avatar-stack-row | 375 | 375×58 | 0.48 | PASS |
 | react-pricing-props | 375 | 375×384 | 0.48 | PASS |
+| tw-grid-form | 375 | 375×220 | 0.46 | PASS |
 | react-alias-import | 320 | 320×200 | 0.44 | PASS |
 | tw-pagination | 375 | 375×58 | 0.43 | PASS |
 | tw-search-header | 768 | 768×61 | 0.43 | PASS |
+| tw-grid-cards | 768 | 768×273 | 0.43 | PASS |
 | tw-stats-responsive-sm | 768 | 768×122 | 0.4 | PASS |
 | tw-empty-state | 375 | 375×358 | 0.37 | PASS |
 | tw-user-dropdown | 375 | 375×320 | 0.37 | PASS |
@@ -64,5 +67,8 @@ The residual is rasterizer antialiasing (resvg vs Skia) on glyph edges.
 | react-multi-file | 768 | 768×110 | 0.34 | PASS |
 | react-footer-columns | 320 | 320×469 | 0.34 | PASS |
 | tw-stepper | 768 | 768×80 | 0.27 | PASS |
+| tw-grid-dashboard | 1024 | 1024×252 | 0.27 | PASS |
 | tw-error-page | 375 | 375×2000 | 0.1 | PASS |
+| tw-grid-hero | 768 | 768×256 | 0.07 | PASS |
 | tw-sidebar-layout | 1440 | 1440×2000 | 0.03 | PASS |
+| tw-grid-flow-col | 600 | 600×72 | 0 | PASS |
