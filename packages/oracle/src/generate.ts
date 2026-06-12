@@ -9,6 +9,7 @@ import { join } from 'node:path';
 import { chromium } from 'playwright';
 import { cases } from '../../../corpora/cases';
 import { generatedCases } from '../../../corpora/generated';
+import { gridCases } from '../../../corpora/grid-cases';
 import { tailwindCases } from '../../../corpora/tailwind-cases';
 import { renderCaseHtml, renderTailwindCaseHtml } from './html';
 import { resolvedReactCases } from './react-html';
@@ -29,6 +30,7 @@ mkdirSync(GOLDEN_DIR, { recursive: true });
 const allCases = [
   ...cases.map((c) => ({ name: c.name, viewport: c.viewport, html: renderCaseHtml(c) })),
   ...generatedCases.map((c) => ({ name: c.name, viewport: c.viewport, html: renderCaseHtml(c) })),
+  ...gridCases.map((c) => ({ name: c.name, viewport: c.viewport, html: renderCaseHtml(c) })),
   ...tailwindCases.map((c) => ({ name: c.name, viewport: c.viewport, html: renderTailwindCaseHtml(c.html) })),
   ...(await resolvedReactCases()).map((c) => ({ name: c.name, viewport: c.viewport, html: renderTailwindCaseHtml(c.html) })),
 ];

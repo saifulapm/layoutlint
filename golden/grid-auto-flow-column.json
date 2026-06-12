@@ -1,0 +1,44 @@
+{
+  "name": "grid-auto-flow-column",
+  "viewport": 600,
+  "chromium": "148.0.7778.96",
+  "generatedAt": "2026-06-12T00:39:30.286Z",
+  "rects": {
+    "r": {
+      "x": 0,
+      "y": 0,
+      "width": 600,
+      "height": 168
+    },
+    "r.0": {
+      "x": 0,
+      "y": 0,
+      "width": 120,
+      "height": 80
+    },
+    "r.1": {
+      "x": 0,
+      "y": 88,
+      "width": 120,
+      "height": 80
+    },
+    "r.2": {
+      "x": 128,
+      "y": 0,
+      "width": 120,
+      "height": 80
+    },
+    "r.3": {
+      "x": 128,
+      "y": 88,
+      "width": 120,
+      "height": 80
+    },
+    "r.4": {
+      "x": 256,
+      "y": 0,
+      "width": 120,
+      "height": 80
+    }
+  }
+}

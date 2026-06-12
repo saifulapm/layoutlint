@@ -717,4 +717,119 @@ export const tailwindCases: TailwindCase[] = [
   </div>
 </div>`,
   },
+  {
+    name: 'tw-grid-cards',
+    viewport: 768,
+    html: `
+<div className="grid grid-cols-1 md:grid-cols-3 gap-4 p-6">
+  <div className="flex flex-col gap-2 rounded-lg border border-gray-200 p-4">
+    <div className="h-24 rounded-md bg-blue-100"></div>
+    <p className="text-sm font-semibold">Deterministic</p>
+    <p className="text-xs text-gray-500 leading-relaxed">Same input, same boxes, every time. No flaky screenshots to babysit.</p>
+  </div>
+  <div className="flex flex-col gap-2 rounded-lg border border-gray-200 p-4">
+    <div className="h-24 rounded-md bg-green-100"></div>
+    <p className="text-sm font-semibold">Fast</p>
+    <p className="text-xs text-gray-500 leading-relaxed">Milliseconds per check.</p>
+  </div>
+  <div className="flex flex-col gap-2 rounded-lg border border-gray-200 p-4">
+    <div className="h-24 rounded-md bg-purple-100"></div>
+    <p className="text-sm font-semibold">Agent-shaped</p>
+    <p className="text-xs text-gray-500 leading-relaxed">Violations say what, where, by how much, and how to fix it.</p>
+  </div>
+</div>`,
+  },
+  {
+    name: 'tw-grid-dashboard',
+    viewport: 1024,
+    html: `
+<div className="grid grid-cols-4 gap-4 p-4">
+  <div className="col-span-2 row-span-2 flex flex-col gap-2 rounded-xl border border-gray-200 p-4">
+    <p className="text-sm font-semibold">Traffic overview</p>
+    <div className="flex-1 rounded-md bg-blue-50"></div>
+  </div>
+  <div className="flex flex-col gap-1 rounded-xl border border-gray-200 p-4">
+    <p className="text-xs text-gray-500">Checks run</p>
+    <p className="text-2xl font-bold">14,208</p>
+  </div>
+  <div className="flex flex-col gap-1 rounded-xl border border-gray-200 p-4">
+    <p className="text-xs text-gray-500">Bugs caught</p>
+    <p className="text-2xl font-bold">312</p>
+  </div>
+  <div className="col-span-2 flex items-center justify-between rounded-xl border border-gray-200 p-4">
+    <p className="text-sm font-medium">Median latency</p>
+    <p className="text-lg font-bold">38ms</p>
+  </div>
+  <div className="col-span-full flex items-center gap-2 rounded-xl bg-gray-50 p-3">
+    <div className="size-2 rounded-full bg-green-500"></div>
+    <p className="text-xs text-gray-600">All gates green as of the last push.</p>
+  </div>
+</div>`,
+  },
+  {
+    name: 'tw-grid-form',
+    viewport: 375,
+    html: `
+<div className="grid grid-cols-2 gap-3 p-4">
+  <div className="flex flex-col gap-1">
+    <p className="text-xs font-medium text-gray-700">First name</p>
+    <div className="h-10 rounded-md border border-gray-300"></div>
+  </div>
+  <div className="flex flex-col gap-1">
+    <p className="text-xs font-medium text-gray-700">Last name</p>
+    <div className="h-10 rounded-md border border-gray-300"></div>
+  </div>
+  <div className="col-span-full flex flex-col gap-1">
+    <p className="text-xs font-medium text-gray-700">Email address</p>
+    <div className="h-10 rounded-md border border-gray-300"></div>
+  </div>
+  <div className="col-span-full h-11 rounded-md bg-blue-600"></div>
+</div>`,
+  },
+  {
+    name: 'tw-grid-stats',
+    viewport: 768,
+    html: `
+<div className="grid grid-cols-4 gap-4 p-6">
+  <div className="flex flex-col gap-1">
+    <p className="text-3xl font-bold">316</p>
+    <p className="text-xs text-gray-500">geometry cases</p>
+  </div>
+  <div className="flex flex-col gap-1">
+    <p className="text-3xl font-bold">61</p>
+    <p className="text-xs text-gray-500">paint cases</p>
+  </div>
+  <div className="flex flex-col gap-1">
+    <p className="text-3xl font-bold">1px</p>
+    <p className="text-xs text-gray-500">size threshold</p>
+  </div>
+  <div className="flex flex-col gap-1">
+    <p className="text-3xl font-bold">0</p>
+    <p className="text-xs text-gray-500">browsers shipped</p>
+  </div>
+</div>`,
+  },
+  {
+    name: 'tw-grid-flow-col',
+    viewport: 600,
+    html: `
+<div className="grid grid-flow-col auto-cols-fr gap-2 p-4">
+  <div className="h-10 rounded-md bg-gray-100"></div>
+  <div className="h-10 rounded-md bg-gray-200"></div>
+  <div className="h-10 rounded-md bg-gray-300"></div>
+  <div className="h-10 rounded-md bg-gray-200"></div>
+  <div className="h-10 rounded-md bg-gray-100"></div>
+</div>`,
+  },
+  {
+    name: 'tw-grid-hero',
+    viewport: 768,
+    html: `
+<div className="grid h-64 place-items-center p-6">
+  <div className="flex w-64 flex-col items-center gap-2 rounded-xl border border-gray-200 p-4">
+    <p className="text-lg font-bold">layoutlint</p>
+    <p className="text-xs text-gray-500">grid, now for real</p>
+  </div>
+</div>`,
+  },
 ];
