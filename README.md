@@ -5,12 +5,13 @@ Your coding agent writes UI it can never see. layoutlint is its eyes:
 
 ![layoutlint demo: check catches an overflow at 320px, the suggested one-class fix makes it green](demo/demo.gif)
 
-It computes the real layout — same flexbox resolution as CSS, same text
-shaper as Chrome, real font metrics — instead of launching a browser. Then
+It computes the real layout — same flexbox and CSS Grid resolution as the
+browser, same text shaper as Chrome, real font metrics — instead of
+launching one. Then
 it either **asserts** (overflow, overlap, viewport fit, truncation) or
 **paints** what it computed.
 
-Verified, not approximate: **316/316 layout cases match headless Chromium
+Verified, not approximate: **336/336 layout cases match headless Chromium
 within 1px** (most at 0.00px), and every render is **pixel-diffed against a
 Chromium screenshot**, gated in CI on every push.
 
@@ -98,17 +99,18 @@ const { png } = await render(source, { viewport: 375, format: 'png' });
 
 ## Scope, honestly
 
-Flexbox + Tailwind v4; JSX/HTML fragments or executed React components
-(client-rendered, no RSC). CSS Grid approximates as a column
-(warned). Shadows/gradients/opacity aren't painted yet. Not a browser
+Flexbox + CSS Grid (Taffy-backed: numbered tracks, spans, auto-flow —
+arbitrary track lists, named areas and subgrid warn) + Tailwind v4;
+JSX/HTML fragments or executed React components (client-rendered, no RSC).
+Shadows/gradients/opacity aren't painted yet. Not a browser
 replacement for E2E — a deterministic bug-catcher and renderer for the
 edit-check-fix loop, with documented
 [envelope edges](docs/engineering.md#scope-notes-parser--resolver).
 
 ## How it's validated
 
-A 316-case corpus (hand-written + real Tailwind markup + seeded fuzzing +
-executed React components) is
+A 336-case corpus (hand-written + real Tailwind markup + seeded fuzzing +
+executed React components + grid) is
 rendered in pinned headless Chromium; the engine must match every
 `getBoundingClientRect` within 1px and every screenshot within a documented
 pixel-diff budget — on every push. Scoreboards:

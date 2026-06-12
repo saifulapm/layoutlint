@@ -58,6 +58,7 @@
         "fontkit": "^2.0.4",
         "harfbuzzjs": "^1.2.1",
         "htmlparser2": "^12.0.0",
+        "taffy-layout": "2.0.3",
         "yoga-layout": "^3.2.1",
         "zod": "^3.25.0",
       },
