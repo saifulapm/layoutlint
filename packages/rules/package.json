@@ -1,6 +1,6 @@
 {
   "name": "@saifulapm/layoutlint",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Deterministic UI layout checks and screenshots for JSX/HTML + Tailwind — overflow, overlap, viewport fit, text truncation, SVG/PNG render — in milliseconds, no browser. Validated against headless-Chromium golden files.",
   "keywords": [
     "layout",
@@ -59,8 +59,12 @@
     "react-dom": ">=18"
   },
   "peerDependenciesMeta": {
-    "react": { "optional": true },
-    "react-dom": { "optional": true }
+    "react": {
+      "optional": true
+    },
+    "react-dom": {
+      "optional": true
+    }
   },
   "devDependencies": {
     "@layoutlint/core": "workspace:*"
