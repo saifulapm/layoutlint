@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-06-12T00:40:34.645Z",
-  "passCount": 316,
+  "generatedAt": "2026-06-12T00:56:08.855Z",
+  "passCount": 336,
   "total": 336,
   "results": [
     {
@@ -26686,8 +26686,8 @@
           "dx": 0,
           "dy": 0,
           "dw": 0,
-          "dh": 56,
-          "pass": false
+          "dh": 0,
+          "pass": true
         },
         {
           "path": "r.0",
@@ -26695,73 +26695,73 @@
           "isText": false,
           "dx": 0,
           "dy": 0,
-          "dw": 178.66,
+          "dw": 0.01,
           "dh": 0,
-          "pass": false
+          "pass": true
         },
         {
           "path": "r.1",
           "name": "b",
           "isText": false,
-          "dx": 178.66,
+          "dx": 0.01,
           "dy": 0,
-          "dw": 178.67,
+          "dw": 0,
           "dh": 0,
-          "pass": false
+          "pass": true
         },
         {
           "path": "r.2",
           "name": "c",
           "isText": false,
-          "dx": 357.33,
+          "dx": 0,
           "dy": 0,
-          "dw": 178.67,
+          "dw": 0,
           "dh": 0,
-          "pass": false
+          "pass": true
         },
         {
           "path": "r.3",
           "name": "d",
           "isText": false,
-          "dx": 48,
-          "dy": 56,
-          "dw": 178.66,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0.01,
           "dh": 0,
-          "pass": false
+          "pass": true
         },
         {
           "path": "r.4",
           "name": "e",
           "isText": false,
-          "dx": 130.66,
-          "dy": 56,
-          "dw": 178.67,
+          "dx": 0.01,
+          "dy": 0,
+          "dw": 0,
           "dh": 0,
-          "pass": false
+          "pass": true
         },
         {
           "path": "r.5",
           "name": "f",
           "isText": false,
-          "dx": 309.33,
-          "dy": 56,
-          "dw": 178.67,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
           "dh": 0,
-          "pass": false
+          "pass": true
         }
       ],
-      "pass": false,
-      "maxPosDelta": 357.33,
-      "maxSizeDelta": 178.67,
+      "pass": true,
+      "maxPosDelta": 0.01,
+      "maxSizeDelta": 0.01,
       "worst": {
-        "path": "r.2",
-        "name": "c",
+        "path": "r.0",
+        "name": "a",
         "isText": false,
-        "dx": 357.33,
+        "dx": 0,
         "dy": 0,
-        "dw": 178.67,
+        "dw": 0.01,
         "dh": 0,
-        "pass": false
+        "pass": true
       }
     },
     {
@@ -26784,44 +26784,34 @@
           "isText": false,
           "dx": 0,
           "dy": 0,
-          "dw": 100,
+          "dw": 0,
           "dh": 0,
-          "pass": false
+          "pass": true
         },
         {
           "path": "r.1",
           "name": "one-fr",
           "isText": false,
-          "dx": 100,
+          "dx": 0,
           "dy": 0,
-          "dw": 100,
+          "dw": 0,
           "dh": 0,
-          "pass": false
+          "pass": true
         },
         {
           "path": "r.2",
           "name": "two-fr",
           "isText": false,
-          "dx": 200,
+          "dx": 0,
           "dy": 0,
-          "dw": 200,
+          "dw": 0,
           "dh": 0,
-          "pass": false
+          "pass": true
         }
       ],
-      "pass": false,
-      "maxPosDelta": 200,
-      "maxSizeDelta": 200,
-      "worst": {
-        "path": "r.2",
-        "name": "two-fr",
-        "isText": false,
-        "dx": 200,
-        "dy": 0,
-        "dw": 200,
-        "dh": 0,
-        "pass": false
-      }
+      "pass": true,
+      "maxPosDelta": 0,
+      "maxSizeDelta": 0
     },
     {
       "name": "grid-col-span",
@@ -26834,8 +26824,8 @@
           "dx": 0,
           "dy": 0,
           "dw": 0,
-          "dh": 104,
-          "pass": false
+          "dh": 0,
+          "pass": true
         },
         {
           "path": "r.0",
@@ -26843,54 +26833,44 @@
           "isText": false,
           "dx": 0,
           "dy": 0,
-          "dw": 396,
+          "dw": 0,
           "dh": 0,
-          "pass": false
+          "pass": true
         },
         {
           "path": "r.1",
           "name": "narrow",
           "isText": false,
-          "dx": 396,
+          "dx": 0,
           "dy": 0,
-          "dw": 192,
+          "dw": 0,
           "dh": 0,
-          "pass": false
+          "pass": true
         },
         {
           "path": "r.2",
           "name": "full",
           "isText": false,
-          "dx": 24,
-          "dy": 52,
-          "dw": 600,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
           "dh": 0,
-          "pass": false
+          "pass": true
         },
         {
           "path": "r.3",
           "name": "tail",
           "isText": false,
-          "dx": 36,
-          "dy": 104,
-          "dw": 192,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
           "dh": 0,
-          "pass": false
+          "pass": true
         }
       ],
-      "pass": false,
-      "maxPosDelta": 396,
-      "maxSizeDelta": 600,
-      "worst": {
-        "path": "r.2",
-        "name": "full",
-        "isText": false,
-        "dx": 24,
-        "dy": 52,
-        "dw": 600,
-        "dh": 0,
-        "pass": false
-      }
+      "pass": true,
+      "maxPosDelta": 0,
+      "maxSizeDelta": 0
     },
     {
       "name": "grid-explicit-placement",
@@ -26903,63 +26883,53 @@
           "dx": 0,
           "dy": 0,
           "dw": 0,
-          "dh": 96,
-          "pass": false
+          "dh": 0,
+          "pass": true
         },
         {
           "path": "r.0",
           "name": "mid",
           "isText": false,
-          "dx": 152,
+          "dx": 0,
           "dy": 0,
-          "dw": 296,
+          "dw": 0,
           "dh": 0,
-          "pass": false
+          "pass": true
         },
         {
           "path": "r.1",
           "name": "first",
           "isText": false,
-          "dx": 8,
-          "dy": 48,
-          "dw": 144,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
           "dh": 0,
-          "pass": false
+          "pass": true
         },
         {
           "path": "r.2",
           "name": "to-end",
           "isText": false,
-          "dx": 288,
-          "dy": 48,
-          "dw": 296,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
           "dh": 0,
-          "pass": false
+          "pass": true
         },
         {
           "path": "r.3",
           "name": "auto",
           "isText": false,
-          "dx": 24,
-          "dy": 96,
-          "dw": 144,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
           "dh": 0,
-          "pass": false
+          "pass": true
         }
       ],
-      "pass": false,
-      "maxPosDelta": 288,
-      "maxSizeDelta": 296,
-      "worst": {
-        "path": "r.0",
-        "name": "mid",
-        "isText": false,
-        "dx": 152,
-        "dy": 0,
-        "dw": 296,
-        "dh": 0,
-        "pass": false
-      }
+      "pass": true,
+      "maxPosDelta": 0,
+      "maxSizeDelta": 0
     },
     {
       "name": "grid-row-placement",
@@ -26972,8 +26942,8 @@
           "dx": 0,
           "dy": 0,
           "dw": 0,
-          "dh": 200,
-          "pass": false
+          "dh": 0,
+          "pass": true
         },
         {
           "path": "r.0",
@@ -26981,54 +26951,44 @@
           "isText": false,
           "dx": 0,
           "dy": 0,
-          "dw": 295,
-          "dh": 130,
-          "pass": false
+          "dw": 0,
+          "dh": 0,
+          "pass": true
         },
         {
           "path": "r.1",
           "name": "top-right",
           "isText": false,
-          "dx": 295,
+          "dx": 0,
           "dy": 0,
-          "dw": 295,
-          "dh": 60,
-          "pass": false
+          "dw": 0,
+          "dh": 0,
+          "pass": true
         },
         {
           "path": "r.2",
           "name": "span-down",
           "isText": false,
-          "dx": 285,
-          "dy": 70,
-          "dw": 295,
-          "dh": 130,
-          "pass": false
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
         },
         {
           "path": "r.3",
           "name": "bottom-left",
           "isText": false,
-          "dx": 30,
-          "dy": 140,
-          "dw": 295,
-          "dh": 60,
-          "pass": false
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
         }
       ],
-      "pass": false,
-      "maxPosDelta": 295,
-      "maxSizeDelta": 295,
-      "worst": {
-        "path": "r.0",
-        "name": "tall",
-        "isText": false,
-        "dx": 0,
-        "dy": 0,
-        "dw": 295,
-        "dh": 130,
-        "pass": false
-      }
+      "pass": true,
+      "maxPosDelta": 0,
+      "maxSizeDelta": 0
     },
     {
       "name": "grid-auto-flow-column",
@@ -27041,8 +27001,8 @@
           "dx": 0,
           "dy": 0,
           "dw": 0,
-          "dh": 168,
-          "pass": false
+          "dh": 0,
+          "pass": true
         },
         {
           "path": "r.0",
@@ -27050,64 +27010,54 @@
           "isText": false,
           "dx": 0,
           "dy": 0,
-          "dw": 120,
-          "dh": 80,
-          "pass": false
+          "dw": 0,
+          "dh": 0,
+          "pass": true
         },
         {
           "path": "r.1",
           "name": "b",
           "isText": false,
-          "dx": 8,
-          "dy": 88,
-          "dw": 120,
-          "dh": 80,
-          "pass": false
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
         },
         {
           "path": "r.2",
           "name": "c",
           "isText": false,
-          "dx": 112,
+          "dx": 0,
           "dy": 0,
-          "dw": 120,
-          "dh": 80,
-          "pass": false
+          "dw": 0,
+          "dh": 0,
+          "pass": true
         },
         {
           "path": "r.3",
           "name": "d",
           "isText": false,
-          "dx": 104,
-          "dy": 88,
-          "dw": 120,
-          "dh": 80,
-          "pass": false
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
         },
         {
           "path": "r.4",
           "name": "e",
           "isText": false,
-          "dx": 224,
+          "dx": 0,
           "dy": 0,
-          "dw": 120,
-          "dh": 80,
-          "pass": false
+          "dw": 0,
+          "dh": 0,
+          "pass": true
         }
       ],
-      "pass": false,
-      "maxPosDelta": 224,
-      "maxSizeDelta": 168,
-      "worst": {
-        "path": "r.4",
-        "name": "e",
-        "isText": false,
-        "dx": 224,
-        "dy": 0,
-        "dw": 120,
-        "dh": 80,
-        "pass": false
-      }
+      "pass": true,
+      "maxPosDelta": 0,
+      "maxSizeDelta": 0
     },
     {
       "name": "grid-auto-flow-dense",
@@ -27120,53 +27070,43 @@
           "dx": 0,
           "dy": 0,
           "dw": 0,
-          "dh": 106,
-          "pass": false
+          "dh": 0,
+          "pass": true
         },
         {
           "path": "r.0",
           "name": "pinned",
           "isText": false,
-          "dx": 202,
+          "dx": 0,
           "dy": 0,
-          "dw": 398,
-          "dh": 50,
-          "pass": false
+          "dw": 0,
+          "dh": 0,
+          "pass": true
         },
         {
           "path": "r.1",
           "name": "wide",
           "isText": false,
-          "dx": 6,
-          "dy": 56,
-          "dw": 398,
-          "dh": 50,
-          "pass": false
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
         },
         {
           "path": "r.2",
           "name": "backfill",
           "isText": false,
-          "dx": 12,
+          "dx": 0,
           "dy": 0,
-          "dw": 196,
-          "dh": 50,
-          "pass": false
+          "dw": 0,
+          "dh": 0,
+          "pass": true
         }
       ],
-      "pass": false,
-      "maxPosDelta": 202,
-      "maxSizeDelta": 398,
-      "worst": {
-        "path": "r.0",
-        "name": "pinned",
-        "isText": false,
-        "dx": 202,
-        "dy": 0,
-        "dw": 398,
-        "dh": 50,
-        "pass": false
-      }
+      "pass": true,
+      "maxPosDelta": 0,
+      "maxSizeDelta": 0
     },
     {
       "name": "grid-auto-rows-content",
@@ -27179,8 +27119,8 @@
           "dx": 0,
           "dy": 0,
           "dw": 0,
-          "dh": 36,
-          "pass": false
+          "dh": 0,
+          "pass": true
         },
         {
           "path": "r.0",
@@ -27188,54 +27128,44 @@
           "isText": true,
           "dx": 0,
           "dy": 0,
-          "dw": 138.48,
-          "dh": 24,
-          "pass": false
+          "dw": 0,
+          "dh": 0,
+          "pass": true
         },
         {
           "path": "r.1",
           "name": "long",
           "isText": true,
-          "dx": 138.48,
+          "dx": 0,
           "dy": 0,
-          "dw": 33.6,
-          "dh": 24,
-          "pass": false
+          "dw": 0,
+          "dh": 0,
+          "pass": true
         },
         {
           "path": "r.2",
           "name": "second-row",
           "isText": true,
-          "dx": 258.11,
-          "dy": 132,
-          "dw": 88.61,
-          "dh": 96,
-          "pass": false
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
         },
         {
           "path": "r.3",
           "name": "block",
           "isText": false,
-          "dx": 169.5,
-          "dy": 132,
-          "dw": 169.5,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
           "dh": 0,
-          "pass": false
+          "pass": true
         }
       ],
-      "pass": false,
-      "maxPosDelta": 258.11,
-      "maxSizeDelta": 169.5,
-      "worst": {
-        "path": "r.2",
-        "name": "second-row",
-        "isText": true,
-        "dx": 258.11,
-        "dy": 132,
-        "dw": 88.61,
-        "dh": 96,
-        "pass": false
-      }
+      "pass": true,
+      "maxPosDelta": 0,
+      "maxSizeDelta": 0
     },
     {
       "name": "grid-percent-tracks",
@@ -27248,8 +27178,8 @@
           "dx": 0,
           "dy": 0,
           "dw": 0,
-          "dh": 50,
-          "pass": false
+          "dh": 0,
+          "pass": true
         },
         {
           "path": "r.0",
@@ -27257,54 +27187,44 @@
           "isText": false,
           "dx": 0,
           "dy": 0,
-          "dw": 100,
+          "dw": 0,
           "dh": 0,
-          "pass": false
+          "pass": true
         },
         {
           "path": "r.1",
           "name": "b",
           "isText": false,
-          "dx": 100,
+          "dx": 0,
           "dy": 0,
-          "dw": 300,
+          "dw": 0,
           "dh": 0,
-          "pass": false
+          "pass": true
         },
         {
           "path": "r.2",
           "name": "c",
           "isText": false,
-          "dx": 40,
-          "dy": 50,
-          "dw": 100,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
           "dh": 0,
-          "pass": false
+          "pass": true
         },
         {
           "path": "r.3",
           "name": "d",
           "isText": false,
-          "dx": 60,
-          "dy": 50,
-          "dw": 300,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
           "dh": 0,
-          "pass": false
+          "pass": true
         }
       ],
-      "pass": false,
-      "maxPosDelta": 100,
-      "maxSizeDelta": 300,
-      "worst": {
-        "path": "r.1",
-        "name": "b",
-        "isText": false,
-        "dx": 100,
-        "dy": 0,
-        "dw": 300,
-        "dh": 0,
-        "pass": false
-      }
+      "pass": true,
+      "maxPosDelta": 0,
+      "maxSizeDelta": 0
     },
     {
       "name": "grid-in-flex",
@@ -27346,54 +27266,44 @@
           "isText": false,
           "dx": 0,
           "dy": 0,
-          "dw": 197,
+          "dw": 0,
           "dh": 0,
-          "pass": false
+          "pass": true
         },
         {
           "path": "r.1.1",
           "name": "cell-2",
           "isText": false,
-          "dx": 197,
+          "dx": 0,
           "dy": 0,
-          "dw": 197,
+          "dw": 0,
           "dh": 0,
-          "pass": false
+          "pass": true
         },
         {
           "path": "r.1.2",
           "name": "cell-3",
           "isText": false,
-          "dx": 16,
-          "dy": 64,
-          "dw": 197,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
           "dh": 0,
-          "pass": false
+          "pass": true
         },
         {
           "path": "r.1.3",
           "name": "cell-4",
           "isText": false,
-          "dx": 181,
-          "dy": 64,
-          "dw": 197,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
           "dh": 0,
-          "pass": false
+          "pass": true
         }
       ],
-      "pass": false,
-      "maxPosDelta": 197,
-      "maxSizeDelta": 197,
-      "worst": {
-        "path": "r.1.0",
-        "name": "cell-1",
-        "isText": false,
-        "dx": 0,
-        "dy": 0,
-        "dw": 197,
-        "dh": 0,
-        "pass": false
-      }
+      "pass": true,
+      "maxPosDelta": 0,
+      "maxSizeDelta": 0
     },
     {
       "name": "flex-in-grid",
@@ -27406,8 +27316,8 @@
           "dx": 0,
           "dy": 0,
           "dw": 0,
-          "dh": 16,
-          "pass": false
+          "dh": 0,
+          "pass": true
         },
         {
           "path": "r.0",
@@ -27415,54 +27325,44 @@
           "isText": false,
           "dx": 0,
           "dy": 0,
-          "dw": 200,
+          "dw": 0,
           "dh": 0,
-          "pass": false
+          "pass": true
         },
         {
           "path": "r.1",
           "name": "flex-cell",
           "isText": false,
-          "dx": 200,
+          "dx": 0,
           "dy": 0,
-          "dw": 200,
-          "dh": 16,
-          "pass": false
+          "dw": 0,
+          "dh": 0,
+          "pass": true
         },
         {
           "path": "r.1.0",
           "name": "avatar",
           "isText": false,
-          "dx": 200,
+          "dx": 0,
           "dy": 0,
           "dw": 0,
           "dh": 0,
-          "pass": false
+          "pass": true
         },
         {
           "path": "r.1.1",
           "name": "label",
           "isText": true,
-          "dx": 200,
+          "dx": 0,
           "dy": 0,
-          "dw": 200,
-          "dh": 16,
-          "pass": false
+          "dw": 0,
+          "dh": 0,
+          "pass": true
         }
       ],
-      "pass": false,
-      "maxPosDelta": 200,
-      "maxSizeDelta": 200,
-      "worst": {
-        "path": "r.0",
-        "name": "fixed-cell",
-        "isText": false,
-        "dx": 0,
-        "dy": 0,
-        "dw": 200,
-        "dh": 0,
-        "pass": false
-      }
+      "pass": true,
+      "maxPosDelta": 0,
+      "maxSizeDelta": 0
     },
     {
       "name": "grid-nested",
@@ -27475,8 +27375,8 @@
           "dx": 0,
           "dy": 0,
           "dw": 0,
-          "dh": 34,
-          "pass": false
+          "dh": 0,
+          "pass": true
         },
         {
           "path": "r.0",
@@ -27484,9 +27384,9 @@
           "isText": false,
           "dx": 0,
           "dy": 0,
-          "dw": 270,
-          "dh": 34,
-          "pass": false
+          "dw": 0,
+          "dh": 0,
+          "pass": true
         },
         {
           "path": "r.0.0",
@@ -27494,64 +27394,54 @@
           "isText": false,
           "dx": 0,
           "dy": 0,
-          "dw": 139,
+          "dw": 0,
           "dh": 0,
-          "pass": false
+          "pass": true
         },
         {
           "path": "r.0.1",
           "name": "i2",
           "isText": false,
-          "dx": 139,
+          "dx": 0,
           "dy": 0,
-          "dw": 139,
+          "dw": 0,
           "dh": 0,
-          "pass": false
+          "pass": true
         },
         {
           "path": "r.0.2",
           "name": "i3",
           "isText": false,
-          "dx": 8,
-          "dy": 34,
-          "dw": 139,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
           "dh": 0,
-          "pass": false
+          "pass": true
         },
         {
           "path": "r.0.3",
           "name": "i4",
           "isText": false,
-          "dx": 131,
-          "dy": 34,
-          "dw": 139,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
           "dh": 0,
-          "pass": false
+          "pass": true
         },
         {
           "path": "r.1",
           "name": "plain",
           "isText": false,
-          "dx": 270,
+          "dx": 0,
           "dy": 0,
-          "dw": 282,
-          "dh": 34,
-          "pass": false
+          "dw": 0,
+          "dh": 0,
+          "pass": true
         }
       ],
-      "pass": false,
-      "maxPosDelta": 270,
-      "maxSizeDelta": 282,
-      "worst": {
-        "path": "r.1",
-        "name": "plain",
-        "isText": false,
-        "dx": 270,
-        "dy": 0,
-        "dw": 282,
-        "dh": 34,
-        "pass": false
-      }
+      "pass": true,
+      "maxPosDelta": 0,
+      "maxSizeDelta": 0
     },
     {
       "name": "grid-alignment",
@@ -27564,52 +27454,52 @@
           "dx": 0,
           "dy": 0,
           "dw": 0,
-          "dh": 50,
-          "pass": false
+          "dh": 0,
+          "pass": true
         },
         {
           "path": "r.0",
           "name": "centered",
           "isText": false,
-          "dx": 67.33,
-          "dy": 50,
+          "dx": 0,
+          "dy": 0,
           "dw": 0,
           "dh": 0,
-          "pass": false
+          "pass": true
         },
         {
           "path": "r.1",
           "name": "stretched",
           "isText": false,
-          "dx": 134.66,
-          "dy": 50,
-          "dw": 194.67,
+          "dx": 0.01,
+          "dy": 0,
+          "dw": 0,
           "dh": 0,
-          "pass": false
+          "pass": true
         },
         {
           "path": "r.2",
           "name": "top-start",
           "isText": false,
-          "dx": 329.33,
+          "dx": 0,
           "dy": 0,
           "dw": 0,
           "dh": 0,
-          "pass": false
+          "pass": true
         }
       ],
-      "pass": false,
-      "maxPosDelta": 329.33,
-      "maxSizeDelta": 194.67,
+      "pass": true,
+      "maxPosDelta": 0.01,
+      "maxSizeDelta": 0,
       "worst": {
-        "path": "r.2",
-        "name": "top-start",
+        "path": "r.1",
+        "name": "stretched",
         "isText": false,
-        "dx": 329.33,
+        "dx": 0.01,
         "dy": 0,
         "dw": 0,
         "dh": 0,
-        "pass": false
+        "pass": true
       }
     },
     {
@@ -27623,8 +27513,8 @@
           "dx": 0,
           "dy": 0,
           "dw": 0,
-          "dh": 20,
-          "pass": false
+          "dh": 0,
+          "pass": true
         },
         {
           "path": "r.0",
@@ -27632,34 +27522,24 @@
           "isText": true,
           "dx": 0,
           "dy": 0,
-          "dw": 67.16,
-          "dh": 20,
-          "pass": false
+          "dw": 0,
+          "dh": 0,
+          "pass": true
         },
         {
           "path": "r.1",
           "name": "normal",
           "isText": true,
-          "dx": 67.16,
+          "dx": 0,
           "dy": 0,
-          "dw": 67.16,
-          "dh": 20,
-          "pass": false
+          "dw": 0,
+          "dh": 0,
+          "pass": true
         }
       ],
-      "pass": false,
-      "maxPosDelta": 67.16,
-      "maxSizeDelta": 67.16,
-      "worst": {
-        "path": "r.0",
-        "name": "unbreakable",
-        "isText": true,
-        "dx": 0,
-        "dy": 0,
-        "dw": 67.16,
-        "dh": 20,
-        "pass": false
-      }
+      "pass": true,
+      "maxPosDelta": 0,
+      "maxSizeDelta": 0
     },
     {
       "name": "tw-card",
@@ -31865,129 +31745,129 @@
           "dx": 0,
           "dy": 0,
           "dw": 0,
-          "dh": 19.5,
-          "pass": false
+          "dh": 0,
+          "pass": true
         },
         {
           "path": "r.0",
           "isText": false,
           "dx": 0,
           "dy": 0,
-          "dw": 72.06,
-          "dh": 19.5,
-          "pass": false
+          "dw": 0,
+          "dh": 0,
+          "pass": true
         },
         {
           "path": "r.0.0",
           "isText": false,
           "dx": 0,
           "dy": 0,
-          "dw": 72.06,
+          "dw": 0,
           "dh": 0,
-          "pass": false
+          "pass": true
         },
         {
           "path": "r.0.1",
           "isText": true,
           "dx": 0,
           "dy": 0,
-          "dw": 72.06,
+          "dw": 0,
           "dh": 0,
-          "pass": false
+          "pass": true
         },
         {
           "path": "r.0.2",
           "isText": true,
           "dx": 0,
           "dy": 0,
-          "dw": 72.06,
-          "dh": 19.5,
-          "pass": false
+          "dw": 0,
+          "dh": 0,
+          "pass": true
         },
         {
           "path": "r.1",
           "isText": false,
-          "dx": 72.06,
+          "dx": 0,
           "dy": 0,
-          "dw": 104.26,
-          "dh": 19.5,
-          "pass": false
+          "dw": 0,
+          "dh": 0,
+          "pass": true
         },
         {
           "path": "r.1.0",
           "isText": false,
-          "dx": 72.06,
+          "dx": 0,
           "dy": 0,
-          "dw": 104.26,
+          "dw": 0,
           "dh": 0,
-          "pass": false
+          "pass": true
         },
         {
           "path": "r.1.1",
           "isText": true,
-          "dx": 72.06,
+          "dx": 0,
           "dy": 0,
-          "dw": 104.26,
+          "dw": 0,
           "dh": 0,
-          "pass": false
+          "pass": true
         },
         {
           "path": "r.1.2",
           "isText": true,
-          "dx": 72.06,
+          "dx": 0,
           "dy": 0,
-          "dw": 104.26,
-          "dh": 19.5,
-          "pass": false
+          "dw": 0,
+          "dh": 0,
+          "pass": true
         },
         {
           "path": "r.2",
           "isText": false,
-          "dx": 32.2,
+          "dx": 0.01,
           "dy": 0,
-          "dw": 32.21,
-          "dh": 19.5,
-          "pass": false
+          "dw": 0,
+          "dh": 0,
+          "pass": true
         },
         {
           "path": "r.2.0",
           "isText": false,
-          "dx": 32.2,
+          "dx": 0.01,
           "dy": 0,
-          "dw": 32.21,
+          "dw": 0,
           "dh": 0,
-          "pass": false
+          "pass": true
         },
         {
           "path": "r.2.1",
           "isText": true,
-          "dx": 32.2,
+          "dx": 0.01,
           "dy": 0,
-          "dw": 32.21,
+          "dw": 0,
           "dh": 0,
-          "pass": false
+          "pass": true
         },
         {
           "path": "r.2.2",
           "isText": true,
-          "dx": 32.2,
+          "dx": 0.01,
           "dy": 0,
-          "dw": 32.21,
+          "dw": 0,
           "dh": 0,
-          "pass": false
+          "pass": true
         }
       ],
-      "pass": false,
-      "maxPosDelta": 72.06,
-      "maxSizeDelta": 104.26,
+      "pass": true,
+      "maxPosDelta": 0.01,
+      "maxSizeDelta": 0,
       "worst": {
-        "path": "r.1",
+        "path": "r.2",
         "isText": false,
-        "dx": 72.06,
+        "dx": 0.01,
         "dy": 0,
-        "dw": 104.26,
-        "dh": 19.5,
-        "pass": false
+        "dw": 0,
+        "dh": 0,
+        "pass": true
       }
     },
     {
@@ -32000,156 +31880,156 @@
           "dx": 0,
           "dy": 0,
           "dw": 0,
-          "dh": 134,
-          "pass": false
+          "dh": 0,
+          "pass": true
         },
         {
           "path": "r.0",
           "isText": false,
           "dx": 0,
           "dy": 0,
-          "dw": 344.37,
-          "dh": 78,
-          "pass": false
+          "dw": 0,
+          "dh": 0,
+          "pass": true
         },
         {
           "path": "r.0.0",
           "isText": true,
           "dx": 0,
           "dy": 0,
-          "dw": 344.37,
+          "dw": 0,
           "dh": 0,
-          "pass": false
+          "pass": true
         },
         {
           "path": "r.0.1",
           "isText": false,
           "dx": 0,
           "dy": 0,
-          "dw": 344.37,
-          "dh": 78,
-          "pass": false
+          "dw": 0,
+          "dh": 0,
+          "pass": true
         },
         {
           "path": "r.1",
           "isText": false,
-          "dx": 344.37,
+          "dx": 0,
           "dy": 0,
-          "dw": 121.29,
+          "dw": 0,
           "dh": 0,
-          "pass": false
+          "pass": true
         },
         {
           "path": "r.1.0",
           "isText": true,
-          "dx": 344.37,
+          "dx": 0,
           "dy": 0,
-          "dw": 121.29,
+          "dw": 0,
           "dh": 0,
-          "pass": false
+          "pass": true
         },
         {
           "path": "r.1.1",
           "isText": true,
-          "dx": 344.37,
+          "dx": 0,
           "dy": 0,
-          "dw": 121.29,
+          "dw": 0,
           "dh": 0,
-          "pass": false
+          "pass": true
         },
         {
           "path": "r.2",
           "isText": false,
-          "dx": 465.67,
+          "dx": 0,
           "dy": 0,
-          "dw": 130.8,
+          "dw": 0,
           "dh": 0,
-          "pass": false
+          "pass": true
         },
         {
           "path": "r.2.0",
           "isText": true,
-          "dx": 465.67,
+          "dx": 0,
           "dy": 0,
-          "dw": 130.8,
+          "dw": 0,
           "dh": 0,
-          "pass": false
+          "pass": true
         },
         {
           "path": "r.2.1",
           "isText": true,
-          "dx": 465.67,
+          "dx": 0,
           "dy": 0,
-          "dw": 130.8,
+          "dw": 0,
           "dh": 0,
-          "pass": false
+          "pass": true
         },
         {
           "path": "r.3",
           "isText": false,
-          "dx": 92.46,
-          "dy": 102,
-          "dw": 302.25,
-          "dh": 24,
-          "pass": false
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
         },
         {
           "path": "r.3.0",
           "isText": true,
-          "dx": 92.46,
-          "dy": 90,
+          "dx": 0,
+          "dy": 0,
           "dw": 0.01,
           "dh": 0,
-          "pass": false
+          "pass": true
         },
         {
           "path": "r.3.1",
           "isText": true,
-          "dx": 394.72,
-          "dy": 90,
+          "dx": 0,
+          "dy": 0,
           "dw": 0,
           "dh": 0,
-          "pass": false
+          "pass": true
         },
         {
           "path": "r.4",
           "isText": false,
-          "dx": 613.28,
-          "dy": 180,
-          "dw": 756.33,
-          "dh": 46,
-          "pass": false
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
+          "dh": 0,
+          "pass": true
         },
         {
           "path": "r.4.0",
           "isText": false,
-          "dx": 613.28,
-          "dy": 157,
+          "dx": 0,
+          "dy": 0,
           "dw": 0,
           "dh": 0,
-          "pass": false
+          "pass": true
         },
         {
           "path": "r.4.1",
           "isText": true,
-          "dx": 613.28,
-          "dy": 157,
+          "dx": 0,
+          "dy": 0,
           "dw": 0.02,
           "dh": 0,
-          "pass": false
+          "pass": true
         }
       ],
-      "pass": false,
-      "maxPosDelta": 613.28,
-      "maxSizeDelta": 756.33,
+      "pass": true,
+      "maxPosDelta": 0,
+      "maxSizeDelta": 0.02,
       "worst": {
-        "path": "r.4",
-        "isText": false,
-        "dx": 613.28,
-        "dy": 180,
-        "dw": 756.33,
-        "dh": 46,
-        "pass": false
+        "path": "r.4.1",
+        "isText": true,
+        "dx": 0,
+        "dy": 0,
+        "dw": 0.02,
+        "dh": 0,
+        "pass": true
       }
     },
     {
@@ -32162,112 +32042,103 @@
           "dx": 0,
           "dy": 0,
           "dw": 0,
-          "dh": 128,
-          "pass": false
+          "dh": 0,
+          "pass": true
         },
         {
           "path": "r.0",
           "isText": false,
           "dx": 0,
           "dy": 0,
-          "dw": 105.28,
+          "dw": 0,
           "dh": 0,
-          "pass": false
+          "pass": true
         },
         {
           "path": "r.0.0",
           "isText": true,
           "dx": 0,
           "dy": 0,
-          "dw": 105.28,
+          "dw": 0,
           "dh": 0,
-          "pass": false
+          "pass": true
         },
         {
           "path": "r.0.1",
           "isText": false,
           "dx": 0,
           "dy": 0,
-          "dw": 105.28,
+          "dw": 0,
           "dh": 0,
-          "pass": false
+          "pass": true
         },
         {
           "path": "r.1",
           "isText": false,
-          "dx": 105.28,
+          "dx": 0,
           "dy": 0,
-          "dw": 106.41,
+          "dw": 0,
           "dh": 0,
-          "pass": false
+          "pass": true
         },
         {
           "path": "r.1.0",
           "isText": true,
-          "dx": 105.28,
+          "dx": 0,
           "dy": 0,
-          "dw": 106.41,
+          "dw": 0,
           "dh": 0,
-          "pass": false
+          "pass": true
         },
         {
           "path": "r.1.1",
           "isText": false,
-          "dx": 105.28,
+          "dx": 0,
           "dy": 0,
-          "dw": 106.41,
+          "dw": 0,
           "dh": 0,
-          "pass": false
+          "pass": true
         },
         {
           "path": "r.2",
           "isText": false,
-          "dx": 143.31,
-          "dy": 72,
-          "dw": 263.01,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
           "dh": 0,
-          "pass": false
+          "pass": true
         },
         {
           "path": "r.2.0",
           "isText": true,
-          "dx": 143.31,
-          "dy": 72,
-          "dw": 263.01,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
           "dh": 0,
-          "pass": false
+          "pass": true
         },
         {
           "path": "r.2.1",
           "isText": false,
-          "dx": 143.31,
-          "dy": 72,
-          "dw": 263.01,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
           "dh": 0,
-          "pass": false
+          "pass": true
         },
         {
           "path": "r.3",
           "isText": false,
-          "dx": 235.3,
-          "dy": 144,
-          "dw": 343,
+          "dx": 0,
+          "dy": 0,
+          "dw": 0,
           "dh": 0,
-          "pass": false
+          "pass": true
         }
       ],
-      "pass": false,
-      "maxPosDelta": 235.3,
-      "maxSizeDelta": 343,
-      "worst": {
-        "path": "r.3",
-        "isText": false,
-        "dx": 235.3,
-        "dy": 144,
-        "dw": 343,
-        "dh": 0,
-        "pass": false
-      }
+      "pass": true,
+      "maxPosDelta": 0,
+      "maxSizeDelta": 0
     },
     {
       "name": "tw-grid-stats",
@@ -32287,122 +32158,113 @@
           "isText": false,
           "dx": 0,
           "dy": 0,
-          "dw": 76.82,
+          "dw": 0,
           "dh": 0,
-          "pass": false
+          "pass": true
         },
         {
           "path": "r.0.0",
           "isText": true,
           "dx": 0,
           "dy": 0,
-          "dw": 76.82,
+          "dw": 0,
           "dh": 0,
-          "pass": false
+          "pass": true
         },
         {
           "path": "r.0.1",
           "isText": true,
           "dx": 0,
           "dy": 0,
-          "dw": 76.82,
+          "dw": 0,
           "dh": 0,
-          "pass": false
+          "pass": true
         },
         {
           "path": "r.1",
           "isText": false,
-          "dx": 76.82,
+          "dx": 0,
           "dy": 0,
-          "dw": 103.13,
+          "dw": 0,
           "dh": 0,
-          "pass": false
+          "pass": true
         },
         {
           "path": "r.1.0",
           "isText": true,
-          "dx": 76.82,
+          "dx": 0,
           "dy": 0,
-          "dw": 103.13,
+          "dw": 0,
           "dh": 0,
-          "pass": false
+          "pass": true
         },
         {
           "path": "r.1.1",
           "isText": true,
-          "dx": 76.82,
+          "dx": 0,
           "dy": 0,
-          "dw": 103.13,
+          "dw": 0,
           "dh": 0,
-          "pass": false
+          "pass": true
         },
         {
           "path": "r.2",
           "isText": false,
-          "dx": 179.94,
+          "dx": 0,
           "dy": 0,
-          "dw": 88.72,
+          "dw": 0,
           "dh": 0,
-          "pass": false
+          "pass": true
         },
         {
           "path": "r.2.0",
           "isText": true,
-          "dx": 179.94,
+          "dx": 0,
           "dy": 0,
-          "dw": 88.72,
+          "dw": 0,
           "dh": 0,
-          "pass": false
+          "pass": true
         },
         {
           "path": "r.2.1",
           "isText": true,
-          "dx": 179.94,
+          "dx": 0,
           "dy": 0,
-          "dw": 88.72,
+          "dw": 0,
           "dh": 0,
-          "pass": false
+          "pass": true
         },
         {
           "path": "r.3",
           "isText": false,
-          "dx": 268.66,
+          "dx": 0,
           "dy": 0,
-          "dw": 66.6,
+          "dw": 0,
           "dh": 0,
-          "pass": false
+          "pass": true
         },
         {
           "path": "r.3.0",
           "isText": true,
-          "dx": 268.66,
+          "dx": 0,
           "dy": 0,
-          "dw": 66.6,
+          "dw": 0,
           "dh": 0,
-          "pass": false
+          "pass": true
         },
         {
           "path": "r.3.1",
           "isText": true,
-          "dx": 268.66,
+          "dx": 0,
           "dy": 0,
-          "dw": 66.6,
+          "dw": 0,
           "dh": 0,
-          "pass": false
+          "pass": true
         }
       ],
-      "pass": false,
-      "maxPosDelta": 268.66,
-      "maxSizeDelta": 103.13,
-      "worst": {
-        "path": "r.3",
-        "isText": false,
-        "dx": 268.66,
-        "dy": 0,
-        "dw": 66.6,
-        "dh": 0,
-        "pass": false
-      }
+      "pass": true,
+      "maxPosDelta": 0,
+      "maxSizeDelta": 0
     },
     {
       "name": "tw-grid-flow-col",
@@ -32422,58 +32284,58 @@
           "isText": false,
           "dx": 0,
           "dy": 0,
-          "dw": 107.19,
+          "dw": 0.01,
           "dh": 0,
-          "pass": false
+          "pass": true
         },
         {
           "path": "r.1",
           "isText": false,
-          "dx": 107.19,
+          "dx": 0.01,
           "dy": 0,
-          "dw": 107.2,
+          "dw": 0,
           "dh": 0,
-          "pass": false
+          "pass": true
         },
         {
           "path": "r.2",
           "isText": false,
-          "dx": 214.39,
+          "dx": 0.01,
           "dy": 0,
-          "dw": 107.2,
+          "dw": 0,
           "dh": 0,
-          "pass": false
+          "pass": true
         },
         {
           "path": "r.3",
           "isText": false,
-          "dx": 321.59,
+          "dx": 0.01,
           "dy": 0,
-          "dw": 107.2,
+          "dw": 0,
           "dh": 0,
-          "pass": false
+          "pass": true
         },
         {
           "path": "r.4",
           "isText": false,
-          "dx": 428.8,
+          "dx": 0,
           "dy": 0,
-          "dw": 107.19,
+          "dw": 0.01,
           "dh": 0,
-          "pass": false
+          "pass": true
         }
       ],
-      "pass": false,
-      "maxPosDelta": 428.8,
-      "maxSizeDelta": 107.2,
+      "pass": true,
+      "maxPosDelta": 0.01,
+      "maxSizeDelta": 0.01,
       "worst": {
-        "path": "r.4",
+        "path": "r.0",
         "isText": false,
-        "dx": 428.8,
+        "dx": 0,
         "dy": 0,
-        "dw": 107.19,
+        "dw": 0.01,
         "dh": 0,
-        "pass": false
+        "pass": true
       }
     },
     {
@@ -32492,42 +32354,42 @@
         {
           "path": "r.0",
           "isText": false,
-          "dx": 232,
+          "dx": 0,
           "dy": 0,
           "dw": 0,
           "dh": 0,
-          "pass": false
+          "pass": true
         },
         {
           "path": "r.0.0",
           "isText": true,
-          "dx": 232,
+          "dx": 0,
           "dy": 0,
           "dw": 0,
           "dh": 0,
-          "pass": false
+          "pass": true
         },
         {
           "path": "r.0.1",
           "isText": true,
-          "dx": 231.99,
+          "dx": 0.01,
           "dy": 0,
           "dw": 0.01,
           "dh": 0,
-          "pass": false
+          "pass": true
         }
       ],
-      "pass": false,
-      "maxPosDelta": 232,
+      "pass": true,
+      "maxPosDelta": 0.01,
       "maxSizeDelta": 0.01,
       "worst": {
-        "path": "r.0",
-        "isText": false,
-        "dx": 232,
+        "path": "r.0.1",
+        "isText": true,
+        "dx": 0.01,
         "dy": 0,
-        "dw": 0,
+        "dw": 0.01,
         "dh": 0,
-        "pass": false
+        "pass": true
       }
     },
     {

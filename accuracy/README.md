@@ -1,6 +1,6 @@
 # Accuracy scoreboard
 
-Engine (Yoga + fontkit) vs headless Chromium golden files. **316/336** cases within threshold (positions ≤1px, sizes ≤1px, text sizes ≤2px).
+Engine (Yoga + fontkit) vs headless Chromium golden files. **336/336** cases within threshold (positions ≤1px, sizes ≤1px, text sizes ≤2px).
 
 | case | vw | nodes | max Δpos | max Δsize | worst node | result |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -260,20 +260,20 @@ Engine (Yoga + fontkit) vs headless Chromium golden files. **316/336** cases wit
 | gen-198 | 1440 | 27 | 0.01 | 0.01 | r.0 (Δw 0.01, Δh 0) | PASS |
 | gen-199 | 1440 | 5 | 0.02 | 0.01 | r.3 (Δw 0.01, Δh 0) | PASS |
 | gen-200 | 768 | 7 | 0.00 | 0.00 | — | PASS |
-| grid-basic-3col | 600 | 7 | 357.33 | 178.67 | c (Δw 178.67, Δh 0) | FAIL |
-| grid-fr-mix | 400 | 4 | 200.00 | 200.00 | two-fr (Δw 200, Δh 0) | FAIL |
-| grid-col-span | 600 | 5 | 396.00 | 600.00 | full (Δw 600, Δh 0) | FAIL |
-| grid-explicit-placement | 600 | 5 | 288.00 | 296.00 | mid (Δw 296, Δh 0) | FAIL |
-| grid-row-placement | 600 | 5 | 295.00 | 295.00 | tall (Δw 295, Δh 130) | FAIL |
-| grid-auto-flow-column | 600 | 6 | 224.00 | 168.00 | e (Δw 120, Δh 80) | FAIL |
-| grid-auto-flow-dense | 600 | 4 | 202.00 | 398.00 | pinned (Δw 398, Δh 50) | FAIL |
-| grid-auto-rows-content | 375 | 5 | 258.11 | 169.50 | second-row (Δw 88.61, Δh 96) | FAIL |
-| grid-percent-tracks | 400 | 5 | 100.00 | 300.00 | b (Δw 300, Δh 0) | FAIL |
-| grid-in-flex | 600 | 7 | 197.00 | 197.00 | cell-1 (Δw 197, Δh 0) | FAIL |
-| flex-in-grid | 600 | 5 | 200.00 | 200.00 | fixed-cell (Δw 200, Δh 0) | FAIL |
-| grid-nested | 600 | 7 | 270.00 | 282.00 | plain (Δw 282, Δh 34) | FAIL |
-| grid-alignment | 600 | 4 | 329.33 | 194.67 | top-start (Δw 0, Δh 0) | FAIL |
-| grid-min-content-pressure | 320 | 3 | 67.16 | 67.16 | unbreakable (Δw 67.16, Δh 20) | FAIL |
+| grid-basic-3col | 600 | 7 | 0.01 | 0.01 | a (Δw 0.01, Δh 0) | PASS |
+| grid-fr-mix | 400 | 4 | 0.00 | 0.00 | — | PASS |
+| grid-col-span | 600 | 5 | 0.00 | 0.00 | — | PASS |
+| grid-explicit-placement | 600 | 5 | 0.00 | 0.00 | — | PASS |
+| grid-row-placement | 600 | 5 | 0.00 | 0.00 | — | PASS |
+| grid-auto-flow-column | 600 | 6 | 0.00 | 0.00 | — | PASS |
+| grid-auto-flow-dense | 600 | 4 | 0.00 | 0.00 | — | PASS |
+| grid-auto-rows-content | 375 | 5 | 0.00 | 0.00 | — | PASS |
+| grid-percent-tracks | 400 | 5 | 0.00 | 0.00 | — | PASS |
+| grid-in-flex | 600 | 7 | 0.00 | 0.00 | — | PASS |
+| flex-in-grid | 600 | 5 | 0.00 | 0.00 | — | PASS |
+| grid-nested | 600 | 7 | 0.00 | 0.00 | — | PASS |
+| grid-alignment | 600 | 4 | 0.01 | 0.00 | stretched (Δw 0, Δh 0) | PASS |
+| grid-min-content-pressure | 320 | 3 | 0.00 | 0.00 | — | PASS |
 | tw-card | 320 | 12 | 0.01 | 0.01 | r.0.3.0 (Δw 0.01, Δh 0) | PASS |
 | tw-card-wide | 768 | 12 | 0.01 | 0.01 | r.0.3.0 (Δw 0.01, Δh 0) | PASS |
 | tw-navbar | 768 | 6 | 0.03 | 0.03 | r.1 (Δw 0.03, Δh 0) | PASS |
@@ -315,12 +315,12 @@ Engine (Yoga + fontkit) vs headless Chromium golden files. **316/336** cases wit
 | tw-user-dropdown | 375 | 8 | 0.00 | 0.00 | — | PASS |
 | tw-progress-card | 375 | 8 | 0.00 | 0.00 | — | PASS |
 | tw-bangla-mixed-feed | 375 | 6 | 0.00 | 0.00 | — | PASS |
-| tw-grid-cards | 768 | 13 | 72.06 | 104.26 | r.1 (Δw 104.26, Δh 19.5) | FAIL |
-| tw-grid-dashboard | 1024 | 16 | 613.28 | 756.33 | r.4 (Δw 756.33, Δh 46) | FAIL |
-| tw-grid-form | 375 | 11 | 235.30 | 343.00 | r.3 (Δw 343, Δh 0) | FAIL |
-| tw-grid-stats | 768 | 13 | 268.66 | 103.13 | r.3 (Δw 66.6, Δh 0) | FAIL |
-| tw-grid-flow-col | 600 | 6 | 428.80 | 107.20 | r.4 (Δw 107.19, Δh 0) | FAIL |
-| tw-grid-hero | 768 | 4 | 232.00 | 0.01 | r.0 (Δw 0, Δh 0) | FAIL |
+| tw-grid-cards | 768 | 13 | 0.01 | 0.00 | r.2 (Δw 0, Δh 0) | PASS |
+| tw-grid-dashboard | 1024 | 16 | 0.00 | 0.02 | r.4.1 (Δw 0.02, Δh 0) | PASS |
+| tw-grid-form | 375 | 11 | 0.00 | 0.00 | — | PASS |
+| tw-grid-stats | 768 | 13 | 0.00 | 0.00 | — | PASS |
+| tw-grid-flow-col | 600 | 6 | 0.01 | 0.01 | r.0 (Δw 0.01, Δh 0) | PASS |
+| tw-grid-hero | 768 | 4 | 0.01 | 0.01 | r.0.1 (Δw 0.01, Δh 0) | PASS |
 | react-profile-card | 375 | 13 | 0.01 | 0.01 | r.0.0.1 (Δw 0.01, Δh 0) | PASS |
 | react-button-row | 320 | 3 | 0.01 | 0.01 | r.0 (Δw 0.01, Δh 0) | PASS |
 | react-css-import | 375 | 6 | 0.00 | 0.00 | — | PASS |

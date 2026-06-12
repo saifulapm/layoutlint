@@ -1,6 +1,7 @@
 import Yoga from 'yoga-layout';
 import type { FontStore } from './fonts';
 import { correctRowContainer, fitContentWidth } from './flexfix';
+import { layoutGridIsland } from './grid';
 import { measureText } from './text';
 import type { Box, Style, TreeNode } from './types';
 
@@ -130,6 +131,24 @@ export function layoutSubtree(
   type YogaNode = ReturnType<typeof Yoga.Node.create>;
   const yogaNodes = new Map<string, YogaNode>();
 
+  // Grid islands are opaque to Yoga: computed by Taffy, cached per constraint
+  // (the measure func fires across flexfix passes; collect reuses the final).
+  const islandCache = new Map<string, SubtreeResult>();
+  const islandAt = (
+    n: TreeNode,
+    path: string,
+    w: number | undefined,
+    h: number | undefined,
+  ): SubtreeResult => {
+    const key = `${path}|${w ?? 'max'}|${h ?? 'max'}`;
+    let r = islandCache.get(key);
+    if (!r) {
+      r = layoutGridIsland(n, w, h, fonts, path, layoutSubtree);
+      islandCache.set(key, r);
+    }
+    return r;
+  };
+
   const build = (n: TreeNode, path: string): YogaNode | null => {
     const style = n.style ?? {};
     if (style.display === 'none') return null;
@@ -151,6 +170,20 @@ export function layoutSubtree(
               ? maxWidth
               : Math.min(m.width, maxWidth);
         return { width: outWidth, height: m.height };
+      });
+    } else if (style.display === 'grid') {
+      // Grid container: childless Yoga leaf; the Taffy island sizes it.
+      node.setMeasureFunc((width, widthMode, height, heightMode) => {
+        const hc = heightMode === Yoga.MEASURE_MODE_EXACTLY ? height : undefined;
+        if (widthMode === Yoga.MEASURE_MODE_EXACTLY) {
+          const island = islandAt(n, path, width, hc);
+          return { width, height: island.height };
+        }
+        const natural = islandAt(n, path, undefined, hc);
+        if (widthMode === Yoga.MEASURE_MODE_UNDEFINED || natural.width <= width)
+          return { width: natural.width, height: natural.height };
+        const island = islandAt(n, path, width, hc); // fit-content: clamp to available
+        return { width, height: island.height };
       });
     } else {
       let slot = 0;
@@ -178,12 +211,14 @@ export function layoutSubtree(
   if (
     availableWidth !== undefined &&
     rootStyle.width === undefined &&
-    typeof rootStyle.maxWidth === 'number'
+    (typeof rootStyle.maxWidth === 'number' || rootStyle.display === 'grid')
   ) {
     const side = (v: number | 'auto' | undefined): number =>
       typeof v === 'number' ? v : v === 'auto' ? 0 : (rootStyle.margin ?? 0);
     const available = availableWidth - side(rootStyle.marginLeft) - side(rootStyle.marginRight);
-    root.setWidth(Math.min(rootStyle.maxWidth, available));
+    root.setWidth(
+      typeof rootStyle.maxWidth === 'number' ? Math.min(rootStyle.maxWidth, available) : available,
+    );
   }
 
   root.calculateLayout(availableWidth, undefined, Yoga.DIRECTION_LTR);
@@ -227,6 +262,7 @@ export function layoutSubtree(
     const visit = (n: TreeNode, path: string) => {
       const yn = yogaNodes.get(path);
       if (!yn || n.text !== undefined) return;
+      if (n.style?.display === 'grid') return; // island — no Yoga children to pin
       const corr = correctRowContainer(n, yn.getComputedWidth(), fonts);
       if (corr) {
         const targets = new Map(corr.children.map((c) => [c.index, c.width]));
@@ -240,6 +276,7 @@ export function layoutSubtree(
       // fit-content cross sizing for non-stretched children of columns
       const contentWidth = yn.getComputedWidth() - hPadBorder(n.style ?? {});
       (n.children ?? []).forEach((c, i) => {
+        if (c.style?.display === 'grid') return; // island measure handles fit-content
         const target = fitContentWidth(n, c, contentWidth, fonts);
         if (target !== null) pin(`${path}.${i}`, target, false);
       });
@@ -273,6 +310,23 @@ export function layoutSubtree(
       width: yn.getComputedWidth(),
       height: yn.getComputedHeight(),
     });
+    if (n.style?.display === 'grid' && n.text === undefined) {
+      const padL = yn.getComputedPadding(Yoga.EDGE_LEFT) + yn.getComputedBorder(Yoga.EDGE_LEFT);
+      const padT = yn.getComputedPadding(Yoga.EDGE_TOP) + yn.getComputedBorder(Yoga.EDGE_TOP);
+      const padR = yn.getComputedPadding(Yoga.EDGE_RIGHT) + yn.getComputedBorder(Yoga.EDGE_RIGHT);
+      const padB = yn.getComputedPadding(Yoga.EDGE_BOTTOM) + yn.getComputedBorder(Yoga.EDGE_BOTTOM);
+      // definite content box so auto rows stretch and align-content
+      // distributes like Chrome
+      const island = islandAt(
+        n,
+        path,
+        yn.getComputedWidth() - padL - padR,
+        yn.getComputedHeight() - padT - padB,
+      );
+      for (const b of island.boxes)
+        boxes.push({ ...b, x: x + padL + b.x, y: y + padT + b.y });
+      return;
+    }
     (n.children ?? []).forEach((child, i) => collect(child, `${path}.${i}`, x, y));
   };
   collect(tree, 'r', 0, 0);
