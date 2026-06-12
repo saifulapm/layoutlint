@@ -1,6 +1,13 @@
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { parseSource, type CorpusCase, type Style, type TreeNode } from '@layoutlint/core';
+import {
+  parseSource,
+  type CorpusCase,
+  type GridPlacement,
+  type GridTrack,
+  type Style,
+  type TreeNode,
+} from '@layoutlint/core';
 
 export const FONTS_DIR = join(import.meta.dir, '../../rules/fonts');
 const VENDOR_DIR = join(import.meta.dir, '../../../vendor');
@@ -15,14 +22,49 @@ function toKebab(key: string): string {
   return key.replace(/[A-Z]/g, (m) => `-${m.toLowerCase()}`);
 }
 
-function styleToCss(style: Style, isText: boolean): string {
+const trackCss = (t: GridTrack): string =>
+  typeof t === 'number'
+    ? `${t}px`
+    : typeof t === 'string'
+      ? t
+      : `minmax(${typeof t.min === 'number' ? `${t.min}px` : t.min},${typeof t.max === 'number' ? `${t.max}px` : t.max})`;
+
+const placeCss = (p: GridPlacement): string => {
+  // CSS grid-line shorthand: `start / end`, where a bare span goes on
+  // whichever side has no explicit line (matching GridPlacement semantics).
+  const start = p.start ?? (p.span !== undefined && p.end !== undefined ? `span ${p.span}` : 'auto');
+  const end = p.end ?? (p.span !== undefined ? `span ${p.span}` : 'auto');
+  return `${start} / ${end}`;
+};
+
+/** Style fields that need structured (non-generic) CSS serialization. */
+const GRID_DECLS: Partial<Record<keyof Style, (v: never) => string>> = {
+  gridTemplateColumns: (v: GridTrack[]) => `grid-template-columns:${v.map(trackCss).join(' ')}`,
+  gridTemplateRows: (v: GridTrack[]) => `grid-template-rows:${v.map(trackCss).join(' ')}`,
+  gridAutoColumns: (v: GridTrack) => `grid-auto-columns:${trackCss(v)}`,
+  gridAutoRows: (v: GridTrack) => `grid-auto-rows:${trackCss(v)}`,
+  gridColumn: (v: GridPlacement) => `grid-column:${placeCss(v)}`,
+  gridRow: (v: GridPlacement) => `grid-row:${placeCss(v)}`,
+};
+
+export function styleToCss(style: Style, isText: boolean): string {
   const decls: string[] = [
     'box-sizing:border-box',
-    // Yoga semantics: every element is a flex container; text is a leaf block.
-    isText ? 'display:block' : 'display:flex',
+    // Yoga semantics: every element is a flex container; text is a leaf
+    // block. Grid containers are the exception — real display:grid.
+    isText ? 'display:block' : style.display === 'grid' ? 'display:grid' : 'display:flex',
   ];
   for (const [key, value] of Object.entries(style)) {
     if (value === undefined) continue;
+    // 'grid' is already the base display decl; 'flex'/'none' keep flowing
+    // through the generic loop exactly as before (cascade: 'none' overrides
+    // the base decl), so pre-grid styles serialize byte-identically.
+    if (key === 'display' && value === 'grid') continue;
+    const grid = GRID_DECLS[key as keyof Style];
+    if (grid) {
+      decls.push(grid(value as never));
+      continue;
+    }
     const px = typeof value === 'number' && !UNITLESS.has(key);
     decls.push(`${toKebab(key)}:${value}${px ? 'px' : ''}`);
   }
